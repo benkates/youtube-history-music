@@ -1,28 +1,12 @@
 import * as Plot from "@observablehq/plot";
 import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
-import truncate from "lodash/truncate";
+
+//TODO: get years from data and update dropdown dynamically
+//TODO: count on bars
 
 function TopChannels({ data }) {
-  //init data state
-  const [data, setData] = useState([]);
   const [year, setYear] = useState("2019");
-
-  //get data and set it
-  useEffect(() => {
-    console.log("fetching data");
-    d3.json("/top_watch_history.json")
-      .then((d) => {
-        d.map((e) => {
-          e.timestamp = new Date(e.timestamp);
-          e.year = e.timestamp.getFullYear();
-          e.channel_name_long = e.channel_name;
-          e.channel_name = truncate(e.channel_name, { length: 25 });
-        });
-        return d;
-      })
-      .then(setData);
-  }, []);
 
   //set ref to append to
   const ref = useRef();
