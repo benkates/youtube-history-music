@@ -17,9 +17,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build && cp -r build/* ~/Documents/personal_site/apps/yt-history && rm -rf build",
+    "git-add": "git -C ~/Documents/personal_site/ add .",
+    "git-commit": "git -C ~/Documents/personal_site/ commit -m ",
+    "git-push": "git -C ~/Documents/personal_site/ push origin",
+    "git-bacp": "echo 'Enter Commit Message' && read message && npm run build && npm run git-add && npm run git-commit \"$message\" && npm run git-push"
   },
   "eslintConfig": {
     "extends": [

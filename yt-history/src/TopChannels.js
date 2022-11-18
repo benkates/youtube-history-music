@@ -2,8 +2,17 @@ import * as Plot from "@observablehq/plot";
 import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 
+//DATA//
 //TODO: get years from data and update dropdown dynamically
+
+//PLOT//
 //TODO: count on bars
+//TODO: plot title
+
+//FIXME:
+
+//UI//
+//TODO: cool slider
 
 function TopChannels({ data }) {
   const [year, setYear] = useState("2019");
@@ -43,7 +52,7 @@ function TopChannels({ data }) {
       ],
       style: {
         background: "#282c34",
-        fontSize: 16,
+        fontSize: 20,
         color: "white",
       },
     });
@@ -55,7 +64,6 @@ function TopChannels({ data }) {
     return () => chart.remove();
   }, [data, year]); //depend on data
 
-  //TODO: cool slider
   return (
     <div ref={ref}>
       <label htmlFor="year">Select a Year</label>

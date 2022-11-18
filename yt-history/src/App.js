@@ -6,8 +6,6 @@ import TopChannels from "./TopChannels";
 import WatchTimeline from "./WatchTimeline";
 
 //TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
-//TODO: replace utils function for truncate with lodash
-//TODO: break out code into modules
 
 /*
 - what is the trend of watch activity over time for a specific channel
@@ -16,8 +14,6 @@ import WatchTimeline from "./WatchTimeline";
 
 - info on embedding a small "subscribe" button https://developers.google.com/youtube/youtube_subscribe_button
 - info on embedding iframes https://developers.google.com/youtube/iframe_api_reference
-
-
 */
 
 function App() {
@@ -27,7 +23,7 @@ function App() {
   //get data and set it
   useEffect(() => {
     console.log("fetching data");
-    d3.json("/top_watch_history.json")
+    d3.json("top_watch_history.json")
       .then((d) => {
         d.map((e) => {
           e.timestamp = new Date(e.timestamp);
@@ -43,9 +39,9 @@ function App() {
   //TODO: cool slider
   return (
     <div className="App">
-      <h1>YouTube Stats</h1>
-      <TopChannels data={data}></TopChannels>
+      <h1>Ben's YouTube History</h1>
       <WatchTimeline data={data}></WatchTimeline>
+      <TopChannels data={data}></TopChannels>
     </div>
   );
 }
