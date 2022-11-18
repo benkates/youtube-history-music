@@ -17,7 +17,16 @@ function WatchTimeline({ data }) {
   const ref = useRef();
   const [channelName, setChannelName] = useState("all");
 
-  const channelList = [...new Set(data.map((item) => item.channel_name))];
+  const channelList = d3
+    .flatRollup(
+      data,
+      (v) => v.length,
+      (d) => d.channel_name,
+      (e) => e.channel_name_full
+    )
+    .sort((a, b) => b[2] - a[2]);
+
+  console.log(channelList);
 
   useEffect(() => {
     //aggregate the data
@@ -73,10 +82,10 @@ function WatchTimeline({ data }) {
         <option value="all" key="all">
           All Channels
         </option>
-        {channelList.map((e) => {
+        {channelList.map((e, i) => {
           return (
-            <option value={e} key={e}>
-              {e}
+            <option value={e[0]} key={e[0]}>
+              {`${i + 1}: ${e[1]} (watched ${d3.format(",")(e[2])} times)`}
             </option>
           );
         })}

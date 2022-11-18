@@ -28,7 +28,7 @@ function App() {
         d.map((e) => {
           e.timestamp = new Date(e.timestamp);
           e.year = e.timestamp.getFullYear();
-          e.channel_name_long = e.channel_name;
+          e.channel_name_full = e.channel_name;
           e.channel_name = truncate(e.channel_name, { length: 25 });
         });
         return d;

@@ -3,13 +3,12 @@ import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 
 //DATA//
-//TODO: get years from data and update dropdown dynamically
+//DONE: get years from data and update dropdown dynamically
 
 //PLOT//
 //TODO: count on bars
 //TODO: plot title
-
-//FIXME:
+//FIXME: 0 at beginning
 
 //UI//
 //TODO: cool slider
