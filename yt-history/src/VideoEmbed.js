@@ -1,4 +1,7 @@
 import * as d3 from "d3";
+
+//TODO: responsive size
+
 function VideoEmbed({ data, selectedChannel }) {
   //filter data to the selected channel
   let data2 =
@@ -15,11 +18,12 @@ function VideoEmbed({ data, selectedChannel }) {
 
   //get the video with the most views
   data2 = d3.greatest(data2, (d) => d[1]);
+
+  //extract the video ID
   let embedId = "rImxuuD_kwM";
   if (data2 !== undefined) {
     embedId = data2[0].match("v=(.*)")[1];
   }
-  console.log(embedId);
 
   return (
     <div className="video-responsive">
