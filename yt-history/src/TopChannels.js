@@ -6,14 +6,14 @@ import * as d3 from "d3";
 //DONE: get years from data and update dropdown dynamically
 
 //PLOT//
-//TODO: count on bars
+//TODO: text
 //TODO: plot title
-//FIXME: 0 at beginning
+//FIXME: 0s when no data
 
 //UI//
-//TODO: cool slider
+//TODO: cool slider for year input
 
-function TopChannels({ data }) {
+function TopChannels({ data, childToParent }) {
   const [year, setYear] = useState("2019");
 
   //set ref to append to
@@ -30,11 +30,15 @@ function TopChannels({ data }) {
 
     //create chart
     const chart = Plot.plot({
+      marks: [
+        Plot.barX(data2, Plot.groupY({ x: "count" }, { y: "channel_name" })),
+        // Plot.textX(data2, Plot.groupY({ x: "count" }, { y: "channel_name" })),
+      ],
       margin: 80,
-      width: 1000,
+      width: window.innerWidth,
       height: 2500,
       inset: 10,
-      marginLeft: 250,
+      marginLeft: 300,
       x: {
         label: null,
       },
@@ -46,12 +50,9 @@ function TopChannels({ data }) {
           (d) => d.channel_name
         ),
       },
-      marks: [
-        Plot.barX(data2, Plot.groupY({ x: "count" }, { y: "channel_name" })),
-      ],
       style: {
         background: "#282c34",
-        fontSize: 20,
+        fontSize: 25,
         color: "white",
       },
     });
@@ -64,7 +65,16 @@ function TopChannels({ data }) {
   }, [data, year]); //depend on data
 
   return (
-    <div ref={ref}>
+    <div
+      id="top-channels"
+      ref={ref}
+      onClick={(e) => {
+        //TODO: check if parent is the "bar" group
+        if (e.target.tagName === "text") {
+          childToParent(e.target.__data__);
+        }
+      }}
+    >
       <label htmlFor="year">Select a Year</label>
       <br></br>
       <select
@@ -74,10 +84,13 @@ function TopChannels({ data }) {
         onChange={(e) => setYear(e.target.value)}
         style={{ fontSize: "inherit" }}
       >
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
+        {[2019, 2020, 2021, 2022].map((e) => {
+          return (
+            <option value={e} key={e}>
+              {e}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

@@ -4,8 +4,11 @@ import * as d3 from "d3";
 import truncate from "lodash/truncate";
 import TopChannels from "./TopChannels";
 import WatchTimeline from "./WatchTimeline";
+import VideoEmbed from "./VideoEmbed";
 
 //TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
+//TODO: use UIKit library for everything (ie: dropdowns are weird)
+//DONE: barchart to filter timeline
 
 /*
 - what is the trend of watch activity over time for a specific channel
@@ -19,6 +22,11 @@ import WatchTimeline from "./WatchTimeline";
 function App() {
   //init data state
   const [data, setData] = useState([]);
+  const [selectedChannel, setSelectedChannel] = useState();
+
+  const childToParent = (childdata) => {
+    setSelectedChannel(childdata);
+  };
 
   //get data and set it
   useEffect(() => {
@@ -40,8 +48,13 @@ function App() {
   return (
     <div className="App">
       <h1>Ben's YouTube History</h1>
-      <WatchTimeline data={data}></WatchTimeline>
-      <TopChannels data={data}></TopChannels>
+      <WatchTimeline
+        data={data}
+        selectedChannel={selectedChannel}
+      ></WatchTimeline>
+      <VideoEmbed data={data} selectedChannel={selectedChannel}></VideoEmbed>
+      <TopChannels data={data} childToParent={childToParent}></TopChannels>
+      //TODO: rename fun
     </div>
   );
 }

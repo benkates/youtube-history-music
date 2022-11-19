@@ -1,40 +1,38 @@
 import * as Plot from "@observablehq/plot";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 //DATA//
-//TODO: sort list by most frequently watched (similar to TopChannels component)
 
 //PLOT//
 //TODO: bar chart instead of line (rectY?)
-//TODO: shorten dates
 //TODO: add title
+//TODO: fixed axis for dates
+//DONE: shorten dates
 
 //UI//
-//TODO: dropdown to show: 1. Saturday Night Live (watched 1,500 videos)
+//DONE: dropdown to show: 1. Saturday Night Live (watched 1,500 videos)
 
-function WatchTimeline({ data }) {
+function WatchTimeline({ data, selectedChannel }) {
   const ref = useRef();
-  const [channelName, setChannelName] = useState("all");
+  // const [channelName, setChannelName] = useState("all");
 
-  const channelList = d3
-    .flatRollup(
-      data,
-      (v) => v.length,
-      (d) => d.channel_name,
-      (e) => e.channel_name_full
-    )
-    .sort((a, b) => b[2] - a[2]);
-
-  console.log(channelList);
+  // const channelList = d3
+  //   .flatRollup(
+  //     data,
+  //     (v) => v.length,
+  //     (d) => d.channel_name,
+  //     (e) => e.channel_name_full
+  //   )
+  //   .sort((a, b) => b[2] - a[2]);
 
   useEffect(() => {
     //aggregate the data
 
     let data2 =
-      channelName === "all"
+      selectedChannel === undefined
         ? data
-        : d3.filter(data, (d) => d.channel_name === channelName);
+        : d3.filter(data, (d) => d.channel_name === selectedChannel);
 
     data2 = d3.rollup(
       data2,
@@ -50,14 +48,22 @@ function WatchTimeline({ data }) {
           x: (d) => d[0],
           y: (d) => d[1],
         }),
+        Plot.ruleY([0], { stroke: null }),
       ],
-      margin: 80,
-      width: 1000,
+      x: {
+        tickFormat: d3.utcFormat("%b '%y"),
+        // range: [new Date("2019-01-01"), new Date("2022-12-31")],
+      },
+      width: window.innerWidth,
+      margin: 100,
       height: 500,
+      grid: true,
       style: {
         background: "#282c34",
         fontSize: "0.5em",
         color: "white",
+        // margin: "2em",
+        // position: "fixed",
       },
     });
 
@@ -66,18 +72,18 @@ function WatchTimeline({ data }) {
 
     //on unmount: remove chart
     return () => chart.remove();
-  }, [data, channelName]);
+  }, [data, selectedChannel]);
 
   return (
-    <div ref={ref}>
-      <label htmlFor="year">Select a Channel</label>
+    <div id="watch-timeline" ref={ref}>
+      {/* <label htmlFor="year">Select a Channel</label>
       <br></br>
       <select
         name="year"
         id="year"
         value={channelName}
         onChange={(e) => setChannelName(e.target.value)}
-        style={{ fontSize: "inherit" }}
+        style={{ fontSize: 16 }}
       >
         <option value="all" key="all">
           All Channels
@@ -89,7 +95,7 @@ function WatchTimeline({ data }) {
             </option>
           );
         })}
-      </select>
+      </select> */}
     </div>
   );
 }
