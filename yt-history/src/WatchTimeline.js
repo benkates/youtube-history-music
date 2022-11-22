@@ -1,6 +1,7 @@
 import * as Plot from "@observablehq/plot";
 import { useEffect, useRef } from "react";
-import * as d3 from "d3";
+import { filter, rollup, timeMonth, utcFormat } from "d3";
+import { Card, Typography } from "@mui/material";
 
 //DATA//
 
@@ -22,13 +23,13 @@ function WatchTimeline({ data, selectedChannel }) {
     let data2 =
       selectedChannel === undefined
         ? data
-        : d3.filter(data, (d) => d.channel_name === selectedChannel);
+        : filter(data, (d) => d.channel_name === selectedChannel);
 
     //aggregate the data
-    data2 = d3.rollup(
+    data2 = rollup(
       data2,
       (v) => v.length,
-      (d) => d3.timeMonth.floor(d.timestamp)
+      (d) => timeMonth.floor(d.timestamp)
     );
 
     //catch data if none
@@ -46,18 +47,18 @@ function WatchTimeline({ data, selectedChannel }) {
       ],
       //set x axis formatting
       x: {
-        tickFormat: d3.utcFormat("%b '%y"),
+        tickFormat: utcFormat("%b '%y"),
         // range: [new Date("2019-01-01"), new Date("2022-12-31")],
       },
       //styling
-      width: window.innerWidth,
-      margin: 100,
+      width: 700,
+      margin: 25,
       height: 500,
       grid: true,
       style: {
-        background: "#282c34",
+        // background: "#282c34",
         fontSize: "0.75em",
-        color: "white",
+        color: "black",
       },
     });
 
@@ -68,7 +69,11 @@ function WatchTimeline({ data, selectedChannel }) {
     return () => chart.remove();
   }, [data, selectedChannel]); //depend on stateful vars
 
-  return <div id="watch-timeline" ref={ref}></div>;
+  return (
+    <Card sx={{ padding: 3 }}>
+      <div id="watch-timeline" ref={ref}></div>
+    </Card>
+  );
 }
 
 export default WatchTimeline;

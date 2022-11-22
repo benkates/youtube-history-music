@@ -1,6 +1,6 @@
 import * as Plot from "@observablehq/plot";
 import { useEffect, useState, useRef } from "react";
-import * as d3 from "d3";
+import { groupSort } from "d3";
 
 //DATA//
 //DONE: get years from data and update dropdown dynamically
@@ -44,7 +44,7 @@ function TopChannels({ data, childToParent }) {
       //y-axis style (sort)
       y: {
         label: null,
-        domain: d3.groupSort(
+        domain: groupSort(
           data2,
           (g) => g.length * -1,
           (d) => d.channel_name
@@ -55,7 +55,7 @@ function TopChannels({ data, childToParent }) {
       width: window.innerWidth,
       height: 2500,
       inset: 10,
-      marginLeft: 350,
+      marginLeft: 150,
       style: {
         background: "#282c34",
         fontSize: "0.75em",
@@ -73,7 +73,7 @@ function TopChannels({ data, childToParent }) {
   return (
     <div
       id="top-channels"
-      style={{ height: 480, overflowY: "auto" }} //scroll in place
+      // style={{ height: 480, overflowY: "auto" }} //scroll in place
       ref={ref}
       //when clicking on text, set the state
       onClick={(e) => {

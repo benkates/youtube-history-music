@@ -1,41 +1,47 @@
-import * as d3 from "d3";
+import { filter, rollup, greatest } from "d3";
 
-//TODO: responsive size
+//DONE: responsive size
 
-function VideoEmbed({ data, selectedChannel }) {
+function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   //filter data to the selected channel
   let data2 =
     selectedChannel === undefined
       ? data
-      : d3.filter(data, (d) => d.channel_name === selectedChannel);
+      : filter(data, (d) => d.channel_name === selectedChannel);
 
   //roll up data to the most occurances
-  data2 = d3.rollup(
+  data2 = rollup(
     data2,
     (v) => v.length,
     (e) => e.video_url
   );
 
   //get the video with the most views
-  data2 = d3.greatest(data2, (d) => d[1]);
+  data2 = greatest(data2, (d) => d[1]);
 
   //extract the video ID
-  let embedId = "rImxuuD_kwM";
+  let vid = "";
+  let embedId = "IUMTaAQ43lY";
   if (data2 !== undefined) {
-    embedId = data2[0].match("v=(.*)")[1];
+    vid = data2[0];
   }
 
+  if (selectedVideo !== undefined) {
+    vid = selectedVideo;
+  }
+  embedId = vid.match("v=(.*)")[1];
+
   return (
-    <div className="video-responsive">
+    <div className="video-container" style={{ borderRadius: "4px !important" }}>
       <iframe
-        width="853"
-        height="480"
+        width="100%"
+        height="100%"
         loading="lazy"
         src={`https://www.youtube.com/embed/${embedId}`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded youtube"
+        // allowFullScreen
+        title="Embedded YouTube Video"
       />
     </div>
   );

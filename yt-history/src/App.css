@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
@@ -8,7 +8,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 #top-channels text {
   cursor: pointer;
@@ -20,4 +20,17 @@
 }
 #top-channels::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

@@ -1,14 +1,22 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import * as d3 from "d3";
+import { json } from "d3";
 import truncate from "lodash/truncate";
-import TopChannels from "./TopChannels";
+// import TopChannels from "./TopChannels";
 import WatchTimeline from "./WatchTimeline";
 import VideoEmbed from "./VideoEmbed";
+import TopVideos from "./TopVideos";
+
+// import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+// import Box from "@mui/material/Box";
 
 //TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
 //TODO: use UIKit library for everything (ie: dropdowns are weird)
 //TODO: rename childtoParent()
+//TODO: implement theming for the main bg color #282c34
 //DONE: barchart to filter timeline
 
 /*
@@ -25,11 +33,18 @@ import VideoEmbed from "./VideoEmbed";
 function App() {
   //init data state
   const [data, setData] = useState([]);
-  const [selectedChannel, setSelectedChannel] = useState();
+  const [selectedChannel, setSelectedChannel] = useState("NPR Music");
+  const [selectedVideo, setSelectedVideo] = useState(
+    "https://www.youtube.com/watch?v=IUMTaAQ43lY"
+  );
 
   //create fun to bring data from the child component (TopChannels) to App
-  const childToParent = (childdata) => {
-    setSelectedChannel(childdata);
+  const childToParent = (e) => {
+    setSelectedChannel(e);
+  };
+
+  const childToParentVideo = (e) => {
+    setSelectedVideo(e);
   };
 
   //get data and set it
@@ -37,7 +52,7 @@ function App() {
     console.log("fetching data");
 
     //get data
-    d3.json("top_watch_history.json")
+    json("top_watch_history_music.json")
       .then((d) => {
         //iterate over, format, create new fields
         d.map((e) => {
@@ -53,18 +68,47 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Ben's YouTube History</h1>
-      <div style={{ display: "flex" }}>
-        <TopChannels data={data} childToParent={childToParent}></TopChannels>
-        <VideoEmbed data={data} selectedChannel={selectedChannel}></VideoEmbed>
-      </div>
-      <br></br>
-      <WatchTimeline
-        data={data}
-        selectedChannel={selectedChannel}
-      ></WatchTimeline>
-    </div>
+    <Container
+      className="App"
+      maxWidth="xl"
+      sx={{ backgroundColor: "#282c34" }}
+    >
+      <Typography variant="h2" component="h1" gutterBottom color="white">
+        What's Ben's Favorite Music Videos on YouTube?
+      </Typography>
+      {/* <TopChannels data={data} childToParent={childToParent}></TopChannels> */}
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+        sx={{ p: 1 }}
+      >
+        <Grid item lg={6} xs={12}>
+          <TopVideos
+            data={data}
+            childToParent={childToParent}
+            childToParentVideo={childToParentVideo}
+          ></TopVideos>
+        </Grid>
+        <Grid item lg={6} xs={12}>
+          <VideoEmbed
+            data={data}
+            selectedChannel={selectedChannel}
+            selectedVideo={selectedVideo}
+          ></VideoEmbed>
+        </Grid>
+        <Grid item lg={6}>
+          <Typography component="p" color="white">
+            Selected Channel Stats: {selectedChannel}
+          </Typography>
+          <WatchTimeline
+            data={data}
+            selectedChannel={selectedChannel}
+          ></WatchTimeline>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
