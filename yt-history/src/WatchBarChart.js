@@ -1,20 +1,19 @@
-import React, { useMemo } from "react";
+import { tidy, groupBy, count, filter, arrange, asc } from "@tidyjs/tidy";
+
 import { Bar } from "@visx/shape";
 import { Group } from "@visx/group";
-import { GradientTealBlue } from "@visx/gradient";
 import { useTooltip, useTooltipInPortal, defaultStyles } from "@visx/tooltip";
-import { tidy, groupBy, count, filter, arrange, asc } from "@tidyjs/tidy";
 import { localPoint } from "@visx/event";
-
-import letterFrequency, {
-  LetterFrequency,
-} from "@visx/mock-data/lib/mocks/letterFrequency";
 import { scaleBand, scaleLinear } from "@visx/scale";
 
-//TODO: animated
-
-//TODO: tooltip correct
-//TODO: responsive (use visx repsonsive component)
+//TODO: animated transition of bars
+//TODO: sort months correctly
+//TODO: onclick filter table to that month
+//TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
+//TODO: colorscale bars
+//TODO: tooltip contains current filter
+//DONE: tooltip correct
+//DONE: responsive (use visx repsonsive component)
 
 const verticalMargin = 0;
 
@@ -28,14 +27,10 @@ let tooltipTimeout = 0;
 
 // accessors
 const getMonth = (d) => d.month;
-const getMonthFrequency = (d) => Number(d.count) * 100;
+const getFreq = (d) => Number(d.count);
 
-export default function WatchTimeline2({
-  data,
-  selectedChannel,
-  width,
-  height,
-}) {
+function WatchBarChart({ data, selectedChannel, width, height }) {
+  //tooltip hook pt 1
   const {
     tooltipOpen,
     tooltipLeft,
@@ -45,14 +40,22 @@ export default function WatchTimeline2({
     showTooltip,
   } = useTooltip();
 
+  //tooltip hook pt 2
   const { containerRef, TooltipInPortal } = useTooltipInPortal({
     scroll: true,
   });
 
+  //prep data
   const dataPrepped = tidy(
     data,
+    //sort by timestamp
     arrange(asc("timestamp")),
-    filter((d) => d.channel_name === selectedChannel),
+    //filter seleted channel
+    filter((d) =>
+      selectedChannel === "All Channels"
+        ? true
+        : d.channel_name === selectedChannel
+    ),
     //group by the primary fields and then count
     groupBy(["month"], [count("month", { name: "count" })])
   );
@@ -62,36 +65,29 @@ export default function WatchTimeline2({
   const yMax = height - verticalMargin;
 
   // scales, memoize for performance
-  const xScale = useMemo(
-    () =>
-      scaleBand({
-        range: [0, xMax],
-        round: true,
-        domain: dataPrepped.map(getMonth),
-        padding: 0.4,
-      }),
-    [xMax, data]
-  );
+  const xScale = scaleBand({
+    range: [0, xMax],
+    round: true,
+    domain: dataPrepped.map(getMonth),
+    padding: 0.4,
+  });
 
-  const yScale = useMemo(
-    () =>
-      scaleLinear({
-        range: [yMax, 0],
-        round: true,
-        domain: [0, Math.max(...dataPrepped.map(getMonthFrequency))],
-      }),
-    [yMax, data]
-  );
+  const yScale = scaleLinear({
+    range: [yMax, 0],
+    round: true,
+    domain: [0, Math.max(...dataPrepped.map(getFreq))],
+  });
 
   return (
     <>
       <div ref={containerRef}>
+        {/* <span style={{ color: "white" }}>{selectedChannel}</span> */}
         <svg width="100%" height={height} transform="translate(0 6)">
           <Group top={verticalMargin / 2}>
             {dataPrepped.map((d) => {
               const month = getMonth(d);
               const barWidth = xScale.bandwidth();
-              const barHeight = yMax - (yScale(getMonthFrequency(d)) ?? 0);
+              const barHeight = yMax - (yScale(getFreq(d)) ?? 0);
               const barX = xScale(month);
               const barY = yMax - barHeight;
               return (
@@ -102,12 +98,9 @@ export default function WatchTimeline2({
                   width={barWidth}
                   height={barHeight}
                   fill="#556cd6"
-                  onMouseMove={(event) => {
+                  onMouseMove={(e) => {
                     if (tooltipTimeout) clearTimeout(tooltipTimeout);
-                    // TooltipInPortal expects coordinates to be relative to containerRef
-                    // localPoint returns coordinates relative to the nearest SVG, which
-                    // is what containerRef is set to in this example.
-                    const eventSvgCoords = localPoint(event);
+                    const eventSvgCoords = localPoint(e);
                     const left = barX + barWidth / 2;
                     showTooltip({
                       tooltipData: d,
@@ -119,6 +112,9 @@ export default function WatchTimeline2({
                     tooltipTimeout = window.setTimeout(() => {
                       hideTooltip();
                     }, 500);
+                  }}
+                  onClick={(e) => {
+                    console.log(d);
                   }}
                 />
               );
@@ -137,9 +133,13 @@ export default function WatchTimeline2({
           </div>
           <div>
             <small>Playcount: {tooltipData.count}</small>
+            <br />
+            <small>{selectedChannel}</small>
           </div>
         </TooltipInPortal>
       )}
     </>
   );
 }
+
+export default WatchBarChart;

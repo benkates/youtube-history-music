@@ -1,8 +1,10 @@
 import { filter, rollup, greatest } from "d3";
 
+//TODO: pause and show the static in between videos?
+//DONE: add back in timeline
+//DONE: rounded edges
 //DONE: responsive size
 //DONE: remove player controls
-//TODO: rounded edges
 
 function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   //filter data to the selected channel
@@ -34,12 +36,18 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   embedId = vid.match("v=(.*)")[1];
 
   return (
-    <div className="video-container" style={{ borderRadius: "4px !important" }}>
+    <div
+      className="video-container"
+      style={{
+        backgroundImage:
+          "url('https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp')",
+      }}
+    >
       <iframe
         width="100%"
         height="100%"
         loading="lazy"
-        src={`https://www.youtube.com/embed/${embedId}?controls=0`}
+        src={`https://www.youtube.com/embed/${embedId}?controls=1`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         // allowFullScreen

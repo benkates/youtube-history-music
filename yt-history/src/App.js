@@ -2,39 +2,32 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { json } from "d3";
 import truncate from "lodash/truncate";
-// import TopChannels from "./TopChannels";
-import WatchTimeline from "./WatchTimeline";
-import VideoEmbed from "./VideoEmbed";
-import TopVideos from "./TopVideos";
-import WatchTimeline2 from "./WatchTimeline2";
 
-// import Card from "@mui/material/Card";
+import VideoEmbed from "./VideoEmbed";
+import TopVideosTable from "./TopVideosTable";
+import WatchBarChart from "./WatchBarChart";
+import Blockquote from "./Blockquote";
+import ChannelDropdown from "./ChannelDropdown";
+
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-// import Box from "@mui/material/Box";
 
-//TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
-//TODO: use UIKit library for everything (ie: dropdowns are weird)
+import ParentSize from "@visx/responsive/lib/components/ParentSize";
+
 //TODO: rename childtoParent() and childtoParentVideo()
 //TODO: implement theming for the main bg color #282c34
+//TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
+//TODO: Blockquote under video on desktop but on top on mobile
+//TODO: when you select a new channel as a filter, automatically bring up the first video
+
+//DONE: reposition divs to have chart on top of one but have the video
 //DONE: barchart to filter timeline
-
-/*
-- what is the trend of watch activity over time for a specific channel
-- what video (per channel) have i watched the most?
-- who have i watched the most consistently?
-- feature highlight: tiny desks?
-- feature highlight: kexp?
-
-- info on embedding a small "subscribe" button https://developers.google.com/youtube/youtube_subscribe_button
-- info on embedding iframes https://developers.google.com/youtube/iframe_api_reference
-*/
 
 function App() {
   //init data state
   const [data, setData] = useState([]);
-  const [selectedChannel, setSelectedChannel] = useState("NPR Music");
+  const [selectedChannel, setSelectedChannel] = useState("All Channels");
   const [selectedVideo, setSelectedVideo] = useState(
     "https://www.youtube.com/watch?v=IUMTaAQ43lY"
   );
@@ -56,7 +49,7 @@ function App() {
     json("top_watch_history_music.json")
       .then((d) => {
         //iterate over, format, create new fields
-        d.map((e) => {
+        d.forEach((e) => {
           e.timestamp = new Date(e.timestamp);
           e.year = e.timestamp.getFullYear();
           e.month =
@@ -70,6 +63,7 @@ function App() {
       })
       //set the stateful data
       .then(setData);
+    //TODO: add in set state of channel (most views etc etc)
   }, []);
 
   return (
@@ -78,10 +72,18 @@ function App() {
       maxWidth="xl"
       sx={{ backgroundColor: "#282c34" }}
     >
-      <Typography variant="h2" component="h1" gutterBottom color="white">
+      {/* title */}
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        color="white"
+        sx={{ textAlign: "center", mt: 3 }}
+      >
         What's Ben's Favorite Music Videos on YouTube?
       </Typography>
-      {/* <TopChannels data={data} childToParent={childToParent}></TopChannels> */}
+
+      {/* parent div */}
       <Grid
         container
         justifyContent="center"
@@ -89,36 +91,39 @@ function App() {
         spacing={3}
         sx={{ p: 1 }}
       >
+        {/* barchart + table */}
         <Grid item lg={6} xs={12}>
-          <TopVideos
-            data={data}
-            childToParent={childToParent}
-            childToParentVideo={childToParentVideo}
-          ></TopVideos>
-        </Grid>
-        <Grid item lg={6} xs={12}>
-          <WatchTimeline2
+          <ChannelDropdown
             data={data}
             selectedChannel={selectedChannel}
-            width={"540"}
-            height={"200"}
-          ></WatchTimeline2>
+            setSelectedChannel={setSelectedChannel}
+          ></ChannelDropdown>
+          <ParentSize className="graph-container" debounceTime={10}>
+            {({ width: visWidth, height: visHeight }) => (
+              <WatchBarChart
+                data={data}
+                selectedChannel={selectedChannel}
+                width={visWidth}
+                height="164"
+              ></WatchBarChart>
+            )}
+          </ParentSize>
+          <TopVideosTable
+            data={data}
+            selectedChannel={selectedChannel}
+            childToParentVideo={childToParentVideo}
+          ></TopVideosTable>
+        </Grid>
+
+        {/* video + blockquote */}
+        <Grid item lg={6} xs={12}>
           <VideoEmbed
             data={data}
             selectedChannel={selectedChannel}
             selectedVideo={selectedVideo}
           ></VideoEmbed>
+          <Blockquote selectedVideo={selectedVideo}></Blockquote>
         </Grid>
-        <Grid item lg={12} sx={{ height: 150 }}></Grid>
-        {/* <Grid item lg={6}>
-          <Typography component="p" color="white">
-            Selected Channel Stats: {selectedChannel}
-          </Typography>
-          <WatchTimeline
-            data={data}
-            selectedChannel={selectedChannel}
-          ></WatchTimeline>
-        </Grid> */}
       </Grid>
     </Container>
   );
