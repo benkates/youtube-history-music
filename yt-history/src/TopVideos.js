@@ -1,8 +1,9 @@
-import { tidy, groupBy, count, arrange, desc, sliceHead } from "@tidyjs/tidy";
+import { tidy, groupBy, count, arrange, desc } from "@tidyjs/tidy";
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 
-//TODO: add column descriptions (description key)
+//TODO: style column header (bold)
+//DONE: add column descriptions (description key)
 
 const columns = [
   {
@@ -11,6 +12,8 @@ const columns = [
     flex: 0.5,
     minWidth: 100,
     hideable: false,
+    description: "Channel Name: YouTube Channel Name",
+    headerClassName: "data-grid-column",
   },
   {
     field: "video_title",
@@ -18,6 +21,8 @@ const columns = [
     flex: 1.5,
     minWidth: 100,
     hideable: false,
+    description: "Video Title: YouTube Video Title",
+    headerClassName: "data-grid-column",
   },
   {
     field: "count",
@@ -25,7 +30,7 @@ const columns = [
     flex: 0.5,
     minWidth: 50,
     hideable: false,
-    // description: "test",
+    description: "Ben's Playcount: Total playcount for 2019-2022",
   },
 ];
 

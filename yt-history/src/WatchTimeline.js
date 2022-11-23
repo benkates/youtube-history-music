@@ -1,14 +1,14 @@
 import * as Plot from "@observablehq/plot";
 import { useEffect, useRef } from "react";
 import { filter, rollup, timeMonth, utcFormat } from "d3";
-import { Card, Typography } from "@mui/material";
+import { Card } from "@mui/material";
 
 //DATA//
 
 //PLOT//
 //TODO: bar chart instead of line (rectY?)
-//TODO: add title
 //TODO: fixed axis for dates (always jan '19 to oct '22)
+//DONE: add title
 //DONE: shorten date format
 
 //UI//
@@ -56,9 +56,9 @@ function WatchTimeline({ data, selectedChannel }) {
       height: 500,
       grid: true,
       style: {
-        // background: "#282c34",
+        background: "#282c34",
         fontSize: "0.75em",
-        color: "black",
+        color: "white",
       },
     });
 
@@ -70,8 +70,15 @@ function WatchTimeline({ data, selectedChannel }) {
   }, [data, selectedChannel]); //depend on stateful vars
 
   return (
-    <Card sx={{ padding: 3 }}>
-      <div id="watch-timeline" ref={ref}></div>
+    <Card
+      sx={{
+        padding: 3,
+        backgroundColor: "#282c34",
+        color: "white",
+        border: "1px solid white",
+      }}
+    >
+      <div id="watch-timeline" ref={ref} style={{ padding: 3 }}></div>
     </Card>
   );
 }

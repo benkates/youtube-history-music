@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,bolder,italic&subset=latin,latin-ext");
+
 /* .App {
   text-align: center;
   background-color: #282c34;
@@ -33,4 +35,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.data-grid-column {
+  font-weight: bolder !important;
 }

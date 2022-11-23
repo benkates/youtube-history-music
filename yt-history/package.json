@@ -14,6 +14,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@tidyjs/tidy": "^2.5.2",
+    "@visx/visx": "^2.16.0",
     "d3": "^7.6.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",

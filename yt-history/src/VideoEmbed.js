@@ -1,6 +1,8 @@
 import { filter, rollup, greatest } from "d3";
 
 //DONE: responsive size
+//DONE: remove player controls
+//TODO: rounded edges
 
 function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   //filter data to the selected channel
@@ -37,9 +39,9 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
         width="100%"
         height="100%"
         loading="lazy"
-        src={`https://www.youtube.com/embed/${embedId}`}
+        src={`https://www.youtube.com/embed/${embedId}?controls=0`}
         frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         // allowFullScreen
         title="Embedded YouTube Video"
       />
