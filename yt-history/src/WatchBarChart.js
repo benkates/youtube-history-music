@@ -12,6 +12,7 @@ import { scaleBand, scaleLinear } from "@visx/scale";
 //TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 //TODO: colorscale bars
 //TODO: tooltip contains current filter
+//TODO: tooltip under video
 //DONE: tooltip correct
 //DONE: responsive (use visx repsonsive component)
 

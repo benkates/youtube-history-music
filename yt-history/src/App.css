@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Abril+Fatface:regular,bold,italic&subset=latin,latin-ext");
+
 body {
   background-color: #282c34 !important;
 }
@@ -53,9 +55,15 @@ blockquote:after {
 /* ChannelDropdown */
 
 .MuiFormLabel-root,
-.MuiInputBase-root,
+.MuiInputBase-formControl,
 .MuiOutlinedInput-notchedOutline,
 .MuiSelect-icon {
   color: white !important;
   border-color: white !important;
+}
+
+.MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  /* border-color: #282c34 !important; */
+  border-width: 1px;
 }

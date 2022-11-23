@@ -1,4 +1,5 @@
 import { filter, rollup, greatest } from "d3";
+import { useRef, useEffect } from "react";
 
 //TODO: pause and show the static in between videos?
 //DONE: add back in timeline
@@ -7,9 +8,18 @@ import { filter, rollup, greatest } from "d3";
 //DONE: remove player controls
 
 function VideoEmbed({ data, selectedChannel, selectedVideo }) {
+  const iframeContainer = useRef(null);
+
+  useEffect(() => {
+    iframeContainer.current.style.zIndex = -1;
+    setTimeout(() => {
+      iframeContainer.current.style.zIndex = 1;
+    }, 1000);
+  }, [selectedChannel, selectedVideo]);
+
   //filter data to the selected channel
   let data2 =
-    selectedChannel === undefined
+    selectedChannel === "All Channels"
       ? data
       : filter(data, (d) => d.channel_name === selectedChannel);
 
@@ -24,16 +34,15 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   data2 = greatest(data2, (d) => d[1]);
 
   //extract the video ID
-  let vid = "";
-  let embedId = "IUMTaAQ43lY";
-  if (data2 !== undefined) {
-    vid = data2[0];
+  let embedId = "";
+  console.log(data2);
+  if (selectedVideo === null && data2 !== undefined) {
+    embedId = data2[0].match("v=(.*)")[1];
+  } else if (selectedVideo !== null && data2 !== undefined) {
+    embedId = selectedVideo.match("v=(.*)")[1];
+  } else {
+    embedId = "IUMTaAQ43lY";
   }
-
-  if (selectedVideo !== undefined) {
-    vid = selectedVideo;
-  }
-  embedId = vid.match("v=(.*)")[1];
 
   return (
     <div
@@ -44,6 +53,7 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
       }}
     >
       <iframe
+        ref={iframeContainer}
         width="100%"
         height="100%"
         loading="lazy"

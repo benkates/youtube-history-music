@@ -34,7 +34,7 @@ const columns = [
   },
 ];
 
-function TopVideosTable({ data, selectedChannel, childToParentVideo }) {
+function TopVideosTable({ data, selectedChannel, setSelectedVideo }) {
   //tidyjs for data manipulation (akin to tidyverse)
   const tidyData = tidy(
     data,
@@ -76,7 +76,7 @@ function TopVideosTable({ data, selectedChannel, childToParentVideo }) {
               hideFooter
               disableColumnMenu
               onRowClick={(e) => {
-                childToParentVideo(e.id);
+                setSelectedVideo(e.id);
                 // childToParent(e.row.channel_name);
               }}
             />

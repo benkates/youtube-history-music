@@ -28,18 +28,7 @@ function App() {
   //init data state
   const [data, setData] = useState([]);
   const [selectedChannel, setSelectedChannel] = useState("All Channels");
-  const [selectedVideo, setSelectedVideo] = useState(
-    "https://www.youtube.com/watch?v=IUMTaAQ43lY"
-  );
-
-  //create fun to bring data from the child component (TopChannels) to App
-  const childToParent = (e) => {
-    setSelectedChannel(e);
-  };
-
-  const childToParentVideo = (e) => {
-    setSelectedVideo(e);
-  };
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   //get data and set it
   useEffect(() => {
@@ -78,9 +67,9 @@ function App() {
         component="h1"
         gutterBottom
         color="white"
-        sx={{ textAlign: "center", mt: 3 }}
+        sx={{ textAlign: "center", mt: 3, fontFamily: "Abril Fatface" }}
       >
-        What's Ben's Favorite Music Videos on YouTube?
+        What are Ben's Favorite Music Videos on YouTube?
       </Typography>
 
       {/* parent div */}
@@ -97,6 +86,7 @@ function App() {
             data={data}
             selectedChannel={selectedChannel}
             setSelectedChannel={setSelectedChannel}
+            setSelectedVideo={setSelectedVideo}
           ></ChannelDropdown>
           <ParentSize className="graph-container" debounceTime={10}>
             {({ width: visWidth, height: visHeight }) => (
@@ -111,7 +101,7 @@ function App() {
           <TopVideosTable
             data={data}
             selectedChannel={selectedChannel}
-            childToParentVideo={childToParentVideo}
+            setSelectedVideo={setSelectedVideo}
           ></TopVideosTable>
         </Grid>
 
@@ -122,7 +112,11 @@ function App() {
             selectedChannel={selectedChannel}
             selectedVideo={selectedVideo}
           ></VideoEmbed>
-          <Blockquote selectedVideo={selectedVideo}></Blockquote>
+          <Blockquote
+            data={data}
+            selectedVideo={selectedVideo}
+            selectedChannel={selectedChannel}
+          ></Blockquote>
         </Grid>
       </Grid>
     </Container>

@@ -17,7 +17,12 @@ import Select from "@mui/material/Select";
 //TODO: put total row first for dropdown
 //TODO: commas in numbers
 
-function ChannelDropdown({ data, selectedChannel, setSelectedChannel }) {
+function ChannelDropdown({
+  data,
+  selectedChannel,
+  setSelectedChannel,
+  setSelectedVideo,
+}) {
   return (
     <FormControl fullWidth sx={{ color: "white", borderColor: "white" }}>
       <InputLabel id="demo-simple-select-label">Channel</InputLabel>
@@ -26,7 +31,11 @@ function ChannelDropdown({ data, selectedChannel, setSelectedChannel }) {
         id="demo-simple-select"
         value={selectedChannel}
         label="Channel"
-        onChange={(e) => setSelectedChannel(e.target.value)}
+        onChange={(e) => {
+          //set channel up for selection, unselect video (so it gets top)
+          setSelectedChannel(e.target.value);
+          setSelectedVideo(null);
+        }}
       >
         {tidy(
           data,
