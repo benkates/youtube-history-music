@@ -86,7 +86,7 @@ export default function WatchTimeline2({
   return (
     <>
       <div ref={containerRef}>
-        <svg width="100%" height={height}>
+        <svg width="100%" height={height} transform="translate(0 6)">
           <Group top={verticalMargin / 2}>
             {dataPrepped.map((d) => {
               const month = getMonth(d);
