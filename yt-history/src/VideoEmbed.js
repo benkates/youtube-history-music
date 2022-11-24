@@ -1,19 +1,24 @@
 import { filter, rollup, greatest } from "d3";
 import { useRef, useEffect } from "react";
 
-//TODO: pause and show the static in between videos?
+//DONE: background image peeking through when iframe is shown
+//DONE: pause and show the static in between videos?
 //DONE: add back in timeline
 //DONE: rounded edges
 //DONE: responsive size
 //DONE: remove player controls
 
 function VideoEmbed({ data, selectedChannel, selectedVideo }) {
-  const iframeContainer = useRef(null);
+  const iframeRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    iframeContainer.current.style.zIndex = -1;
+    iframeRef.current.style.zIndex = -1;
+    containerRef.current.style.backgroundImage =
+      "url('https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp')";
     setTimeout(() => {
-      iframeContainer.current.style.zIndex = 1;
+      iframeRef.current.style.zIndex = 1;
+      containerRef.current.style.backgroundImage = null;
     }, 1000);
   }, [selectedChannel, selectedVideo]);
 
@@ -35,7 +40,6 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
 
   //extract the video ID
   let embedId = "";
-  console.log(data2);
   if (selectedVideo === null && data2 !== undefined) {
     embedId = data2[0].match("v=(.*)")[1];
   } else if (selectedVideo !== null && data2 !== undefined) {
@@ -45,15 +49,9 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   }
 
   return (
-    <div
-      className="video-container"
-      style={{
-        backgroundImage:
-          "url('https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp')",
-      }}
-    >
+    <div className="video-container" ref={containerRef}>
       <iframe
-        ref={iframeContainer}
+        ref={iframeRef}
         width="100%"
         height="100%"
         loading="lazy"

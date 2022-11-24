@@ -1,20 +1,44 @@
-import { tidy, groupBy, count, arrange, desc, filter } from "@tidyjs/tidy";
+import {
+  tidy,
+  groupBy,
+  count,
+  arrange,
+  desc,
+  filter,
+  mutate,
+} from "@tidyjs/tidy";
 import { DataGrid } from "@mui/x-data-grid";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
 
 //TODO: style column header (bold)
 //TODO: avatars in table?
 //TODO: better fonts
 //TODO: special button icon inline if i wrote something
+//TODO: bars/styling for playcount?
 //DONE: add column descriptions (description key)
 
 const columns = [
   {
     field: "channel_name",
     headerName: "Channel Name",
-    flex: 0.5,
+    flex: 0.65,
     minWidth: 100,
     hideable: false,
     description: "Channel Name: YouTube Channel Name",
+    renderCell: (params) => {
+      return (
+        <Chip
+          avatar={
+            <Avatar alt={params.value} src={`avatar/${params.value}.jpg`} />
+          }
+          label={params.value}
+          variant="outlined"
+          sx={{ color: "white", borderColor: null }}
+          onClick={(e) => console.log(e)}
+        />
+      );
+    },
   },
   {
     field: "video_title",
@@ -49,7 +73,8 @@ function TopVideosTable({ data, selectedChannel, setSelectedVideo }) {
       [count("channel_name", { name: "count" })]
     ),
     //arrange in descending order based on the count
-    arrange(desc("count"))
+    arrange(desc("count")),
+    mutate({ avatar: (d) => d.channel_name })
   );
 
   return (

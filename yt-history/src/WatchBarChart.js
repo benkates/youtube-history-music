@@ -6,13 +6,13 @@ import { useTooltip, useTooltipInPortal, defaultStyles } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
 import { scaleBand, scaleLinear } from "@visx/scale";
 
-//TODO: animated transition of bars
+//TODO: animated transition of bars on change of top level channel (although you cant really see much)
 //TODO: sort months correctly
 //TODO: onclick filter table to that month
 //TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 //TODO: colorscale bars
-//TODO: tooltip contains current filter
-//TODO: tooltip under video
+//DONE: tooltip is under video
+//DONE: tooltip contains current filter
 //DONE: tooltip correct
 //DONE: responsive (use visx repsonsive component)
 
@@ -23,6 +23,7 @@ const tooltipStyles = {
   minWidth: 60,
   backgroundColor: "black",
   color: "white",
+  zIndex: 2,
 };
 let tooltipTimeout = 0;
 

@@ -13,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Avatar from "@mui/material/Avatar";
 
 //TODO: put total row first for dropdown
 //TODO: commas in numbers
@@ -52,7 +53,12 @@ function ChannelDropdown({
         ).map((e) => {
           return (
             <MenuItem value={e.channel_name} key={e.channel_name}>
-              {e.label}
+              <Avatar
+                alt={`${e.label}`}
+                src={`./avatar/${e.channel_name}.jpg`}
+                sx={{ width: 24, height: 24, mr: 1, position: "absolute" }}
+              />{" "}
+              <div style={{ marginLeft: 30 }}>{e.label}</div>
             </MenuItem>
           );
         })}
