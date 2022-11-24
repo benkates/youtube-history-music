@@ -11,28 +11,26 @@ import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 
-//TODO: style column header (bold)
-//TODO: avatars in table?
-//TODO: better fonts
-//TODO: special button icon inline if i wrote something
+//TODO: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
 //TODO: bars/styling for playcount?
+//DONE: style column header (bold)
+//DONE: avatars in table?
 //DONE: add column descriptions (description key)
 
 const columns = [
   {
     field: "channel_name",
-    headerName: "Channel Name",
+    headerName: "Channel",
     flex: 0.65,
     minWidth: 100,
     hideable: false,
-    description: "Channel Name: YouTube Channel Name",
-    renderCell: (params) => {
+    headerClassName: "col-header-center",
+    description: "YouTube Channel Name",
+    renderCell: (d) => {
       return (
         <Chip
-          avatar={
-            <Avatar alt={params.value} src={`avatar/${params.value}.jpg`} />
-          }
-          label={params.value}
+          avatar={<Avatar alt={d.value} src={`avatar/${d.value}.jpg`} />}
+          label={d.value}
           variant="outlined"
           sx={{ color: "white", borderColor: null }}
           onClick={(e) => console.log(e)}
@@ -42,19 +40,34 @@ const columns = [
   },
   {
     field: "video_title",
-    headerName: "Video Title",
+    headerName: "Video",
     flex: 1.5,
+    headerClassName: "col-header-center",
     minWidth: 100,
     hideable: false,
-    description: "Video Title: YouTube Video Title",
+    description: "YouTube Video Title",
+    renderCell: (d) => {
+      return (
+        <>
+          {d.value}
+          {d.value === "Tom Misch: NPR Music Tiny Desk Concert" && "*"}
+        </>
+      );
+    },
   },
   {
     field: "count",
-    headerName: "Ben's Playcount",
+    headerName: "Playcount",
+    type: "number",
+    headerClassName: "col-header-center col-header-center",
+    headerAlign: "center",
+    style: { color: "red" },
     flex: 0.5,
     minWidth: 50,
     hideable: false,
     description: "Ben's Playcount: Total playcount for 2019-2022",
+    // cellClassName: "count-col-align-center",
+    align: "center",
   },
 ];
 

@@ -4,7 +4,6 @@ import Slide from "@mui/material/Slide";
 import { filter, rollup, greatest } from "d3";
 
 // TODO: write commentary summaries for some videos
-// TODO:
 
 function Blockquote({ data, selectedVideo, selectedChannel }) {
   //filter data to the selected channel
@@ -25,7 +24,6 @@ function Blockquote({ data, selectedVideo, selectedChannel }) {
 
   //extract the video ID
   let video = "";
-  console.log(data2);
   if (selectedVideo === null && data2 !== undefined) {
     video = data2[0];
   } else if (selectedVideo !== null && data2 !== undefined) {

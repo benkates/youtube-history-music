@@ -15,8 +15,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Avatar from "@mui/material/Avatar";
 
+import { format } from "d3";
+
 //TODO: put total row first for dropdown
-//TODO: commas in numbers
+//TODO: stylize "all" avatar
+//DONE: commas in numbers
 
 function ChannelDropdown({
   data,
@@ -48,7 +51,8 @@ function ChannelDropdown({
           total({ count: sum("count") }, { channel_name: "All Channels" }),
           //create label field
           mutate({
-            label: (d) => `${d.channel_name} (Playcount: ${d.count})`,
+            label: (d) =>
+              `${d.channel_name} (Playcount: ${format(",")(d.count)})`,
           })
         ).map((e) => {
           return (

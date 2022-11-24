@@ -4,6 +4,10 @@ body {
   background-color: #282c34 !important;
 }
 
+.col-header-center {
+  font-size: 18px !important;
+}
+
 /* Blockquote */
 
 blockquote {

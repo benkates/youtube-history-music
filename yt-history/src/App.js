@@ -15,12 +15,13 @@ import Grid from "@mui/material/Grid";
 
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
-//TODO: introductory text, explainer that you can click on table, etc.
+//TODO: introductory text, explainer that you can click on table to scroll down, etc.
 //TODO: implement theming for the main bg color #282c34
 //TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
 //TODO: Blockquote under video on desktop but on top on mobile
 //TODO: footer
 //TODO: graphics scrollytelling (use single column to get a skinnier column on desktop)
+//TODO: skeleton component?
 
 //DONE: when you select a new channel as a filter, automatically bring up the first video
 //DONE: reposition divs to have chart on top of one but have the video
@@ -54,7 +55,6 @@ function App() {
       })
       //set the stateful data
       .then(setData);
-    //TODO: add in set state of channel (most views etc etc)
   }, []);
 
   return (
@@ -124,7 +124,11 @@ function App() {
             setSelectedChannel={setSelectedChannel}
             setSelectedVideo={setSelectedVideo}
           ></ChannelDropdown>
-          <ParentSize className="graph-container" debounceTime={10}>
+          <ParentSize
+            className="graph-container"
+            debounceTime={10}
+            style={{ marginTop: "12px", marginBottom: "6px" }}
+          >
             {({ width: visWidth, height: visHeight }) => (
               <WatchBarChart
                 data={data}

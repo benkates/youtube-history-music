@@ -1,6 +1,7 @@
 import { filter, rollup, greatest } from "d3";
 import { useRef, useEffect } from "react";
 
+//DONE: save static webp locally https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp
 //DONE: background image peeking through when iframe is shown
 //DONE: pause and show the static in between videos?
 //DONE: add back in timeline
@@ -14,8 +15,7 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
 
   useEffect(() => {
     iframeRef.current.style.zIndex = -1;
-    containerRef.current.style.backgroundImage =
-      "url('https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp')";
+    containerRef.current.style.backgroundImage = "url('static.webp')";
     setTimeout(() => {
       iframeRef.current.style.zIndex = 1;
       containerRef.current.style.backgroundImage = null;

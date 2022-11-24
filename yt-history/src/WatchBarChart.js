@@ -5,6 +5,8 @@ import { Group } from "@visx/group";
 import { useTooltip, useTooltipInPortal, defaultStyles } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
 import { scaleBand, scaleLinear } from "@visx/scale";
+import { AxisLeft } from "@visx/axis";
+import { format } from "d3";
 
 //TODO: animated transition of bars on change of top level channel (although you cant really see much)
 //TODO: sort months correctly
@@ -66,7 +68,7 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
   const xMax = width;
   const yMax = height - verticalMargin;
 
-  // scales, memoize for performance
+  // scales, (can be memoized)
   const xScale = scaleBand({
     range: [0, xMax],
     round: true,
@@ -83,8 +85,30 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
   return (
     <>
       <div ref={containerRef}>
-        {/* <span style={{ color: "white" }}>{selectedChannel}</span> */}
-        <svg width="100%" height={height} transform="translate(0 6)">
+        <svg
+          width="100%"
+          height={height}
+          transform="translate(0 0)"
+          style={{ overflow: "overlay" }}
+        >
+          <AxisLeft
+            scale={yScale}
+            key="axisLeft"
+            stroke="white"
+            tickStroke="white"
+            numTicks={3}
+            hideAxisLine={true}
+            hideTicks={true}
+            tickFormat={(d) => format(".0f")(d)}
+            tickLabelProps={() => {
+              return {
+                fill: "grey",
+                transform: "translate(10,-3)",
+                textAnchor: "end",
+                fontSize: 10,
+              };
+            }}
+          />
           <Group top={verticalMargin / 2}>
             {dataPrepped.map((d) => {
               const month = getMonth(d);
