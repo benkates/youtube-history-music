@@ -7,13 +7,24 @@ import {
   filter,
   mutate,
 } from "@tidyjs/tidy";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 //TODO: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
 //TODO: bars/styling for playcount?
+//TODO: Reset table scroll on month filter and channel filter
+//TODO: Different text on mobile for col titles? it's cutoff (.col-header-center)
+//TODO: search bar underline to be white
+
+//DONE: search bar
+//DONE: Put pencil before text in table
 //DONE: style column header (bold)
 //DONE: avatars in table?
 //DONE: add column descriptions (description key)
@@ -25,6 +36,14 @@ function TopVideosTable({
   selectedMonth,
   WRITING,
 }) {
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarQuickFilter />
+      </GridToolbarContainer>
+    );
+  }
+
   const columns = [
     {
       field: "channel_name",
@@ -57,12 +76,12 @@ function TopVideosTable({
       renderCell: (d) => {
         return (
           <>
-            {d.value}
             {WRITING.some((e) => e.video_url === d.rowNode.id) && (
               <CreateOutlinedIcon
-                sx={{ ml: 1, width: 16, height: 16 }}
+                sx={{ mr: 1, width: 16, height: 16 }}
               ></CreateOutlinedIcon>
             )}
+            {d.value}
           </>
         );
       },
@@ -122,9 +141,19 @@ function TopVideosTable({
               getRowId={(e) => e.video_url}
               hideFooter
               disableColumnMenu
+              disableColumnFilter
+              disableColumnSelector
+              disableDensitySelector
               onRowClick={(e) => {
                 setSelectedVideo(e.id);
                 // childToParent(e.row.channel_name);
+              }}
+              components={{ Toolbar: CustomToolbar }}
+              componentsProps={{
+                toolbar: {
+                  showQuickFilter: true,
+                  quickFilterProps: { debounceMs: 200 },
+                },
               }}
             />
           </div>

@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/system";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

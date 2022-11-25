@@ -1,11 +1,16 @@
 import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
+import { useTheme } from "@mui/material/styles";
 
 import { filter, rollup, greatest } from "d3";
 
-// TODO: write commentary summaries for some videos
+//TODO: write commentary summaries for some videos
+//TODO: transition between new text
+//TODO: different bg color (gradient?)
 
 function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
+  const theme = useTheme();
+
   //filter data to the selected channel
   let data2 =
     selectedChannel === "All Channels"
@@ -32,7 +37,6 @@ function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
     return;
   }
 
-  //TODO: get
   const toggle = WRITING.some((e) => e.video_url === video);
   let selectedText = "";
   if (toggle) {
@@ -43,7 +47,8 @@ function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
     <Slide direction="left" in={toggle} mountOnEnter unmountOnExit>
       <Paper
         sx={{
-          backgroundColor: "#282c34",
+          // backgroundColor: theme.palette.bgColor,
+          backgroundImage: `linear-gradient(210deg, ${theme.palette.accentColor},${theme.palette.bgColor},${theme.palette.bgColor});`,
           border: "1px solid white",
           color: "white",
           mt: 3,

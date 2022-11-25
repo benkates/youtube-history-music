@@ -12,14 +12,24 @@ import ChannelDropdown from "./ChannelDropdown";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
 
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
-//TODO: introductory text, explainer that you can click on table to scroll down, etc.
-//TODO: implement theming for the main bg color #282c34
+//UI
+//TODO: implement theming for lightgrey
 //TODO: Blockquote under video on desktop but on top on mobile
-//TODO: footer/outro...
 //TODO: graphics scrollytelling (use single column to get a skinnier column on desktop)
+//TODO: Add GA
+//TODO: Scrollytrlling at the top and logos come in in background
+
+//WRITING
+//TODO: Tom misch has been in so many of the channels, highlight that in intro text
+//TODO: introductory text, explainer that you can click on table to scroll down, etc.
+//TODO: footer/outro...
+//TODO: Comment on the Vulf msg being super high
+//TODO: README
+//TODO: Add link to my homepage in footer
 
 //DONE: when you select a new channel as a filter, automatically bring up the first video
 //DONE: reposition divs to have chart on top of one but have the video
@@ -32,6 +42,8 @@ function App() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   // const [blockquoteText, setBlockquoteText] = useState(null);
+
+  const theme = useTheme();
 
   const WRITING = [
     {
@@ -68,11 +80,13 @@ function App() {
       .then(setData);
   }, []);
 
+  console.log(theme.palette);
+
   return (
     <Container
       className="App"
       maxWidth="xl"
-      sx={{ backgroundColor: "#282c34" }}
+      sx={{ backgroundColor: theme.palette.bgColor }}
     >
       {/* title */}
       <Typography
@@ -127,6 +141,21 @@ function App() {
         spacing={3}
         sx={{ p: 1 }}
       >
+        {/* video + blockquote */}
+        <Grid item lg={6} xs={12}>
+          <VideoEmbed
+            data={data}
+            selectedChannel={selectedChannel}
+            selectedVideo={selectedVideo}
+          ></VideoEmbed>
+          <Blockquote
+            data={data}
+            selectedVideo={selectedVideo}
+            selectedChannel={selectedChannel}
+            WRITING={WRITING}
+          ></Blockquote>
+        </Grid>
+
         {/* barchart + table */}
         <Grid item lg={6} xs={12}>
           <ChannelDropdown
@@ -159,21 +188,6 @@ function App() {
             selectedMonth={selectedMonth}
             WRITING={WRITING}
           ></TopVideosTable>
-        </Grid>
-
-        {/* video + blockquote */}
-        <Grid item lg={6} xs={12}>
-          <VideoEmbed
-            data={data}
-            selectedChannel={selectedChannel}
-            selectedVideo={selectedVideo}
-          ></VideoEmbed>
-          <Blockquote
-            data={data}
-            selectedVideo={selectedVideo}
-            selectedChannel={selectedChannel}
-            WRITING={WRITING}
-          ></Blockquote>
         </Grid>
       </Grid>
       <Typography

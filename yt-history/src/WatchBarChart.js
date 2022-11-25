@@ -13,6 +13,9 @@ import { GridRows } from "@visx/grid";
 //TODO: animated transition of bars on change of top level channel (although you cant really see much)
 //TODO: sort months correctly
 //TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
+//TODO: Can’t see axis on mobile
+//TODO: Month indicator cutoff in mobile
+
 //DONE: reset month on change
 //DONE: onclick filter table to that month
 //DONE: colorscale bars
@@ -133,7 +136,7 @@ function WatchBarChart({
             tickLabelProps={() => {
               return {
                 fill: "grey",
-                transform: "translate(0,3)",
+                transform: "translate(5,4)",
                 textAnchor: "end",
                 fontSize: 10,
               };
