@@ -6,12 +6,12 @@ import { groupSort } from "d3";
 //DONE: get years from data and update dropdown dynamically
 
 //PLOT//
-//TODO: count as text?
-//TODO: plot title
+//ONHOLD: count as text?
+//ONHOLD: plot title
 
 //UI//
-//TODO: cool slider for year input
-//TODO: arrow for scroll indication
+//ONHOLD: cool slider for year input
+//ONHOLD: arrow for scroll indication
 
 function TopChannels({ data, childToParent }) {
   //set reactive year

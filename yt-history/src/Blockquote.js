@@ -5,7 +5,7 @@ import { filter, rollup, greatest } from "d3";
 
 // TODO: write commentary summaries for some videos
 
-function Blockquote({ data, selectedVideo, selectedChannel }) {
+function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
   //filter data to the selected channel
   let data2 =
     selectedChannel === "All Channels"
@@ -32,7 +32,13 @@ function Blockquote({ data, selectedVideo, selectedChannel }) {
     return;
   }
 
-  const toggle = video === "https://www.youtube.com/watch?v=IUMTaAQ43lY";
+  //TODO: get
+  const toggle = WRITING.some((e) => e.video_url === video);
+  let selectedText = "";
+  if (toggle) {
+    selectedText = WRITING.filter((d) => d.video_url === video)[0]["text"];
+  }
+
   return (
     <Slide direction="left" in={toggle} mountOnEnter unmountOnExit>
       <Paper
@@ -45,17 +51,7 @@ function Blockquote({ data, selectedVideo, selectedChannel }) {
           fontStyle: "italic",
         }}
       >
-        <blockquote>
-          Tom Misch is the best, I'm writing about how this had an impact on me.
-          <br></br>
-          <br></br>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-        </blockquote>
+        <blockquote>{selectedText}</blockquote>
       </Paper>
     </Slide>
   );

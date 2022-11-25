@@ -17,11 +17,9 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 //TODO: introductory text, explainer that you can click on table to scroll down, etc.
 //TODO: implement theming for the main bg color #282c34
-//TODO: remove "https://youtube.com/" from video/channel IN R stuff to reduce data size
 //TODO: Blockquote under video on desktop but on top on mobile
-//TODO: footer
+//TODO: footer/outro...
 //TODO: graphics scrollytelling (use single column to get a skinnier column on desktop)
-//TODO: skeleton component?
 
 //DONE: when you select a new channel as a filter, automatically bring up the first video
 //DONE: reposition divs to have chart on top of one but have the video
@@ -32,6 +30,19 @@ function App() {
   const [data, setData] = useState([]);
   const [selectedChannel, setSelectedChannel] = useState("All Channels");
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  // const [blockquoteText, setBlockquoteText] = useState(null);
+
+  const WRITING = [
+    {
+      video_url: "https://www.youtube.com/watch?v=IUMTaAQ43lY",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      video_url: "https://www.youtube.com/watch?v=hC8CH0Z3L54",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    },
+  ];
 
   //get data and set it
   useEffect(() => {
@@ -123,6 +134,7 @@ function App() {
             selectedChannel={selectedChannel}
             setSelectedChannel={setSelectedChannel}
             setSelectedVideo={setSelectedVideo}
+            setSelectedMonth={setSelectedMonth}
           ></ChannelDropdown>
           <ParentSize
             className="graph-container"
@@ -133,6 +145,8 @@ function App() {
               <WatchBarChart
                 data={data}
                 selectedChannel={selectedChannel}
+                selectedMonth={selectedMonth}
+                setSelectedMonth={setSelectedMonth}
                 width={visWidth}
                 height="164"
               ></WatchBarChart>
@@ -142,6 +156,8 @@ function App() {
             data={data}
             selectedChannel={selectedChannel}
             setSelectedVideo={setSelectedVideo}
+            selectedMonth={selectedMonth}
+            WRITING={WRITING}
           ></TopVideosTable>
         </Grid>
 
@@ -156,6 +172,7 @@ function App() {
             data={data}
             selectedVideo={selectedVideo}
             selectedChannel={selectedChannel}
+            WRITING={WRITING}
           ></Blockquote>
         </Grid>
       </Grid>

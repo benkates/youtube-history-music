@@ -1,5 +1,5 @@
 import { tidy, groupBy, count, filter, arrange, asc } from "@tidyjs/tidy";
-
+import { useEffect } from "react";
 import { Bar } from "@visx/shape";
 import { Group } from "@visx/group";
 import { useTooltip, useTooltipInPortal, defaultStyles } from "@visx/tooltip";
@@ -7,12 +7,15 @@ import { localPoint } from "@visx/event";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { AxisLeft } from "@visx/axis";
 import { format } from "d3";
+import { darken } from "@mui/material";
+import { GridRows } from "@visx/grid";
 
 //TODO: animated transition of bars on change of top level channel (although you cant really see much)
 //TODO: sort months correctly
-//TODO: onclick filter table to that month
 //TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
-//TODO: colorscale bars
+//DONE: reset month on change
+//DONE: onclick filter table to that month
+//DONE: colorscale bars
 //DONE: tooltip is under video
 //DONE: tooltip contains current filter
 //DONE: tooltip correct
@@ -26,6 +29,8 @@ const tooltipStyles = {
   backgroundColor: "black",
   color: "white",
   zIndex: 2,
+  borderRadius: "4px",
+  border: "1px solid grey",
 };
 let tooltipTimeout = 0;
 
@@ -33,7 +38,14 @@ let tooltipTimeout = 0;
 const getMonth = (d) => d.month;
 const getFreq = (d) => Number(d.count);
 
-function WatchBarChart({ data, selectedChannel, width, height }) {
+function WatchBarChart({
+  data,
+  selectedChannel,
+  selectedMonth,
+  setSelectedMonth,
+  width,
+  height,
+}) {
   //tooltip hook pt 1
   const {
     tooltipOpen,
@@ -82,6 +94,15 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
   });
 
+  const colorScale = scaleLinear({
+    range: ["lightgrey", "#556CD6"],
+    domain: [0, Math.max(...dataPrepped.map(getFreq))],
+  });
+
+  useEffect(() => {
+    setSelectedMonth(null);
+  }, [setSelectedMonth]);
+
   return (
     <>
       <div ref={containerRef}>
@@ -90,7 +111,16 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
           height={height}
           transform="translate(0 0)"
           style={{ overflow: "overlay" }}
+          onClick={(e) =>
+            e.target.tagName !== "rect" ? setSelectedMonth(null) : true
+          }
         >
+          <GridRows
+            scale={yScale}
+            width={xMax}
+            height={yMax}
+            stroke="#444444"
+          />
           <AxisLeft
             scale={yScale}
             key="axisLeft"
@@ -103,7 +133,7 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
             tickLabelProps={() => {
               return {
                 fill: "grey",
-                transform: "translate(10,-3)",
+                transform: "translate(0,3)",
                 textAnchor: "end",
                 fontSize: 10,
               };
@@ -116,6 +146,16 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
               const barHeight = yMax - (yScale(getFreq(d)) ?? 0);
               const barX = xScale(month);
               const barY = yMax - barHeight;
+
+              let color = colorScale(getFreq(d));
+              //if it's the month, make it stand out
+              if (selectedMonth !== null && d.month === selectedMonth) {
+                color = "#32A287";
+              }
+              //if it's not the month, make it darker
+              if (selectedMonth !== null && d.month !== selectedMonth) {
+                color = darken(color, 0.5);
+              }
               return (
                 <Bar
                   key={`bar-${month}`}
@@ -123,31 +163,63 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
                   y={Number(barY)}
                   width={barWidth}
                   height={barHeight}
-                  fill="#556cd6"
+                  fill={color}
+                  rx={2}
                   onMouseMove={(e) => {
                     if (tooltipTimeout) clearTimeout(tooltipTimeout);
+                    //localPoint will get the exact svg coords
                     const eventSvgCoords = localPoint(e);
                     const left = barX + barWidth / 2;
                     showTooltip({
-                      tooltipData: d,
+                      tooltipData: d, //data of the mapped array
                       tooltipTop: eventSvgCoords?.y,
                       tooltipLeft: left,
                     });
                   }}
+                  //remove tooltip on mosuse out
                   onMouseLeave={() => {
                     tooltipTimeout = window.setTimeout(() => {
                       hideTooltip();
                     }, 500);
                   }}
-                  onClick={(e) => {
-                    console.log(d);
+                  //set month on click
+                  onClick={() => {
+                    //if the selected month is the same as the state var, reset it
+                    if (d.month === selectedMonth) {
+                      setSelectedMonth(null);
+                      //otherwise set it
+                    } else {
+                      setSelectedMonth(d.month);
+                    }
                   }}
                 />
               );
             })}
           </Group>
+
+          {/* MONTH TEXT START */}
+          {selectedMonth && (
+            <g>
+              <text style={{ fill: "white" }} x={width} y={10} textAnchor="end">
+                {`Month: ${selectedMonth}`}
+              </text>
+              <text
+                style={{ fill: "white", cursor: "pointer" }}
+                x={width}
+                y={30}
+                textAnchor="end"
+                textDecoration="underline"
+                font-size="12px"
+              >
+                reset
+              </text>
+            </g>
+          )}
+          {/* MONTH TEXT END */}
         </svg>
       </div>
+
+      {/* TOOLTIP START */}
       {tooltipOpen && tooltipData && (
         <TooltipInPortal
           top={tooltipTop}
@@ -164,6 +236,7 @@ function WatchBarChart({ data, selectedChannel, width, height }) {
           </div>
         </TooltipInPortal>
       )}
+      {/* TOOLTIP END */}
     </>
   );
 }

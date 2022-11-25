@@ -15,10 +15,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Avatar from "@mui/material/Avatar";
 
+import YouTubeIcon from "@mui/icons-material/YouTube";
+
 import { format } from "d3";
 
-//TODO: put total row first for dropdown
-//TODO: stylize "all" avatar
+//DONE: put total row first for dropdown
+//DONE: stylize "all" avatar
 //DONE: commas in numbers
 
 function ChannelDropdown({
@@ -26,7 +28,22 @@ function ChannelDropdown({
   selectedChannel,
   setSelectedChannel,
   setSelectedVideo,
+  setSelectedMonth,
 }) {
+  const AvatarStyles = { width: 24, height: 24, mr: 1, position: "absolute" };
+  const tidyData = tidy(
+    data,
+    //group by channel name and count
+    groupBy(["channel_name"], [count("channel_name", { name: "count" })]),
+    //create a total row
+    total({ count: sum("count") }, { channel_name: "All Channels" }),
+    //sort descending by count
+    arrange(desc("count")),
+    //create label field
+    mutate({
+      label: (d) => `${d.channel_name} (Playcount: ${format(",")(d.count)})`,
+    })
+  );
   return (
     <FormControl fullWidth sx={{ color: "white", borderColor: "white" }}>
       <InputLabel id="demo-simple-select-label">Channel</InputLabel>
@@ -36,32 +53,31 @@ function ChannelDropdown({
         value={selectedChannel}
         label="Channel"
         onChange={(e) => {
-          //set channel up for selection, unselect video (so it gets top)
+          //set channel up for selection
           setSelectedChannel(e.target.value);
+          //unselect video (so it grabs the top video of that channel next)
           setSelectedVideo(null);
+          //unselect month filter
+          setSelectedMonth(null);
         }}
       >
-        {tidy(
-          data,
-          //group by channel name and count
-          groupBy(["channel_name"], [count("channel_name", { name: "count" })]),
-          //sort descending by count
-          arrange(desc("count")),
-          //create a total row
-          total({ count: sum("count") }, { channel_name: "All Channels" }),
-          //create label field
-          mutate({
-            label: (d) =>
-              `${d.channel_name} (Playcount: ${format(",")(d.count)})`,
-          })
-        ).map((e) => {
+        {tidyData.map((e) => {
           return (
-            <MenuItem value={e.channel_name} key={e.channel_name}>
+            <MenuItem
+              value={e.channel_name}
+              key={e.channel_name}
+              divider={true}
+              dense={true}
+            >
               <Avatar
                 alt={`${e.label}`}
                 src={`./avatar/${e.channel_name}.jpg`}
-                sx={{ width: 24, height: 24, mr: 1, position: "absolute" }}
-              />{" "}
+                sx={{ ...AvatarStyles, bgcolor: "red" }}
+              >
+                {e.channel_name === "All Channels" && (
+                  <YouTubeIcon sx={{ width: 20, height: 20 }}></YouTubeIcon>
+                )}
+              </Avatar>
               <div style={{ marginLeft: 30 }}>{e.label}</div>
             </MenuItem>
           );
