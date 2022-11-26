@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface:regular,bold,italic&subset=latin,latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic&subset=latin,latin-ext");
 
 body {
   background-color: #282c34 !important;
+  font-family: "Roboto";
 }
 
 /* TopVideosTable */

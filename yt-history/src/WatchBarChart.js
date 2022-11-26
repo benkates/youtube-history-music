@@ -11,11 +11,11 @@ import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
 //TODO: sort months correctly
-//TODO: 0 axis label cutoff on safari
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: 0 axis label cutoff on safari
 //DONE: Can’t see axis on mobile
 //DONE: Month indicator cutoff in mobile
 //DONE: reset month on change
@@ -104,6 +104,11 @@ function WatchBarChart({
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
   });
 
+  const tickFormatter = (d) => {
+    let r = d > 0 ? format(".0f")(d) : "";
+    return r;
+  };
+
   useEffect(() => {
     setSelectedMonth(null);
   }, [setSelectedMonth]);
@@ -135,7 +140,7 @@ function WatchBarChart({
             numTicks={3}
             hideAxisLine={true}
             hideTicks={true}
-            tickFormat={(d) => format(".0f")(d)}
+            tickFormat={tickFormatter}
             tickLabelProps={() => {
               return {
                 fill: "grey",

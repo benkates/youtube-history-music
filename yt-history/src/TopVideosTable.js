@@ -131,6 +131,7 @@ function TopVideosTable({
                 "& .MuiButtonBase-root": {
                   color: "white !important",
                 },
+                fontFamily: "Roboto",
               }}
               rows={tidyData}
               columns={columns}

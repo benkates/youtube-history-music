@@ -12,7 +12,7 @@ import ChannelDropdown from "./ChannelDropdown";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
+// import { useTheme } from "@mui/material/styles";
 
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
@@ -22,6 +22,7 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: Add GA
 //TODO: Scrollytelling at the top and logos come in in background
 //TODO: responsively narrow the text cols
+//TODO: opengraph stuff
 
 //WRITING
 //TODO: Tom misch has been in so many of the channels, highlight that in intro text
@@ -42,7 +43,7 @@ function App() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const WRITING = [
     {
@@ -79,98 +80,91 @@ function App() {
       .then(setData);
   }, []);
 
-  console.log(theme.palette);
-
   return (
-    <Container
-      className="App"
-      maxWidth="xl"
-      sx={{ backgroundColor: theme.palette.bgColor }}
-    >
+    <Container maxWidth="xl">
       {/* title */}
-      <Typography
-        variant="h2"
-        component="h1"
-        gutterBottom
-        color="white"
-        sx={{ textAlign: "center", mt: 3, fontFamily: "Abril Fatface" }}
-      >
-        What are Ben's Favorite Music Videos on YouTube?
-      </Typography>
+      <Container maxWidth="lg">
+        <Typography
+          variant="h2"
+          component="h1"
+          gutterBottom
+          color="white"
+          sx={{ textAlign: "center", mt: 3, fontFamily: "Abril Fatface" }}
+        >
+          What music-related videos are impacting Ben the most?
+        </Typography>
+      </Container>
       {/* TODO: h2 Introduction */}
-      <Typography
-        component="p"
-        gutterBottom
-        color="white"
-        sx={{
-          textAlign: "left",
-          mt: 3,
-          mb: 3,
-          pr: 10,
-          pl: 10,
-          color: "lightgrey",
-        }}
-      >
-        Ever since I can remember, I’ve loved watching musical performances on
-        YouTube. I’m not talking “concert” footage, but edited YouTube videos of
-        bands, artists, and music producers. There’s something about intimate
-        recordings of performance and the creative process that captivate me as
-        a hobbyist musician!
-        <br></br>
-        <br></br>
-        There are so many YouTube channels and media platforms out there
-        producing amazing music content, particularly the ones that have regular
-        series! I used the “Google Takeout” data export feature to dive into my
-        YouTube history and filter to some of the channels I watch most.
-      </Typography>
-      <Typography
-        component="p"
-        gutterBottom
-        color="white"
-        sx={{
-          textAlign: "left",
-          mt: 3,
-          mb: 3,
-          pr: 10,
-          pl: 10,
-          color: "lightgrey",
-        }}
-      >
-        Tiny Desk amazing Against the Clock series from FACT Some good notes in
-        here about the channels in my previous writing
-      </Typography>
-      {/* TODO: h2 Notes about the data */}
-      <Typography
-        component="p"
-        gutterBottom
-        color="white"
-        sx={{
-          textAlign: "left",
-          mt: 3,
-          mb: 3,
-          pr: 10,
-          pl: 10,
-          color: "lightgrey",
-        }}
-      >
-        Warning: the YouTube algorithm is amazing and there might be some
-        relevant plays in there that have counted towards my history but might
-        have auto-played when I was distracted, out of the room, or even asleep!
-        The bottom line is that the videos that have the highest play count are
-        the most are the ones I love the most.
-        <br></br>
-        TABLE CLICK: Click on a video to pull it up on this page. If you’d like
-        to check out that channel, click on the video’s title once it’s been
-        rendered
-        <br></br>
-        PARAGRAPH ICON: This means I’ve written a little more about how a
-        particular video might have impacted me as a music fan or creator. See
-        below the YouTube video for some added context!
-        <br></br>
-        DATA SOURCE: December 2018 to October 2022
-        <br></br>
-        MONTH CLICK: Click on a month bar to filter the table to that month!
-      </Typography>
+      <Container maxWidth="md">
+        <Typography
+          component="p"
+          gutterBottom
+          color="white"
+          sx={{
+            textAlign: "left",
+            mt: 3,
+            mb: 3,
+            color: "lightgrey",
+          }}
+        >
+          Ever since I can remember, I’ve loved watching musical performances on
+          YouTube. I’m not talking “concert” footage, but edited YouTube videos
+          of bands, artists, and music producers. There’s something about
+          intimate recordings of performance and the creative process that
+          captivate me as a hobbyist musician!
+          <br></br>
+          <br></br>
+          There are so many YouTube channels and media platforms out there
+          producing amazing music content, particularly the ones that have
+          regular series! I used the “Google Takeout” data export feature to
+          dive into my YouTube history and filter to some of the channels I
+          watch most.
+        </Typography>
+        <Typography
+          component="p"
+          gutterBottom
+          color="white"
+          sx={{
+            textAlign: "left",
+            mt: 3,
+            mb: 3,
+            color: "lightgrey",
+          }}
+        >
+          Tiny Desk amazing Against the Clock series from FACT Some good notes
+          in here about the channels in my previous writing
+        </Typography>
+        {/* TODO: h2 Notes about the data */}
+        <Typography
+          component="p"
+          gutterBottom
+          color="white"
+          sx={{
+            textAlign: "left",
+            mt: 3,
+            mb: 3,
+            color: "lightgrey",
+          }}
+        >
+          Warning: the YouTube algorithm is amazing and there might be some
+          relevant plays in there that have counted towards my history but might
+          have auto-played when I was distracted, out of the room, or even
+          asleep! The bottom line is that the videos that have the highest play
+          count are the most are the ones I love the most.
+          <br></br>
+          TABLE CLICK: Click on a video to pull it up on this page. If you’d
+          like to check out that channel, click on the video’s title once it’s
+          been rendered
+          <br></br>
+          PARAGRAPH ICON: This means I’ve written a little more about how a
+          particular video might have impacted me as a music fan or creator. See
+          below the YouTube video for some added context!
+          <br></br>
+          DATA SOURCE: December 2018 to October 2022
+          <br></br>
+          MONTH CLICK: Click on a month bar to filter the table to that month!
+        </Typography>
+      </Container>
 
       {/* parent div */}
       <Grid
@@ -229,19 +223,22 @@ function App() {
           ></TopVideosTable>
         </Grid>
       </Grid>
-      <Typography
-        component="p"
-        // gutterBottom
-        color="white"
-        sx={{ textAlign: "center", mt: 3, mb: 3, color: "lightgrey" }}
-      >
-        I had a lot of fun making this! This was my first larger React.js
-        project after years of developing in R/Shiny and dashboarding tools like
-        Google Data Studio and Power BI! If you're curious to learn more, you
-        can visit the GitHub repo here!
-        <br></br>
-        <br></br>
-      </Typography>
+      <Container maxWidth="lg">
+        <Typography
+          component="p"
+          // gutterBottom
+          color="white"
+          sx={{ textAlign: "center", mt: 3, mb: 3, color: "lightgrey" }}
+        >
+          I had a lot of fun making this! This was my first larger React.js
+          project after years of developing in R/Shiny and dashboarding tools
+          like Google Data Studio and Power BI! If you're curious to learn more,
+          you can visit the GitHub repo here!
+          <br></br>
+          <br></br>
+          {/* TODO: personal site etc */}
+        </Typography>
+      </Container>
     </Container>
   );
 }
