@@ -17,11 +17,10 @@ import { useTheme } from "@mui/material/styles";
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 //UI
-//TODO: implement theming for lightgrey
 //TODO: Blockquote under video on desktop but on top on mobile
 //TODO: graphics scrollytelling in the background
 //TODO: Add GA
-//TODO: Scrollytrlling at the top and logos come in in background
+//TODO: Scrollytelling at the top and logos come in in background
 //TODO: responsively narrow the text cols
 
 //WRITING

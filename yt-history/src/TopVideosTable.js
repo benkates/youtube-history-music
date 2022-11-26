@@ -1,12 +1,4 @@
-import {
-  tidy,
-  groupBy,
-  count,
-  arrange,
-  desc,
-  filter,
-  mutate,
-} from "@tidyjs/tidy";
+import { tidy, groupBy, count, arrange, desc, filter } from "@tidyjs/tidy";
 import {
   DataGrid,
   GridToolbarContainer,
@@ -16,10 +8,10 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
-//TODO: bars/styling for playcount?
-//TODO: Different font size on mobile for col titles? it's cutoff (.col-header-center)
-//TODO: alternating row stripes
+//HOLD: bars/styling for playcount?
 
+//DONE: Different font size on mobile for col titles? it's cutoff (.col-header-center)
+//DONE: alternating row stripes
 //DONE: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
 //DONE: Reset table scroll on month filter and channel filter https://mui.com/x/react-data-grid/scrolling/#main-content
 //DONE: paragraph icon indicates text
@@ -41,12 +33,8 @@ function TopVideosTable({
     return (
       <GridToolbarContainer sx={{ justifyContent: "space-between" }}>
         <div style={{ cursor: "default", marginLeft: 8 }}>
-          <FormatQuoteIcon
-            sx={{ mr: 1, width: 16, height: 16 }}
-          ></FormatQuoteIcon>
-          <span style={{ mr: 2, fontSize: 12 }}>
-            indicates text below video
-          </span>
+          <FormatQuoteIcon sx={{ width: 16, height: 16 }}></FormatQuoteIcon>
+          <span style={{ fontSize: 10 }}>text below video</span>
         </div>
         <GridToolbarQuickFilter />
       </GridToolbarContainer>
@@ -97,7 +85,7 @@ function TopVideosTable({
     },
     {
       field: "count",
-      headerName: "Playcount",
+      headerName: "Plays",
       type: "number",
       headerClassName: "col-header-center col-header-center",
       headerAlign: "center",
@@ -105,7 +93,7 @@ function TopVideosTable({
       flex: 0.5,
       minWidth: 50,
       hideable: false,
-      description: "Ben's Playcount: Total playcount for 2019-2022",
+      description: "Total playcount for selected data",
       // cellClassName: "count-col-align-center",
       align: "center",
     },
@@ -126,8 +114,7 @@ function TopVideosTable({
       [count("channel_name", { name: "count" })]
     ),
     //arrange in descending order based on the count
-    arrange(desc("count")),
-    mutate({ avatar: (d) => d.channel_name })
+    arrange(desc("count"))
   );
 
   return (
@@ -153,9 +140,13 @@ function TopVideosTable({
               disableColumnFilter
               disableColumnSelector
               disableDensitySelector
+              getRowClassName={(params) =>
+                params.indexRelativeToCurrentPage % 2 === 0
+                  ? "even-row"
+                  : "odd-row"
+              }
               onRowClick={(e) => {
                 setSelectedVideo(e.id);
-                // childToParent(e.row.channel_name);
               }}
               components={{ Toolbar: CustomToolbar }}
               componentsProps={{

@@ -11,12 +11,13 @@ import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
 //TODO: sort months correctly
-//TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
-//TODO: Can’t see axis on mobile
-//TODO: Month indicator cutoff in mobile
+//TODO: 0 axis label cutoff on safari
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
+//HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: Can’t see axis on mobile
+//DONE: Month indicator cutoff in mobile
 //DONE: reset month on change
 //DONE: onclick filter table to that month
 //DONE: colorscale bars
@@ -121,9 +122,10 @@ function WatchBarChart({
         >
           <GridRows
             scale={yScale}
-            width={xMax}
+            width={xMax - 15}
             height={yMax}
             stroke="#444444"
+            transform="translate(15,0)"
           />
           <AxisLeft
             scale={yScale}
@@ -137,7 +139,7 @@ function WatchBarChart({
             tickLabelProps={() => {
               return {
                 fill: "grey",
-                transform: "translate(5,4)",
+                transform: "translate(20,3)",
                 textAnchor: "end",
                 fontSize: 10,
               };
@@ -163,7 +165,7 @@ function WatchBarChart({
               return (
                 <Bar
                   key={`bar-${month}`}
-                  x={barX}
+                  x={barX + 7.5}
                   y={Number(barY)}
                   width={barWidth}
                   height={barHeight}
@@ -176,8 +178,8 @@ function WatchBarChart({
                     const left = barX + barWidth / 2;
                     showTooltip({
                       tooltipData: d, //data of the mapped array
-                      tooltipTop: eventSvgCoords?.y,
-                      tooltipLeft: left,
+                      tooltipTop: eventSvgCoords?.y + 5,
+                      tooltipLeft: left + 5,
                     });
                   }}
                   //remove tooltip on mosuse out
@@ -208,7 +210,7 @@ function WatchBarChart({
           {/* MONTH TEXT START */}
           {selectedMonth && (
             <g>
-              <text style={{ fill: "white" }} x={width} y={10} textAnchor="end">
+              <text style={{ fill: "white" }} x={width} y={12} textAnchor="end">
                 {`Month: ${selectedMonth}`}
               </text>
               <text

@@ -6,9 +6,9 @@ import { useTheme } from "@mui/material/styles";
 import { filter, rollup, greatest } from "d3";
 
 //TODO: write commentary summaries for some videos
-//TODO: transition between new text
 //TODO: different bg color (gradient?)
 
+//HOLD: transition between new text
 function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
   const theme = useTheme();
 
