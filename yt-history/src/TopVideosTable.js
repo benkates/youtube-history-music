@@ -9,20 +9,21 @@ import {
 } from "@tidyjs/tidy";
 import {
   DataGrid,
-  GridToolbar,
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
-import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
-//TODO: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
 //TODO: bars/styling for playcount?
-//TODO: Reset table scroll on month filter and channel filter
-//TODO: Different text on mobile for col titles? it's cutoff (.col-header-center)
-//TODO: search bar underline to be white
+//TODO: Different font size on mobile for col titles? it's cutoff (.col-header-center)
+//TODO: alternating row stripes
 
+//DONE: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
+//DONE: Reset table scroll on month filter and channel filter https://mui.com/x/react-data-grid/scrolling/#main-content
+//DONE: paragraph icon indicates text
+//DONE: search bar underline to be white
 //DONE: search bar
 //DONE: Put pencil before text in table
 //DONE: style column header (bold)
@@ -38,7 +39,15 @@ function TopVideosTable({
 }) {
   function CustomToolbar() {
     return (
-      <GridToolbarContainer>
+      <GridToolbarContainer sx={{ justifyContent: "space-between" }}>
+        <div style={{ cursor: "default", marginLeft: 8 }}>
+          <FormatQuoteIcon
+            sx={{ mr: 1, width: 16, height: 16 }}
+          ></FormatQuoteIcon>
+          <span style={{ mr: 2, fontSize: 12 }}>
+            indicates text below video
+          </span>
+        </div>
         <GridToolbarQuickFilter />
       </GridToolbarContainer>
     );
@@ -77,9 +86,9 @@ function TopVideosTable({
         return (
           <>
             {WRITING.some((e) => e.video_url === d.rowNode.id) && (
-              <CreateOutlinedIcon
-                sx={{ mr: 1, width: 16, height: 16 }}
-              ></CreateOutlinedIcon>
+              <FormatQuoteIcon
+                sx={{ mr: 0.5, width: 16, height: 16 }}
+              ></FormatQuoteIcon>
             )}
             {d.value}
           </>
@@ -123,7 +132,7 @@ function TopVideosTable({
 
   return (
     <>
-      <div style={{ height: 317, width: "100%" }}>
+      <div style={{ height: 358, width: "100%" }}>
         <div style={{ display: "flex", height: "100%" }}>
           <div style={{ flexGrow: 1, cursor: "pointer" }}>
             <DataGrid

@@ -19,9 +19,10 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //UI
 //TODO: implement theming for lightgrey
 //TODO: Blockquote under video on desktop but on top on mobile
-//TODO: graphics scrollytelling (use single column to get a skinnier column on desktop)
+//TODO: graphics scrollytelling in the background
 //TODO: Add GA
 //TODO: Scrollytrlling at the top and logos come in in background
+//TODO: responsively narrow the text cols
 
 //WRITING
 //TODO: Tom misch has been in so many of the channels, highlight that in intro text
@@ -41,7 +42,6 @@ function App() {
   const [selectedChannel, setSelectedChannel] = useState("All Channels");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
-  // const [blockquoteText, setBlockquoteText] = useState(null);
 
   const theme = useTheme();
 
@@ -98,39 +98,79 @@ function App() {
       >
         What are Ben's Favorite Music Videos on YouTube?
       </Typography>
+      {/* TODO: h2 Introduction */}
       <Typography
         component="p"
         gutterBottom
         color="white"
-        sx={{ textAlign: "center", mt: 3, mb: 3, color: "grey" }}
+        sx={{
+          textAlign: "left",
+          mt: 3,
+          mb: 3,
+          pr: 10,
+          pl: 10,
+          color: "lightgrey",
+        }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Ever since I can remember, I’ve loved watching musical performances on
+        YouTube. I’m not talking “concert” footage, but edited YouTube videos of
+        bands, artists, and music producers. There’s something about intimate
+        recordings of performance and the creative process that captivate me as
+        a hobbyist musician!
+        <br></br>
+        <br></br>
+        There are so many YouTube channels and media platforms out there
+        producing amazing music content, particularly the ones that have regular
+        series! I used the “Google Takeout” data export feature to dive into my
+        YouTube history and filter to some of the channels I watch most.
       </Typography>
       <Typography
         component="p"
         gutterBottom
         color="white"
-        sx={{ textAlign: "center", mt: 3, mb: 3, color: "grey" }}
+        sx={{
+          textAlign: "left",
+          mt: 3,
+          mb: 3,
+          pr: 10,
+          pl: 10,
+          color: "lightgrey",
+        }}
       >
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur?
+        Tiny Desk amazing Against the Clock series from FACT Some good notes in
+        here about the channels in my previous writing
+      </Typography>
+      {/* TODO: h2 Notes about the data */}
+      <Typography
+        component="p"
+        gutterBottom
+        color="white"
+        sx={{
+          textAlign: "left",
+          mt: 3,
+          mb: 3,
+          pr: 10,
+          pl: 10,
+          color: "lightgrey",
+        }}
+      >
+        Warning: the YouTube algorithm is amazing and there might be some
+        relevant plays in there that have counted towards my history but might
+        have auto-played when I was distracted, out of the room, or even asleep!
+        The bottom line is that the videos that have the highest play count are
+        the most are the ones I love the most.
+        <br></br>
+        TABLE CLICK: Click on a video to pull it up on this page. If you’d like
+        to check out that channel, click on the video’s title once it’s been
+        rendered
+        <br></br>
+        PARAGRAPH ICON: This means I’ve written a little more about how a
+        particular video might have impacted me as a music fan or creator. See
+        below the YouTube video for some added context!
+        <br></br>
+        DATA SOURCE: December 2018 to October 2022
+        <br></br>
+        MONTH CLICK: Click on a month bar to filter the table to that month!
       </Typography>
 
       {/* parent div */}
@@ -192,23 +232,16 @@ function App() {
       </Grid>
       <Typography
         component="p"
-        gutterBottom
+        // gutterBottom
         color="white"
-        sx={{ textAlign: "center", mt: 3, mb: 3, color: "grey" }}
+        sx={{ textAlign: "center", mt: 3, mb: 3, color: "lightgrey" }}
       >
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur?
+        I had a lot of fun making this! This was my first larger React.js
+        project after years of developing in R/Shiny and dashboarding tools like
+        Google Data Studio and Power BI! If you're curious to learn more, you
+        can visit the GitHub repo here!
+        <br></br>
+        <br></br>
       </Typography>
     </Container>
   );

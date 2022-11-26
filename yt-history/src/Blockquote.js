@@ -1,5 +1,6 @@
 import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
+
 import { useTheme } from "@mui/material/styles";
 
 import { filter, rollup, greatest } from "d3";
@@ -44,7 +45,7 @@ function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
   }
 
   return (
-    <Slide direction="left" in={toggle} mountOnEnter unmountOnExit>
+    <Slide direction="right" in={toggle} mountOnEnter unmountOnExit>
       <Paper
         sx={{
           // backgroundColor: theme.palette.bgColor,
@@ -54,6 +55,7 @@ function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
           mt: 3,
           p: 3,
           fontStyle: "italic",
+          position: "relative",
         }}
       >
         <blockquote>{selectedText}</blockquote>

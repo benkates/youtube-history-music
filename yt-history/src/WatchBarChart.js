@@ -10,11 +10,12 @@ import { format } from "d3";
 import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
-//TODO: animated transition of bars on change of top level channel (although you cant really see much)
 //TODO: sort months correctly
 //TODO: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 //TODO: Can’t see axis on mobile
 //TODO: Month indicator cutoff in mobile
+
+//HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 
 //DONE: reset month on change
 //DONE: onclick filter table to that month
@@ -194,6 +195,10 @@ function WatchBarChart({
                     } else {
                       setSelectedMonth(d.month);
                     }
+                    //scroll to top of table
+                    document.querySelector(
+                      ".MuiDataGrid-virtualScroller"
+                    ).scrollTop = 0;
                   }}
                 />
               );

@@ -59,6 +59,8 @@ function ChannelDropdown({
           setSelectedVideo(null);
           //unselect month filter
           setSelectedMonth(null);
+          //reset table to top
+          document.querySelector(".MuiDataGrid-virtualScroller").scrollTop = 0;
         }}
       >
         {tidyData.map((e) => {

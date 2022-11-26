@@ -4,8 +4,20 @@ body {
   background-color: #282c34 !important;
 }
 
+/* TopVideosTable */
+
 .col-header-center {
   font-size: 18px !important;
+}
+
+.MuiInput-underline:before,
+.MuiInputBase-root:before {
+  border: none !important;
+  transition: none !important;
+}
+
+.MuiInputBase-input {
+  border-bottom: 1px solid white !important;
 }
 
 /* Blockquote */

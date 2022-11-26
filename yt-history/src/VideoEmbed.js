@@ -1,9 +1,10 @@
 import { filter, rollup, greatest } from "d3";
 import { useRef, useEffect } from "react";
 
+//DONE: if video is the same, don't re-render
 //DONE: save static webp locally https://i.giphy.com/media/YRcXl6VfNhCorklI0R/giphy.webp
 //DONE: background image peeking through when iframe is shown
-//DONE: pause and show the static in between videos?
+//DONE: pause and show the static in between videos
 //DONE: add back in timeline
 //DONE: rounded edges
 //DONE: responsive size
@@ -12,15 +13,6 @@ import { useRef, useEffect } from "react";
 function VideoEmbed({ data, selectedChannel, selectedVideo }) {
   const iframeRef = useRef(null);
   const containerRef = useRef(null);
-
-  useEffect(() => {
-    iframeRef.current.style.zIndex = -1;
-    containerRef.current.style.backgroundImage = "url('static.webp')";
-    setTimeout(() => {
-      iframeRef.current.style.zIndex = 1;
-      containerRef.current.style.backgroundImage = null;
-    }, 1000);
-  }, [selectedChannel, selectedVideo]);
 
   //filter data to the selected channel
   let data2 =
@@ -48,6 +40,18 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
     embedId = "IUMTaAQ43lY";
   }
 
+  //when mounting component, move iframe to the back and show the static gif
+  //dependent on the embedId so that it doesn't animate if the video is the same even if the channel changes
+
+  useEffect(() => {
+    iframeRef.current.style.zIndex = -1;
+    containerRef.current.style.backgroundImage = "url('static.webp')";
+    setTimeout(() => {
+      iframeRef.current.style.zIndex = 1;
+      containerRef.current.style.backgroundImage = null;
+    }, 1000);
+  }, [embedId]);
+
   return (
     <div className="video-container" ref={containerRef}>
       <iframe
@@ -58,7 +62,7 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
         src={`https://www.youtube.com/embed/${embedId}?controls=1`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-        // allowFullScreen
+        allowFullScreen
         title="Embedded YouTube Video"
       />
     </div>
