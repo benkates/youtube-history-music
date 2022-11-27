@@ -2,7 +2,7 @@ import { Container, Typography } from "@mui/material";
 
 function FooterText() {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <hr style={{ borderColor: "grey", marginTop: 20 }}></hr>
       <Typography
         component="p"

@@ -71,33 +71,12 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" p="0 16px">
       {/* parent div */}
       <IntroText theme={theme}></IntroText>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        spacing={3}
-        sx={{ p: 1 }}
-      >
-        {/* video + blockquote */}
-        <Grid item lg={6} xs={12}>
-          <VideoEmbed
-            data={data}
-            selectedChannel={selectedChannel}
-            selectedVideo={selectedVideo}
-          ></VideoEmbed>
-          <Blockquote
-            data={data}
-            selectedVideo={selectedVideo}
-            selectedChannel={selectedChannel}
-            WRITING={WRITING}
-          ></Blockquote>
-        </Grid>
-
+      <Grid container justifyContent="center" alignItems="center" spacing={2}>
         {/* barchart + table */}
-        <Grid item lg={6} xs={12}>
+        <Grid item md={6} xs={12} id="watch-bar-chart-top-videos-table">
           <ChannelDropdown
             data={data}
             selectedChannel={selectedChannel}
@@ -128,6 +107,20 @@ function App() {
             selectedMonth={selectedMonth}
             WRITING={WRITING}
           ></TopVideosTable>
+        </Grid>
+        {/* video + blockquote */}
+        <Grid item md={6} xs={12} id="video-embed-blockquote">
+          <VideoEmbed
+            data={data}
+            selectedChannel={selectedChannel}
+            selectedVideo={selectedVideo}
+          ></VideoEmbed>
+          <Blockquote
+            data={data}
+            selectedVideo={selectedVideo}
+            selectedChannel={selectedChannel}
+            WRITING={WRITING}
+          ></Blockquote>
         </Grid>
       </Grid>
       <FooterText></FooterText>

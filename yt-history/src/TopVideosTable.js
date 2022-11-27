@@ -34,7 +34,9 @@ function TopVideosTable({
     return (
       <GridToolbarContainer sx={{ justifyContent: "space-between" }}>
         <div style={{ cursor: "default", marginLeft: 8 }}>
-          <FormatQuoteIcon sx={{ width: 16, height: 16 }}></FormatQuoteIcon>
+          <FormatQuoteIcon sx={{ width: 16, height: 16 }}>
+            <text>Test</text>
+          </FormatQuoteIcon>
           <span style={{ fontSize: 10 }}>text below video</span>
         </div>
         <GridToolbarQuickFilter />
@@ -52,7 +54,7 @@ function TopVideosTable({
       headerClassName: "col-header-center",
       description: "YouTube Channel Name",
       renderCell: (d) => {
-        return ChipAvatar(d.value);
+        return <ChipAvatar name={d.value}></ChipAvatar>;
       },
     },
     {
@@ -83,7 +85,7 @@ function TopVideosTable({
       headerClassName: "col-header-center col-header-center",
       headerAlign: "center",
       style: { color: "red" },
-      flex: 0.5,
+      flex: 0.35,
       minWidth: 50,
       hideable: false,
       description: "Total playcount for selected data",
@@ -115,44 +117,52 @@ function TopVideosTable({
   return (
     <>
       <div style={{ height: 358, width: "100%" }}>
-        <div style={{ display: "flex", height: "100%" }}>
-          <div style={{ flexGrow: 1, cursor: "pointer" }}>
-            <DataGrid
-              sx={{
-                color: "white",
-                "& .MuiDataGrid-cell:hover": {
-                  color: "primary.main",
-                },
-                "& .MuiButtonBase-root": {
-                  color: "white !important",
-                },
-                fontFamily: "Roboto",
-              }}
-              rows={tidyData}
-              columns={columns}
-              getRowId={(e) => e.video_url}
-              hideFooter
-              disableColumnMenu
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              getRowClassName={(params) =>
-                params.indexRelativeToCurrentPage % 2 === 0
-                  ? "even-row"
-                  : "odd-row"
-              }
-              onRowClick={(e) => {
-                setSelectedVideo(e.id);
-              }}
-              components={{ Toolbar: CustomToolbar }}
-              componentsProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 200 },
-                },
-              }}
-            />
-          </div>
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            flexGrow: 1,
+            cursor: "pointer",
+          }}
+        >
+          <DataGrid
+            sx={{
+              color: "white",
+              "& .MuiDataGrid-cell:hover": {
+                color: "primary.main",
+              },
+              "& .MuiButtonBase-root": {
+                color: "white !important",
+              },
+              fontFamily: "Roboto",
+            }}
+            rows={tidyData}
+            columns={columns}
+            getRowId={(e) => e.video_url}
+            hideFooter
+            disableColumnMenu
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            getRowClassName={(params) =>
+              params.indexRelativeToCurrentPage % 2 === 0
+                ? "even-row"
+                : "odd-row"
+            }
+            onRowClick={(e) => {
+              setSelectedVideo(e.id);
+              document
+                .getElementById("video-embed-blockquote")
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+            components={{ Toolbar: CustomToolbar }}
+            componentsProps={{
+              toolbar: {
+                showQuickFilter: true,
+                quickFilterProps: { debounceMs: 200 },
+              },
+            }}
+          />
         </div>
       </div>
     </>

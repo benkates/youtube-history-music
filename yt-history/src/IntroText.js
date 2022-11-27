@@ -3,7 +3,35 @@ import Typography from "@mui/material/Typography";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import ChipAvatar from "./utils/ChipAvatar";
 
+import Tooltip from "@mui/material/Tooltip";
+
 // import { Grow } from "@mui/material";
+
+/*
+COLORS
+November 29, 2018
+
+FACTmagazine
+July 5, 2017
+
+Fkj
+June 14, 2017
+
+NPR Music
+December 26, 2018
+
+Vulf
+June 27, 2018
+
+Mass Appeal
+April 23, 2019
+
+Soulection
+February 19, 2019
+
+Stones Throw
+March 3, 2022
+*/
 
 //TODO: channels
 //TODO: month filter intro
@@ -13,7 +41,7 @@ function IntroText({ theme }) {
   return (
     <>
       {/* <Grow toggle={true} mountOnEnter unmountOnExit> */}
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ padding: 0 }}>
         <Typography
           variant="h2"
           component="h1"
@@ -31,9 +59,10 @@ function IntroText({ theme }) {
           color="lightgrey"
           fontSize="20px"
           gutterBottom
+          fontStyle={"italic"}
           sx={{ textAlign: "center", mb: 2 }}
         >
-          by Ben Kates{" "}
+          by Ben Kates / Nov 2022{" "}
         </Typography>
       </Container>
       <Container maxWidth="md" sx={{ p: 0 }}>
@@ -104,10 +133,77 @@ function IntroText({ theme }) {
             color: "lightgrey",
           }}
         >
-          Tiny Desk amazing Against the Clock series from FACT Some good notes
-          in here about the channels in my previous writing Now this is a thing
-          blah blah blah {ChipAvatar("FACTmagazine")}
+          I've filtered to 10 channels that I love the most! I've been
+          subscribed to
+          <br></br>
+          <ul id="intro-text-list" style={{ listStyleType: "none" }}>
+            <li>
+              <Tooltip title="First Subscribed: July 5, 2017">
+                <ChipAvatar name="FACTmagazine"></ChipAvatar>
+              </Tooltip>{" "}
+              Fact Magazine describes itself as a "music platform" that...
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: June 27, 2018">
+                <ChipAvatar name="Vulf"></ChipAvatar>
+              </Tooltip>{" "}
+              Vulf comes from Vulfpeck
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: December 26, 2018">
+                <ChipAvatar name="NPR Music"></ChipAvatar>
+              </Tooltip>{" "}
+              Tiny Desk
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: June 27, 2018">
+                <ChipAvatar name="FACTmagazine"></ChipAvatar>
+              </Tooltip>{" "}
+              Against the Clock
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: November 27, 2022">
+                <ChipAvatar name="KEXP"></ChipAvatar>
+              </Tooltip>{" "}
+              Like tiny desk but west coast lol
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: February 19, 2019">
+                <ChipAvatar name="Soulection"></ChipAvatar>
+              </Tooltip>{" "}
+              Radio show previously soundcloud then Apple Music in...
+            </li>
+            <li>
+              <ChipAvatar name="Boiler Room"></ChipAvatar> Epic
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: June 27, 2018">
+                <ChipAvatar name="Stones Throw"></ChipAvatar>
+              </Tooltip>{" "}
+              Record label
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: June 27, 2018">
+                <ChipAvatar name="Fkj"></ChipAvatar>
+              </Tooltip>{" "}
+              Loop dude
+            </li>
+            <li>
+              <Tooltip title="First Subscribed: November 29, 2018">
+                <ChipAvatar name="COLORS"></ChipAvatar>
+              </Tooltip>{" "}
+              Cool bakcdrops A note on playcount: The YouTube algorithm is
+              amazing and there might be some plays in there that have counted
+              towards my history that might have auto-played when I was
+              distracted, out of the room, or even asleep! The bottom line is
+              that the videos that have the highest playcount are the ones I
+              love the most.
+            </li>
+          </ul>
         </Typography>
+
+        {/* This App and Its Data */}
+
         <Typography
           component="h2"
           variant="h4"
@@ -147,7 +243,8 @@ function IntroText({ theme }) {
           highest playcount are the ones I love the most.
           <br></br>
           <br></br>
-          MONTH CLICK: Click on a month bar to filter the table to that month!
+          UI Note: Click on a month bar to filter the table to that month's
+          activity!
         </Typography>
       </Container>
       {/* </Grow> */}

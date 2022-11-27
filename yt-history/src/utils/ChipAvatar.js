@@ -1,14 +1,18 @@
 import { Chip, Avatar } from "@mui/material";
+import { forwardRef } from "react";
 
-function ChipAvatar(name) {
+const ChipAvatar = forwardRef(function MyComponent(props, ref) {
+  //  Spread the props to the underlying DOM element.
   return (
     <Chip
-      avatar={<Avatar alt={name} src={`avatar/${name}.jpg`} />}
-      label={name}
+      avatar={<Avatar alt={props.name} src={`avatar/${props.name}.jpg`} />}
+      label={props.name}
       variant="outlined"
       sx={{ color: "white", borderColor: null }}
+      ref={ref}
+      {...props}
     />
   );
-}
+});
 
 export default ChipAvatar;
