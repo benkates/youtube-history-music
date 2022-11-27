@@ -7,6 +7,8 @@ import {
 import ChipAvatar from "./utils/ChipAvatar";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
+//TODO: checkbox bool field for quote sorting/filtering
+
 //HOLD: bars/styling for playcount?
 
 //DONE: Different font size on mobile for col titles? it's cutoff (.col-header-center)

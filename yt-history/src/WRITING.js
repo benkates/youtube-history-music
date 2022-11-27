@@ -1,14 +1,13 @@
-//TODO: add some more
 const WRITING = [
   {
     video_url: "https://www.youtube.com/watch?v=IUMTaAQ43lY",
     ref: "Tom Misch Tiny Desk",
-    text: "I don't know exactly why this video has so many plays on the list. YouTube might have auto-played it thinking I'd be interested, and I was! I love Tom Misch's mystical guitar playing and soft voice. His band does a great job of supporting his vibe throughout. One of my favorite saxophonists, Braxton Cook, makes an appearance for the opening track It Runs Through Me (I saw Braxton open for Moonchild in October of 2019).",
+    text: `I'm not surprised this is my most watched video. YouTube might have auto-played it thinking I'd be interested, and I was! I love Tom Misch's mystical guitar playing and soft voice. His band does a great job of supporting his vibe throughout. One of my favorite saxophonists, Braxton Cook, makes an appearance for the opening track It Runs Through Me (I saw Braxton open for Moonchild in October of 2019).`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=hC8CH0Z3L54",
     ref: "FKJ Tadow",
-    text: "I first saw this video when it came out in 2017, and now it has garnered close to half a BILLION views. This video was an inspiration for me to get back into playing the saxophone post-college after a five-year hiatus. It also inspired me to explore live looping and using simple drum beats to build a track on the spot! Masego triggering his vocal samples while FKJ takes lead on the arrangement stuns me every time I watch. I'm glad this video has spread to so many.",
+    text: `I first saw this video when it came out in 2017, and now it has garnered close to half a BILLION views. This video was an inspiration for me to get back into playing the saxophone post-college after a five-year hiatus. It also inspired me to explore live looping and using simple drum beats to build a track on the spot! Masego triggering his vocal samples while FKJ takes lead on the arrangement stuns me every time I watch. I'm glad this video has spread to so many.`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=fQkC6AkfPmo",
@@ -18,7 +17,7 @@ const WRITING = [
   {
     video_url: "https://www.youtube.com/watch?v=4CGBfbB4g0Y",
     ref: "Tom Misch Against the clock",
-    text: 'This Against the Clock challenge with my fave Tom Misch starts with some drums and an amazingly ambient drone with the violin. The drone establishes a feel so that there is less "pressure" on the guitar to establish a vibe. This video taught me about the importance of mixing sounds to create the whole (vs. individual instruments having to stand out on their own), pitching instruments to work with the sounds and give them new energy, and diving into jamming once there are enough layers established! Seeing him make time to jam with one minute to go has got to be one of the coolest endings to one of these videos.',
+    text: `This Against the Clock challenge with my fave Tom Misch starts with some drums and an amazingly ambient drone with the violin. The drone establishes a feel so that there is less "pressure" on the guitar to establish a vibe. This video taught me about the importance of mixing sounds to create the whole (vs. individual instruments having to stand out on their own), pitching instruments to work with the sounds and give them new energy, and diving into jamming once there are enough layers established! Seeing him make time to jam with one minute to go has got to be one of the coolest endings to one of these videos.`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=QrR_gm6RqCo",
@@ -28,7 +27,7 @@ const WRITING = [
   {
     video_url: "https://www.youtube.com/watch?v=PBKa-AAy_vo",
     ref: "Daniel Caesar Tiny Desk",
-    text: "It's wild to see how successful both Daniel Caesar and special guest H.E.R. have become since this video came out in 2018. Aside from the incredibly smooth backup vocalists, Daniel Caesar's voice connects me to the deep emotion in his vocal cords and body. The band does an excellent job of supporting the lead by giving him space to flow. When he brings out H.E.R. for Best Part, the harmonies, riffs, and solos come one after the other. This is just a jaw-dropping performance that I enjoy listening to when I'm deep in my feels!",
+    text: `It's wild to see how successful both Daniel Caesar and special guest H.E.R. have become since this video came out in 2018. Aside from the incredibly smooth backup vocalists, Daniel Caesar's voice connects me to the deep emotion in his vocal cords and body. The band does an excellent job of supporting the lead by giving him space to flow. When he brings out H.E.R. for Best Part, the harmonies, riffs, and solos come one after the other. This is just a jaw-dropping performance that I enjoy listening to when I'm deep in my feels!`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=rv4wf7bzfFE",
@@ -48,17 +47,17 @@ const WRITING = [
   {
     video_url: "https://www.youtube.com/watch?v=xuc9C-C6Ldw",
     ref: "FKJ Cool Paris Museum",
-    text: ``,
+    text: `How cool is this venue?? I am always stunned by FKJ's live looping and solo act, but WOW. It's enhanced by the amazing museum hall and the intimate audience seating. I've only been to a silent disco once and this seems like a much more relaxing version. Talk about cool vibes.`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=kOx2rbcfTMs",
     ref: "Stro Rhythm Roulette",
-    text: ``,
+    text: `Stro Elliot, now one of the members of The Roots, is one of the best finger drummers in the game. In addition to his impeccable sampling and production skills, he brings an amazingly lifelike sound to playing the drums on a beatpad. I highly recommend the video titled "Doing it for Dilla" where Stro accompanies some musicians hanging out at DJ Jazzy Jeff's PlayList Retreat covering J Dilla tracks. He sounds like he's playing live drums!`,
   },
   {
     video_url: "https://www.youtube.com/watch?v=yLN5TvtdQec",
     ref: "Full Crate Soulection Studio",
-    text: `Cover of pump up the jam around 9:00`,
+    text: `All I have to say here is the cover of Pump Up the Jam at 9:00 is one of the coolest covers I've ever seen! This video also inspired me to check out sampler pads that are controlled using drumsticks! So neat.`,
   },
 ];
 

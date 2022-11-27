@@ -10,6 +10,9 @@ import { format } from "d3";
 import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
+import { Annotation, Connector, Label } from "@visx/annotation";
+import theme from "./utils/theme";
+
 //TODO: annotation on vulf spike
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
@@ -113,6 +116,47 @@ function WatchBarChart({
   useEffect(() => {
     setSelectedMonth(null);
   }, [setSelectedMonth]);
+
+  const vulfAnnoation =
+    selectedChannel === "Vulf" ? (
+      <>
+        <Annotation
+          x={xScale(
+            new Date(
+              "Wed Aug 01 2020 00:00:00 GMT-0400 (Eastern Daylight Time)"
+            )
+          )}
+          y={yScale(51)}
+          dx={25} // x offset of label from subject
+          dy={25} // y offset of label from subject
+        >
+          <Connector stroke="#fff" />
+          {/* <LineSubject stroke="#fff" min /> */}
+          <Label
+            title="High spike in Vulf listening!"
+            subtitle="This was probably a combination of going down a Vulfpeck rabbit hole with my good friend Virginia and subsequently falling asleep with autoplay on!"
+            backgroundFill={theme.palette.primary.main}
+            fontColor="white"
+            backgroundPadding={15}
+            subtitleFontSize={10}
+            titleProps={{ transform: "translate(-5,0)" }}
+            subtitleProps={{
+              transform: "translate(-5,0)",
+              textWrap: "normal",
+            }}
+            width={width > 500 ? width / 2 : width / 2}
+            showAnchorLine={false}
+            backgroundProps={{
+              rx: "4px",
+              // paddingTop: 5,
+              // paddingRight: 20,
+              // paddingBottom: 5,
+              // paddingLeft: 0,
+            }}
+          />
+        </Annotation>
+      </>
+    ) : null;
 
   return (
     <>
@@ -232,6 +276,7 @@ function WatchBarChart({
             </g>
           )}
           {/* MONTH TEXT END */}
+          {vulfAnnoation}
         </svg>
       </div>
 

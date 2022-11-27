@@ -36,7 +36,7 @@ function IntroText({ theme }) {
           by Ben Kates{" "}
         </Typography>
       </Container>
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ p: 0 }}>
         <Typography
           component="h2"
           variant="h4"

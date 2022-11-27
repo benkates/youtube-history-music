@@ -69,8 +69,6 @@ function App() {
       .then(setData);
   }, []);
 
-  console.log(data[0]);
-
   return (
     <Container maxWidth="xl">
       {/* parent div */}

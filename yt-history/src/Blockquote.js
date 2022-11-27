@@ -3,7 +3,7 @@ import Slide from "@mui/material/Slide";
 import { useTheme } from "@mui/material/styles";
 import { filter, rollup, greatest } from "d3";
 
-//HOLD: transition between new text
+//HOLD: fade between new text
 
 //DONE: gradient fade background color
 
