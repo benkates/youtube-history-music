@@ -42,7 +42,6 @@ function VideoEmbed({ data, selectedChannel, selectedVideo }) {
 
   //when mounting component, move iframe to the back and show the static gif
   //dependent on the embedId so that it doesn't animate if the video is the same even if the channel changes
-
   useEffect(() => {
     iframeRef.current.style.zIndex = -1;
     containerRef.current.style.backgroundImage = "url('static.webp')";

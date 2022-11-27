@@ -4,15 +4,14 @@ import {
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
+import ChipAvatar from "./utils/ChipAvatar";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
 //HOLD: bars/styling for playcount?
 
 //DONE: Different font size on mobile for col titles? it's cutoff (.col-header-center)
 //DONE: alternating row stripes
-//DONE: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/
+//DONE: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/`
 //DONE: Reset table scroll on month filter and channel filter https://mui.com/x/react-data-grid/scrolling/#main-content
 //DONE: paragraph icon indicates text
 //DONE: search bar underline to be white
@@ -51,15 +50,7 @@ function TopVideosTable({
       headerClassName: "col-header-center",
       description: "YouTube Channel Name",
       renderCell: (d) => {
-        return (
-          <Chip
-            avatar={<Avatar alt={d.value} src={`avatar/${d.value}.jpg`} />}
-            label={d.value}
-            variant="outlined"
-            sx={{ color: "white", borderColor: null }}
-            onClick={(e) => console.log(e)}
-          />
-        );
+        return ChipAvatar(d.value);
       },
     },
     {
@@ -107,7 +98,9 @@ function TopVideosTable({
         ? d.channel_name === selectedChannel
         : true
     ),
-    filter((d) => (selectedMonth === null ? true : d.month === selectedMonth)),
+    filter((d) =>
+      selectedMonth === null ? true : d.month_label === selectedMonth
+    ),
     //group by the primary fields and then count
     groupBy(
       ["channel_name", "video_title", "video_url"],

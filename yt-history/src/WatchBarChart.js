@@ -10,11 +10,12 @@ import { format } from "d3";
 import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
-//TODO: sort months correctly
+//TODO: annotation on vulf spike
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: sort months correctly
 //DONE: 0 axis label cutoff on safari
 //DONE: Can’t see axis on mobile
 //DONE: Month indicator cutoff in mobile
@@ -78,7 +79,7 @@ function WatchBarChart({
         : d.channel_name === selectedChannel
     ),
     //group by the primary fields and then count
-    groupBy(["month"], [count("month", { name: "count" })])
+    groupBy(["month", "month_label"], [count("month", { name: "count" })])
   );
 
   // bounds
@@ -160,11 +161,11 @@ function WatchBarChart({
 
               let color = colorScale(getFreq(d));
               //if it's the month, make it stand out
-              if (selectedMonth !== null && d.month === selectedMonth) {
+              if (selectedMonth !== null && d.month_label === selectedMonth) {
                 color = "#32A287";
               }
               //if it's not the month, make it darker
-              if (selectedMonth !== null && d.month !== selectedMonth) {
+              if (selectedMonth !== null && d.month_label !== selectedMonth) {
                 color = darken(color, 0.5);
               }
               return (
@@ -196,11 +197,11 @@ function WatchBarChart({
                   //set month on click
                   onClick={() => {
                     //if the selected month is the same as the state var, reset it
-                    if (d.month === selectedMonth) {
+                    if (d.month_label === selectedMonth) {
                       setSelectedMonth(null);
                       //otherwise set it
                     } else {
-                      setSelectedMonth(d.month);
+                      setSelectedMonth(d.month_label);
                     }
                     //scroll to top of table
                     document.querySelector(
@@ -224,7 +225,7 @@ function WatchBarChart({
                 y={30}
                 textAnchor="end"
                 textDecoration="underline"
-                font-size="12px"
+                fontSize="12px"
               >
                 reset
               </text>
@@ -242,7 +243,7 @@ function WatchBarChart({
           style={tooltipStyles}
         >
           <div style={{ color: "white" }}>
-            <strong>{tooltipData.month}</strong>
+            <strong>{tooltipData.month_label}</strong>
           </div>
           <div>
             <small>Playcount: {tooltipData.count}</small>

@@ -14,7 +14,7 @@ const theme = createTheme({
       main: red.A400,
     },
     bgColor: "#282c34",
-    accentColor: "#556CD6",
+    accentColor: "#55ADD6",
   },
 });
 
