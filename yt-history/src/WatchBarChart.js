@@ -13,11 +13,10 @@ import { GridRows } from "@visx/grid";
 import { Annotation, Connector, Label } from "@visx/annotation";
 import theme from "./utils/theme";
 
-//TODO: annotation on vulf spike
-
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: annotation on vulf spike
 //DONE: sort months correctly
 //DONE: 0 axis label cutoff on safari
 //DONE: Can’t see axis on mobile
@@ -108,15 +107,19 @@ function WatchBarChart({
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
   });
 
+  //format the tick to exclude decimals
+  //exclude 0 (awkward placement on small screens)
   const tickFormatter = (d) => {
     let r = d > 0 ? format(".0f")(d) : "";
     return r;
   };
 
+  //set selectedMonth state var to null
   useEffect(() => {
     setSelectedMonth(null);
   }, [setSelectedMonth]);
 
+  //the Vulf channel spike needs an annotation to explain
   const vulfAnnoation =
     selectedChannel === "Vulf" ? (
       <>
@@ -126,7 +129,7 @@ function WatchBarChart({
               "Wed Aug 01 2020 00:00:00 GMT-0400 (Eastern Daylight Time)"
             )
           )}
-          y={yScale(51)}
+          y={yScale(51)} // y value of label
           dx={25} // x offset of label from subject
           dy={25} // y offset of label from subject
         >
@@ -146,13 +149,7 @@ function WatchBarChart({
             }}
             width={width > 500 ? width / 2 : width / 2}
             showAnchorLine={false}
-            backgroundProps={{
-              rx: "4px",
-              // paddingTop: 5,
-              // paddingRight: 20,
-              // paddingBottom: 5,
-              // paddingLeft: 0,
-            }}
+            backgroundProps={{ rx: "4px" }}
           />
         </Annotation>
       </>

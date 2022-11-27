@@ -22,7 +22,7 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: uncomment GA
 //TODO: Scrollytelling at the top and logos come in in background
 //TODO: opengraph stuff
-//TODO: favicon (youtube + bar chart)
+//TODO: square favicon
 
 //WRITING
 //TODO: Tom misch has been in so many of the channels, highlight that in intro text
@@ -56,8 +56,9 @@ function App() {
       .then((d) => {
         //iterate over, format, create new fields
         d.forEach((e) => {
-          e.timestamp = new Date(e.timestamp);
-          e.year = e.timestamp.getFullYear();
+          //replace T in string with space because iPad has trouble;
+          //https://stackoverflow.com/a/13363791/5800118
+          e.timestamp = new Date(e.timestamp.replace(" ", "T"));
           e.month = timeMonth.floor(e.timestamp);
           e.month_label = timeFormat("%b %Y")(e.month);
           e.channel_name_full = e.channel_name;
