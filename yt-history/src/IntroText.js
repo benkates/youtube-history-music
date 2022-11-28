@@ -4,6 +4,7 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import ChipAvatar from "./utils/ChipAvatar";
 
 import Tooltip from "@mui/material/Tooltip";
+import { Grid } from "@mui/material";
 
 // import { Grow } from "@mui/material";
 
@@ -41,7 +42,7 @@ function IntroText({ theme }) {
   return (
     <>
       {/* <Grow toggle={true} mountOnEnter unmountOnExit> */}
-      <Container maxWidth="lg" sx={{ padding: 0 }}>
+      <Container maxWidth="lg" disableGutters>
         <Typography
           variant="h2"
           component="h1"
@@ -87,8 +88,8 @@ function IntroText({ theme }) {
           Ever since I can remember, I’ve loved watching musical performances on
           YouTube. I’m not talking “concert” footage, but edited YouTube videos
           of bands, artists, and music producers. There’s something about
-          intimate recordings of performance and the creative process that
-          captivate me as a{" "}
+          intimate recordings of performance and creative process that captivate
+          me as a{" "}
           <a
             href="https://open.spotify.com/artist/0aOoGOhY7yubvn0nNu4EJo"
             target="_blank"
@@ -128,79 +129,132 @@ function IntroText({ theme }) {
           color="white"
           sx={{
             textAlign: "left",
-            // mt: 3,
-            mb: 3,
+            mb: 1,
             color: "lightgrey",
           }}
         >
           I've filtered to 10 channels that I love the most! I've been
           subscribed to
-          <br></br>
-          <ul id="intro-text-list" style={{ listStyleType: "none" }}>
-            <li>
-              <Tooltip title="First Subscribed: July 5, 2017">
-                <ChipAvatar name="FACTmagazine"></ChipAvatar>
-              </Tooltip>{" "}
-              Fact Magazine describes itself as a "music platform" that...
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: June 27, 2018">
-                <ChipAvatar name="Vulf"></ChipAvatar>
-              </Tooltip>{" "}
-              Vulf comes from Vulfpeck
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: December 26, 2018">
-                <ChipAvatar name="NPR Music"></ChipAvatar>
-              </Tooltip>{" "}
-              Tiny Desk
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: June 27, 2018">
-                <ChipAvatar name="FACTmagazine"></ChipAvatar>
-              </Tooltip>{" "}
-              Against the Clock
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: November 27, 2022">
-                <ChipAvatar name="KEXP"></ChipAvatar>
-              </Tooltip>{" "}
-              Like tiny desk but west coast lol
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: February 19, 2019">
-                <ChipAvatar name="Soulection"></ChipAvatar>
-              </Tooltip>{" "}
-              Radio show previously soundcloud then Apple Music in...
-            </li>
-            <li>
-              <ChipAvatar name="Boiler Room"></ChipAvatar> Epic
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: June 27, 2018">
-                <ChipAvatar name="Stones Throw"></ChipAvatar>
-              </Tooltip>{" "}
-              Record label
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: June 27, 2018">
-                <ChipAvatar name="Fkj"></ChipAvatar>
-              </Tooltip>{" "}
-              Loop dude
-            </li>
-            <li>
-              <Tooltip title="First Subscribed: November 29, 2018">
-                <ChipAvatar name="COLORS"></ChipAvatar>
-              </Tooltip>{" "}
-              Cool bakcdrops A note on playcount: The YouTube algorithm is
-              amazing and there might be some plays in there that have counted
-              towards my history that might have auto-played when I was
-              distracted, out of the room, or even asleep! The bottom line is
-              that the videos that have the highest playcount are the ones I
-              love the most.
-            </li>
-          </ul>
         </Typography>
+        <Grid container spacing={2}>
+          <Grid item md={6}>
+            <ul class="intro-text-list">
+              <li>
+                <Tooltip title="First Subscribed: July 5, 2017">
+                  <ChipAvatar name="FACTmagazine"></ChipAvatar>
+                </Tooltip>
+                <br></br> Fact Magazine describes itself as a "music platform"
+                that... -- A note on playcount: The YouTube algorithm is amazing
+                and there might be some plays in there that have counted towards
+                my history that might have auto-played when I was distracted,
+                out of the room, or even asleep! The bottom line is that the
+                videos that have the highest playcount are the ones I love the
+                most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: June 27, 2018">
+                  <ChipAvatar name="Vulf"></ChipAvatar>
+                </Tooltip>
+                <br></br> Vulf comes from Vulfpeck -- A note on playcount: The
+                YouTube algorithm is amazing and there might be some plays in
+                there that have counted towards my history that might have
+                auto-played when I was distracted, out of the room, or even
+                asleep! The bottom line is that the videos that have the highest
+                playcount are the ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: December 26, 2018">
+                  <ChipAvatar name="NPR Music"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Tiny Desk -- A note on playcount: The YouTube
+                algorithm is amazing and there might be some plays in there that
+                have counted towards my history that might have auto-played when
+                I was distracted, out of the room, or even asleep! The bottom
+                line is that the videos that have the highest playcount are the
+                ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: June 27, 2018">
+                  <ChipAvatar name="FACTmagazine"></ChipAvatar>
+                </Tooltip>
+                <br></br> Against the Clock -- A note on playcount: The YouTube
+                algorithm is amazing and there might be some plays in there that
+                have counted towards my history that might have auto-played when
+                I was distracted, out of the room, or even asleep! The bottom
+                line is that the videos that have the highest playcount are the
+                ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: November 27, 2022">
+                  <ChipAvatar name="KEXP"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Like tiny desk but west coast lol -- A note on
+                playcount: The YouTube algorithm is amazing and there might be
+                some plays in there that have counted towards my history that
+                might have auto-played when I was distracted, out of the room,
+                or even asleep! The bottom line is that the videos that have the
+                highest playcount are the ones I love the most.
+              </li>
+            </ul>
+          </Grid>
+          <Grid item md={6}>
+            <ul class="intro-text-list" style={{ textAlign: "right" }}>
+              <li>
+                <Tooltip title="First Subscribed: February 19, 2019">
+                  <ChipAvatar name="Soulection"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Radio show previously soundcloud then Apple Music
+                in... -- A note on playcount: The YouTube algorithm is amazing
+                and there might be some plays in there that have counted towards
+                my history that might have auto-played when I was distracted,
+                out of the room, or even asleep! The bottom line is that the
+                videos that have the highest playcount are the ones I love the
+                most.
+              </li>
+              <li>
+                <ChipAvatar name="Boiler Room"></ChipAvatar> <br></br> Epic -- A
+                note on playcount: The YouTube algorithm is amazing and there
+                might be some plays in there that have counted towards my
+                history that might have auto-played when I was distracted, out
+                of the room, or even asleep! The bottom line is that the videos
+                that have the highest playcount are the ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: June 27, 2018">
+                  <ChipAvatar name="Stones Throw"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Record label -- A note on playcount: The YouTube
+                algorithm is amazing and there might be some plays in there that
+                have counted towards my history that might have auto-played when
+                I was distracted, out of the room, or even asleep! The bottom
+                line is that the videos that have the highest playcount are the
+                ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: June 27, 2018">
+                  <ChipAvatar name="Fkj"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Loop dude -- A note on playcount: The YouTube
+                algorithm is amazing and there might be some plays in there that
+                have counted towards my history that might have auto-played when
+                I was distracted, out of the room, or even asleep! The bottom
+                line is that the videos that have the highest playcount are the
+                ones I love the most.
+              </li>
+              <li>
+                <Tooltip title="First Subscribed: November 29, 2018">
+                  <ChipAvatar name="COLORS"></ChipAvatar>
+                </Tooltip>{" "}
+                <br></br> Cool bakcdrops A note on playcount: The YouTube
+                algorithm is amazing and there might be some plays in there that
+                have counted towards my history that might have auto-played when
+                I was distracted, out of the room, or even asleep! The bottom
+                line is that the videos that have the highest playcount are the
+                ones I love the most.
+              </li>
+            </ul>
+          </Grid>
+        </Grid>
 
         {/* This App and Its Data */}
 

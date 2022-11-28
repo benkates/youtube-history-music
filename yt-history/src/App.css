@@ -9,8 +9,28 @@ body {
 /**/
 /* IntroText */
 /**/
-#intro-text-list li {
-  margin: 0.75em;
+
+/* margin separatae */
+.intro-text-list {
+  padding: 0;
+}
+.intro-text-list li {
+  margin-bottom: 1em;
+  list-style-type: none;
+  color: lightgrey;
+}
+
+/**/
+/* ChannelDropdown */
+/**/
+
+/* white border color */
+.MuiFormLabel-root,
+.MuiInputBase-formControl,
+.MuiOutlinedInput-notchedOutline,
+.MuiSelect-icon {
+  color: white !important;
+  border-color: white !important;
 }
 
 /**/
@@ -52,35 +72,10 @@ body {
 }
 
 /**/
-/* Blockquote */
-/**/
-
-blockquote {
-  position: relative;
-}
-
-blockquote:before {
-  position: absolute;
-  content: open-quote;
-  font-size: 4em;
-  margin-left: -0.6em;
-  margin-top: -0.4em;
-}
-
-blockquote:after {
-  position: absolute;
-  content: close-quote;
-  font-size: 4em;
-  bottom: 0;
-  right: 0;
-  margin-right: -0.6em;
-  margin-bottom: -0.8em;
-}
-
-/**/
 /* VideoEmbed */
 /**/
 
+/* cool styling on iframe */
 .video-container {
   --border-radius: 25px;
   position: relative;
@@ -94,6 +89,7 @@ blockquote:after {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+/* responsive iframe size */
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -104,20 +100,30 @@ blockquote:after {
 }
 
 /**/
-/* ChannelDropdown */
+/* Blockquote */
 /**/
 
-/* white border color */
-.MuiFormLabel-root,
-.MuiInputBase-formControl,
-.MuiOutlinedInput-notchedOutline,
-.MuiSelect-icon {
-  color: white !important;
-  border-color: white !important;
+/* relative position for quotes */
+blockquote {
+  position: relative;
 }
 
-.MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
-  /* border-color: #282c34 !important; */
-  border-width: 1px;
+/* top left quote */
+blockquote:before {
+  position: absolute;
+  content: open-quote;
+  font-size: 4em;
+  margin-left: -0.6em;
+  margin-top: -0.4em;
+}
+
+/* bottom right quote */
+blockquote:after {
+  position: absolute;
+  content: close-quote;
+  font-size: 4em;
+  bottom: 0;
+  right: 0;
+  margin-right: -0.6em;
+  margin-bottom: -0.8em;
 }

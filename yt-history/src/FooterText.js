@@ -25,7 +25,7 @@ function FooterText() {
         <a href="https://benkates.com" style={{ color: "white" }}>
           personal site
         </a>{" "}
-        too! Cheers and happy listening."
+        too! Cheers and happy listening.
         <br></br>
         <br></br>
       </Typography>

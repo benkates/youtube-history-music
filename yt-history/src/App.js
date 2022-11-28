@@ -23,6 +23,7 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: Scrollytelling at the top and logos come in in background
 //TODO: opengraph stuff
 //TODO: square favicon
+//TODO: change bg
 
 //WRITING
 //TODO: Tom misch has been in so many of the channels, highlight that in intro text
