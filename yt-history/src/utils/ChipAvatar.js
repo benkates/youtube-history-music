@@ -1,7 +1,7 @@
 import { Chip, Avatar } from "@mui/material";
 import { forwardRef } from "react";
 
-const ChipAvatar = forwardRef(function MyComponent(props, ref) {
+const ChipAvatar = forwardRef((props, ref) => {
   //  Spread the props to the underlying DOM element.
   let color = props.chipAvatarColor ? props.chipAvatarColor : "white";
   return (
