@@ -11,8 +11,8 @@ function FooterText() {
       >
         I had a lot of fun making this! This was my first larger React.js
         project after years of developing in R/Shiny and dashboarding tools
-        Google Data Studio and Power BI! If you're curious to learn more, you
-        can visit the{" "}
+        Google Data Studio and Power BI! If you're curious to learn more about
+        the code, you can visit the{" "}
         <a
           href="https://github.com/benkates/apps/tree/main/yt-history"
           target="_blank"

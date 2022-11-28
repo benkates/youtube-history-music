@@ -5,17 +5,21 @@ import { Group } from "@visx/group";
 import { useTooltip, useTooltipInPortal, defaultStyles } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
 import { scaleBand, scaleLinear } from "@visx/scale";
-import { AxisLeft } from "@visx/axis";
-import { format } from "d3";
+import { AxisLeft, AxisBottom } from "@visx/axis";
+import { format, timeFormat } from "d3";
 import { darken } from "@mui/material";
 import { GridRows } from "@visx/grid";
 
 import { Annotation, Connector, Label } from "@visx/annotation";
 import theme from "./utils/theme";
 
+//TODO: x-axis label shown
+//TODO: Reverse color scale for graph? Blue to white standout
+
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: Fade in annotation
 //DONE: annotation on vulf spike
 //DONE: sort months correctly
 //DONE: 0 axis label cutoff on safari
@@ -109,7 +113,7 @@ function WatchBarChart({
 
   //format the tick to exclude decimals
   //exclude 0 (awkward placement on small screens)
-  const tickFormatter = (d) => {
+  const yTickFormatter = (d) => {
     let r = d > 0 ? format(".0f")(d) : "";
     return r;
   };
@@ -123,35 +127,38 @@ function WatchBarChart({
   const vulfAnnoation =
     selectedChannel === "Vulf" ? (
       <>
-        <Annotation
-          x={xScale(
-            new Date(
-              "Wed Aug 01 2020 00:00:00 GMT-0400 (Eastern Daylight Time)"
-            )
-          )}
-          y={yScale(51)} // y value of label
-          dx={25} // x offset of label from subject
-          dy={25} // y offset of label from subject
-        >
-          <Connector stroke="#fff" />
-          {/* <LineSubject stroke="#fff" min /> */}
-          <Label
-            title="High spike in Vulf listening!"
-            subtitle="This was probably a combination of going down a Vulfpeck rabbit hole with my good friend Virginia and subsequently falling asleep with autoplay on!"
-            backgroundFill={theme.palette.primary.main}
-            fontColor="white"
-            backgroundPadding={15}
-            subtitleFontSize={10}
-            titleProps={{ transform: "translate(-5,0)" }}
-            subtitleProps={{
-              transform: "translate(-5,0)",
-              textWrap: "normal",
-            }}
-            width={width > 500 ? width / 2 : width / 2}
-            showAnchorLine={false}
-            backgroundProps={{ rx: "4px" }}
-          />
-        </Annotation>
+        <svg className="fade-in">
+          <Annotation
+            x={xScale(
+              new Date(
+                "Wed Aug 01 2020 00:00:00 GMT-0400 (Eastern Daylight Time)"
+              )
+            )}
+            y={yScale(51)} // y value of label
+            dx={25} // x offset of label from subject
+            dy={25} // y offset of label from subject
+            className="fade-in"
+          >
+            <Connector stroke="#fff" />
+            {/* <LineSubject stroke="#fff" min /> */}
+            <Label
+              title="High spike in Vulf views!"
+              subtitle="This was probably a combination of going down a Vulfpeck rabbit hole with my good friend Virginia and subsequently falling asleep with autoplay on!"
+              backgroundFill={theme.palette.primary.main}
+              fontColor="white"
+              backgroundPadding={15}
+              subtitleFontSize={10}
+              titleProps={{ transform: "translate(-5,0)" }}
+              subtitleProps={{
+                transform: "translate(-5,0)",
+                textWrap: "normal",
+              }}
+              width={width > 500 ? width / 2 : width / 2}
+              showAnchorLine={false}
+              backgroundProps={{ rx: "4px" }}
+            />
+          </Annotation>
+        </svg>
       </>
     ) : null;
 
@@ -182,7 +189,7 @@ function WatchBarChart({
             numTicks={3}
             hideAxisLine={true}
             hideTicks={true}
-            tickFormat={tickFormatter}
+            tickFormat={yTickFormatter}
             tickLabelProps={() => {
               return {
                 fill: "grey",
@@ -192,6 +199,24 @@ function WatchBarChart({
               };
             }}
           />
+          <AxisBottom
+            scale={xScale}
+            key="axisBottom"
+            numTicks={3}
+            hideAxisLine={true}
+            hideTicks={true}
+            tickFormat={(d) => timeFormat("%b '%y")(d)}
+            tickLabelProps={() => {
+              return {
+                y: height,
+                fill: "grey",
+                transform: "translate(-7.5,13)",
+                textAnchor: "center",
+                fontSize: 10,
+              };
+            }}
+          />
+
           <Group top={verticalMargin / 2}>
             {dataPrepped.map((d) => {
               const month = getMonth(d);

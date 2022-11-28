@@ -23,15 +23,17 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: Scrollytelling at the top and logos come in in background
 //TODO: opengraph stuff
 //TODO: square favicon
-//TODO: change bg
+//TODO: change bg color
 
 //WRITING
 //TODO: Tom misch has been in so many of the channels, highlight that in intro text
 //TODO: footer/outro...
 //TODO: README
+//TODO: change language from plays to views
 
 //HOLD: Blockquote under video on desktop but on top on mobile
 
+//DONE: Fade in intro text using css
 //DONE: Add link to my homepage in footer
 //DONE: responsively narrow the text cols
 //DONE: when you select a new channel as a filter, automatically bring up the first video
@@ -88,7 +90,7 @@ function App() {
           <ParentSize
             className="graph-container"
             debounceTime={10}
-            style={{ marginTop: "12px", marginBottom: "6px" }}
+            style={{ marginTop: "12px", marginBottom: "12px" }}
           >
             {({ width: visWidth, height: visHeight }) => (
               <WatchBarChart
