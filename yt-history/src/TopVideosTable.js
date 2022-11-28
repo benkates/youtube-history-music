@@ -58,6 +58,28 @@ function TopVideosTable({
       },
     },
     {
+      field: "text",
+      headerName: "",
+      type: "boolean",
+      headerClassName: "col-header-center",
+      headerAlign: "center",
+      valueGetter: (d) => {
+        return WRITING.some((e) => e.video_url === d.row.video_url);
+      },
+      renderCell: (d) => {
+        return d.value ? (
+          <FormatQuoteIcon sx={{ width: 16, height: 16 }}></FormatQuoteIcon>
+        ) : (
+          ""
+        );
+      },
+      flex: 0.15,
+      minWidth: 25,
+      hideable: false,
+      description: "Whether or not text commentary exists for video",
+      align: "center",
+    },
+    {
       field: "video_title",
       headerName: "Video",
       flex: 1.5,
@@ -65,26 +87,25 @@ function TopVideosTable({
       minWidth: 100,
       hideable: false,
       description: "YouTube Video Title",
-      renderCell: (d) => {
-        return (
-          <>
-            {WRITING.some((e) => e.video_url === d.rowNode.id) && (
-              <FormatQuoteIcon
-                sx={{ mr: 0.5, width: 16, height: 16 }}
-              ></FormatQuoteIcon>
-            )}
-            {d.value}
-          </>
-        );
-      },
+      // renderCell: (d) => {
+      //   return (
+      //     <>
+      //       {WRITING.some((e) => e.video_url === d.rowNode.id) && (
+      //         <FormatQuoteIcon
+      //           sx={{ mr: 0.5, width: 16, height: 16 }}
+      //         ></FormatQuoteIcon>
+      //       )}
+      //       {d.value}
+      //     </>
+      //   );
+      // },
     },
     {
       field: "count",
       headerName: "Plays",
       type: "number",
-      headerClassName: "col-header-center col-header-center",
+      headerClassName: "col-header-center",
       headerAlign: "center",
-      style: { color: "red" },
       flex: 0.35,
       minWidth: 50,
       hideable: false,
