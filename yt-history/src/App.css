@@ -71,6 +71,11 @@ body {
   display: none;
 }
 
+/* make the column quote */
+.quote-col {
+  padding: 5px 0 !important;
+}
+
 /**/
 /* VideoEmbed */
 /**/

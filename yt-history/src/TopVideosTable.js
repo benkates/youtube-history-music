@@ -61,20 +61,25 @@ function TopVideosTable({
       field: "text",
       headerName: "",
       type: "boolean",
-      headerClassName: "col-header-center",
+      headerClassName: "quote-col",
       headerAlign: "center",
       valueGetter: (d) => {
         return WRITING.some((e) => e.video_url === d.row.video_url);
       },
       renderCell: (d) => {
         return d.value ? (
-          <FormatQuoteIcon sx={{ width: 16, height: 16 }}></FormatQuoteIcon>
+          <FormatQuoteIcon sx={{ width: "1rem", height: "1rem" }} />
         ) : (
           ""
         );
       },
+      renderHeader: () => {
+        return (
+          <FormatQuoteIcon sx={{ p: 0, m: 0, width: "1rem", height: "1rem" }} />
+        );
+      },
       flex: 0.15,
-      minWidth: 25,
+      minWidth: 32,
       hideable: false,
       description: "Whether or not text commentary exists for video",
       align: "center",
