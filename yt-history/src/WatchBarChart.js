@@ -13,7 +13,7 @@ import { GridRows } from "@visx/grid";
 import { Annotation, Connector, Label } from "@visx/annotation";
 import theme from "./utils/theme";
 
-//TODO: x-axis label shown
+//TODO: x-axis label more padding
 //TODO: Reverse color scale for graph? Blue to white standout
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)

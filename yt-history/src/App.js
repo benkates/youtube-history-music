@@ -90,7 +90,7 @@ function App() {
           <ParentSize
             className="graph-container"
             debounceTime={10}
-            style={{ marginTop: "12px", marginBottom: "12px" }}
+            style={{ marginTop: "12px", marginBottom: "24px" }}
           >
             {({ width: visWidth, height: visHeight }) => (
               <WatchBarChart
