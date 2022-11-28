@@ -107,22 +107,10 @@ function IntroText({ theme }) {
           component="h2"
           variant="h4"
           fontWeight="bold"
+          gutterBottom
           color={theme.palette.accentColor}
         >
           The YouTube Channels
-        </Typography>
-        <Typography
-          component="div"
-          gutterBottom
-          color="white"
-          sx={{
-            textAlign: "left",
-            mb: 1,
-            color: "lightgrey",
-          }}
-        >
-          I've filtered to 10 channels that I love the most! I've been
-          subscribed to
         </Typography>
       </Container>
 
