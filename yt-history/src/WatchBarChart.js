@@ -13,11 +13,10 @@ import { GridRows } from "@visx/grid";
 import { Annotation, Connector, Label } from "@visx/annotation";
 import theme from "./utils/theme";
 
-//TODO: Reverse color scale for graph? Blue to white standout
-
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: too many axis lines for low count
 //DONE: x-axis label more padding
 //DONE: Fade in annotation
 //DONE: annotation on vulf spike
@@ -33,7 +32,7 @@ import theme from "./utils/theme";
 //DONE: tooltip correct
 //DONE: responsive (use visx repsonsive component)
 
-const verticalMargin = 0;
+const verticalMargin = 25;
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -101,9 +100,10 @@ function WatchBarChart({
   });
 
   const yScale = scaleLinear({
-    range: [yMax, 0],
+    range: [yMax, verticalMargin / 2],
     round: true,
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
+    padding: 0.3,
   });
 
   const colorScale = scaleLinear({
@@ -174,131 +174,141 @@ function WatchBarChart({
             e.target.tagName !== "rect" ? setSelectedMonth(null) : true
           }
         >
-          <GridRows
-            scale={yScale}
-            width={xMax - 15}
-            height={yMax}
-            stroke="#444444"
-            transform="translate(15,0)"
-          />
-          <AxisLeft
-            scale={yScale}
-            key="axisLeft"
-            stroke="white"
-            tickStroke="white"
-            numTicks={3}
-            hideAxisLine={true}
-            hideTicks={true}
-            tickFormat={yTickFormatter}
-            tickLabelProps={() => {
-              return {
-                fill: "grey",
-                transform: "translate(20,3)",
-                textAnchor: "end",
-                fontSize: 10,
-              };
-            }}
-          />
-          <AxisBottom
-            scale={xScale}
-            key="axisBottom"
-            numTicks={3}
-            hideAxisLine={true}
-            hideTicks={true}
-            tickFormat={(d) => timeFormat("%b '%y")(d)}
-            tickLabelProps={() => {
-              return {
-                y: height,
-                fill: "grey",
-                transform: "translate(-7.5,13)",
-                textAnchor: "center",
-                fontSize: 10,
-              };
-            }}
-          />
+          <g style={{ transform: `translate(0, -${verticalMargin / 2}px)` }}>
+            <GridRows
+              scale={yScale}
+              width={xMax - 15}
+              height={yMax}
+              stroke="#444444"
+              numTicks={6}
+              transform={`translate(15,${verticalMargin / 2})`}
+            />
+            <AxisLeft
+              scale={yScale}
+              key="axisLeft"
+              stroke="white"
+              tickStroke="white"
+              numTicks={3}
+              hideAxisLine={true}
+              hideTicks={true}
+              tickFormat={yTickFormatter}
+              tickLabelProps={() => {
+                return {
+                  fill: "grey",
+                  transform: `translate(20,${verticalMargin / 2})`,
+                  dominantBaseline: "middle",
+                  textAnchor: "end",
+                  fontSize: 10,
+                };
+              }}
+            />
+            <AxisBottom
+              scale={xScale}
+              key="axisBottom"
+              numTicks={3}
+              hideAxisLine={true}
+              hideTicks={true}
+              tickFormat={(d) => timeFormat("%b '%y")(d)}
+              tickLabelProps={() => {
+                return {
+                  y: height,
+                  fill: "grey",
+                  transform: "translate(-7.5,0)",
+                  textAnchor: "center",
+                  dominantBaseline: "middle",
+                  fontSize: 10,
+                };
+              }}
+            />
 
-          <Group top={verticalMargin / 2}>
-            {dataPrepped.map((d) => {
-              const month = getMonth(d);
-              const barWidth = xScale.bandwidth();
-              const barHeight = yMax - (yScale(getFreq(d)) ?? 0);
-              const barX = xScale(month);
-              const barY = yMax - barHeight;
+            <Group top={verticalMargin / 2}>
+              {dataPrepped.map((d) => {
+                const month = getMonth(d);
+                const barWidth = xScale.bandwidth();
+                const barHeight = yMax - (yScale(getFreq(d)) ?? 0);
+                const barX = xScale(month);
+                const barY = yMax - barHeight;
 
-              let color = colorScale(getFreq(d));
-              //if it's the month, make it stand out
-              if (selectedMonth !== null && d.month_label === selectedMonth) {
-                color = "#32A287";
-              }
-              //if it's not the month, make it darker
-              if (selectedMonth !== null && d.month_label !== selectedMonth) {
-                color = darken(color, 0.5);
-              }
-              return (
-                <Bar
-                  key={`bar-${month}`}
-                  x={barX + 7.5}
-                  y={Number(barY)}
-                  width={barWidth}
-                  height={barHeight}
-                  fill={color}
-                  rx={2}
-                  onMouseMove={(e) => {
-                    if (tooltipTimeout) clearTimeout(tooltipTimeout);
-                    //localPoint will get the exact svg coords
-                    const eventSvgCoords = localPoint(e);
-                    const left = barX + barWidth / 2;
-                    showTooltip({
-                      tooltipData: d, //data of the mapped array
-                      tooltipTop: eventSvgCoords?.y + 5,
-                      tooltipLeft: left + 5,
-                    });
-                  }}
-                  //remove tooltip on mosuse out
-                  onMouseLeave={() => {
-                    tooltipTimeout = window.setTimeout(() => {
-                      hideTooltip();
-                    }, 500);
-                  }}
-                  //set month on click
-                  onClick={() => {
-                    //if the selected month is the same as the state var, reset it
-                    if (d.month_label === selectedMonth) {
-                      setSelectedMonth(null);
-                      //otherwise set it
-                    } else {
-                      setSelectedMonth(d.month_label);
-                    }
-                    //scroll to top of table
-                    document.querySelector(
-                      ".MuiDataGrid-virtualScroller"
-                    ).scrollTop = 0;
-                  }}
-                />
-              );
-            })}
-          </Group>
+                let color = colorScale(getFreq(d));
+                //if it's the month, make it stand out
+                if (selectedMonth !== null && d.month_label === selectedMonth) {
+                  color = "#32A287";
+                }
+                //if it's not the month, make it darker
+                if (selectedMonth !== null && d.month_label !== selectedMonth) {
+                  color = darken(color, 0.5);
+                }
+                return (
+                  <Bar
+                    key={`bar-${month}`}
+                    x={barX + 7.5}
+                    y={Number(barY)}
+                    width={barWidth}
+                    height={barHeight}
+                    fill={color}
+                    rx={2}
+                    onMouseMove={(e) => {
+                      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+                      //localPoint will get the exact svg coords
+                      const eventSvgCoords = localPoint(e);
+                      const left = barX + barWidth / 2;
+                      showTooltip({
+                        tooltipData: d, //data of the mapped array
+                        tooltipTop: eventSvgCoords?.y + 5,
+                        tooltipLeft: left + 5,
+                      });
+                    }}
+                    //remove tooltip on mosuse out
+                    onMouseLeave={() => {
+                      tooltipTimeout = window.setTimeout(() => {
+                        hideTooltip();
+                      }, 500);
+                    }}
+                    //set month on click
+                    onClick={() => {
+                      //if the selected month is the same as the state var, reset it
+                      if (d.month_label === selectedMonth) {
+                        setSelectedMonth(null);
+                        //otherwise set it
+                      } else {
+                        setSelectedMonth(d.month_label);
+                      }
+                      //scroll to top of table
+                      document.querySelector(
+                        ".MuiDataGrid-virtualScroller"
+                      ).scrollTop = 0;
+                    }}
+                  />
+                );
+              })}
+            </Group>
 
-          {/* MONTH TEXT START */}
-          {selectedMonth && (
-            <g>
-              <text style={{ fill: "white" }} x={width} y={12} textAnchor="end">
-                {`Month: ${selectedMonth}`}
-              </text>
-              <text
-                style={{ fill: "white", cursor: "pointer" }}
-                x={width}
-                y={30}
-                textAnchor="end"
-                textDecoration="underline"
-                fontSize="12px"
-              >
-                reset
-              </text>
-            </g>
-          )}
-          {/* MONTH TEXT END */}
-          {vulfAnnoation}
+            {/* MONTH TEXT START */}
+            {selectedMonth && (
+              <g>
+                <text
+                  style={{ fill: "white" }}
+                  x={width}
+                  y={12}
+                  textAnchor="end"
+                >
+                  {`Month: ${selectedMonth}`}
+                </text>
+                <text
+                  style={{ fill: "white", cursor: "pointer" }}
+                  x={width}
+                  y={30}
+                  textAnchor="end"
+                  textDecoration="underline"
+                  fontSize="12px"
+                >
+                  reset
+                </text>
+              </g>
+            )}
+            {/* MONTH TEXT END */}
+            {vulfAnnoation}
+          </g>
         </svg>
       </div>
 
