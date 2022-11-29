@@ -1,6 +1,8 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import MouseIcon from "@mui/icons-material/Mouse";
+import Link from "@mui/material/Link";
 
 import YouTubeChannelGrid from "./YouTubeChannelGrid";
 
@@ -12,28 +14,38 @@ function IntroText({ theme }) {
         <Typography
           variant="h2"
           component="h1"
-          color="white"
           sx={{
             textAlign: "center",
             mt: 3,
+            pb: 1,
             fontFamily: "Abril Fatface",
+            color: "transparent",
+            backgroundClip: "text",
+            backgroundImage: `linear-gradient(50deg, #55add6, rgb(255, 91, 138) 20%, rgb(255, 91, 138) 23%, #556CD6 55%, rgb(251, 166, 75) 77%, lightgrey)`,
           }}
         >
-          What's in my YouTube History: Music
+          What's in My YouTube History: Music
         </Typography>
         <Typography
           component="div"
-          color="grey"
+          color="darkgrey"
           fontSize="20px"
           fontStyle={"italic"}
           sx={{ textAlign: "center", mb: 2 }}
         >
-          by Ben Kates / Nov 2022 <br></br>
+          by{" "}
+          <Link
+            style={{ textDecoration: "underline", color: "inherit" }}
+            href="https://benkates.com"
+          >
+            Ben Kates
+          </Link>{" "}
+          / Nov 2022<br></br>
           {
             <span
               style={{
                 cursor: "pointer",
-                textDecoration: "underline",
+                // textDecoration: "underline",
                 fontSize: "14px",
               }}
               onClick={() =>
@@ -42,7 +54,10 @@ function IntroText({ theme }) {
                   .scrollIntoView({ behavior: "smooth" })
               }
             >
-              scroll to the app
+              <MouseIcon
+                sx={{ width: 12, height: 12, verticalAlign: "middle" }}
+              />
+              {` scroll to the app`}
             </span>
           }
         </Typography>
@@ -70,23 +85,21 @@ function IntroText({ theme }) {
           of bands, artists, and music producers. There’s something about
           intimate recording of performance and creative process that captivates
           me as a{" "}
-          <a
+          <Link
             href="https://open.spotify.com/artist/0aOoGOhY7yubvn0nNu4EJo"
             target="_blank"
-            rel="noreferrer"
             style={{ color: "lightgrey" }}
           >
             hobbyist musician
-          </a>
+          </Link>
           {" and "}
-          <a
+          <Link
             href="https://www.youtube.com/benkates"
             target="_blank"
-            rel="noreferrer"
             style={{ color: "lightgrey" }}
           >
             bedroom producer
-          </a>
+          </Link>
           {"!"}
           <br></br>
           <br></br>
@@ -127,7 +140,7 @@ function IntroText({ theme }) {
           components to take a look at some of my most viewed videos and the
           viewcount trends.
         </Typography>
-        <Typography sx={{ color: "lightgrey", mb: 1 }}>
+        <Typography sx={{ color: "lightgrey" }}>
           It's interesting to see the higher viewcount in 2019/2020 vs 2022. I
           spent a lot of time making music in Ableton Live with my synths,
           sampling, and live looping gear; inspired by a lot of these videos!
