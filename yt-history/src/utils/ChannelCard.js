@@ -5,6 +5,7 @@ import {
   Typography,
   CardMedia,
   Avatar,
+  CardContent,
 } from "@mui/material";
 
 import Accordion from "@mui/material/Accordion";
@@ -37,7 +38,8 @@ function ChannelCard({
         image={`channel-images/${name}.jpg`}
         alt={name}
       />
-      {/* <br></br>
+      <CardContent>
+        {/* <br></br>
       <div style={{ textAlign: "center" }}>
         {/* <Tooltip title={tooltipTitle}>
             <ChipAvatar
@@ -46,8 +48,8 @@ function ChannelCard({
             ></ChipAvatar>
           </Tooltip>
       </div> */}
-      {/* <Typography sx={{ mr: 2, ml: 2, mb: 2 }}>{children}</Typography> */}
-      <Accordion>
+        {/* <Typography sx={{ mr: 2, ml: 2, mb: 2 }}>{children}</Typography> */}
+        {/* <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -55,11 +57,12 @@ function ChannelCard({
         >
           <Typography>Description</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography>{children}</Typography>
-        </AccordionDetails>
-      </Accordion>
-      {/* </CardActionArea> */}
+        <AccordionDetails> */}
+        <Typography>{children}</Typography>
+        {/* </AccordionDetails>
+      </Accordion> */}
+        {/* </CardActionArea> */}
+      </CardContent>
     </Card>
   );
 }

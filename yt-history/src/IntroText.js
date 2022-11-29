@@ -6,6 +6,14 @@ import Grid from "@mui/material/Grid";
 
 import ChannelCard from "./utils/ChannelCard";
 
+import useIsInViewport from "./utils/useIsInViewPort";
+import { useRef } from "react";
+
+import { Zoom } from "@mui/material";
+
+import YouTubeChannelGrid from "./YouTubeChannelGrid";
+
+//TODO: transition ref
 //DONE: intro the month filter
 //DONE: transition body text
 
@@ -43,7 +51,7 @@ function IntroText({ theme }) {
               }}
               onClick={() =>
                 document
-                  .getElementById("watch-bar-chart-top-videos-table")
+                  .getElementById("app-h2")
                   .scrollIntoView({ behavior: "smooth" })
               }
             >
@@ -73,7 +81,7 @@ function IntroText({ theme }) {
           Ever since I can remember, I’ve loved watching musical performances on
           YouTube. I’m not talking “concert” footage, but edited YouTube videos
           of bands, artists, and music producers. There’s something about
-          intimate recordings of performance and creative process that captivate
+          intimate recording of performance and creative process that captivates
           me as a{" "}
           <a
             href="https://open.spotify.com/artist/0aOoGOhY7yubvn0nNu4EJo"
@@ -97,9 +105,9 @@ function IntroText({ theme }) {
           <br></br>
           There are so many YouTube channels and media platforms out there
           producing amazing music content, particularly the ones that have
-          regular series! I wanted to explore my YouTube history and filter to
-          some of the channels I watch most. What better than a data app to help
-          facilitate that?
+          regular series! I wanted to explore my YouTube history and filter it
+          to some of the channels I watch most. What better than a data app to
+          help facilitate that?
         </Typography>
         <Typography
           component="h2"
@@ -112,166 +120,7 @@ function IntroText({ theme }) {
           The YouTube Channels
         </Typography>
       </Container>
-
-      <Container maxWidth="xl" sx={{ mb: 2 }}>
-        {/* YouTube Channel Grid */}
-        <Grid
-          container
-          spacing={2}
-          alignContent="center"
-          justifyContent="center"
-        >
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Vulf"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: June 27, 2018"
-              subheader="548K subscribers"
-            >
-              Vulf is a record label originally from the funk band Vulfpeck!
-              Originally formed in 2011 at University of Michican's music
-              school, the collective of musicians has produced -- A note on
-              playcount: The YouTube algorithm is amazing and there might be
-              some plays in there that have counted towards my history that
-              might have auto-played when I was distracted, out of the room, or
-              even asleep! The bottom line is that the videos that have the
-              highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="FACTmagazine"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: July 5, 2017"
-              subheader="327K subscribers"
-            >
-              Fact Magazine describes itself as a "music platform" that... -- A
-              note on playcount: The YouTube algorithm is amazing and there
-              might be some plays in there that have counted towards my history
-              that might have auto-played when I was distracted, out of the
-              room, or even asleep! The bottom line is that the videos that have
-              the highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="NPR Music"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: December 26, 2018"
-              subheader="7.35M subscribers"
-            >
-              Tiny Desk -- A note on playcount: The YouTube algorithm is amazing
-              and there might be some plays in there that have counted towards
-              my history that might have auto-played when I was distracted, out
-              of the room, or even asleep! The bottom line is that the videos
-              that have the highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Mass Appeal"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: July 8, 2018"
-              subheader="1.01M subscribers"
-            >
-              Rhythm Roulette -- A note on playcount: The YouTube algorithm is
-              amazing and there might be some plays in there that have counted
-              towards my history that might have auto-played when I was
-              distracted, out of the room, or even asleep! The bottom line is
-              that the videos that have the highest playcount are the ones I
-              love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="KEXP"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: November 27, 2022"
-              subheader="2.84M subscribers"
-            >
-              Like tiny desk but west coast lol -- A note on playcount: The
-              YouTube algorithm is amazing and there might be some plays in
-              there that have counted towards my history that might have
-              auto-played when I was distracted, out of the room, or even
-              asleep! The bottom line is that the videos that have the highest
-              playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Soulection"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: February 19, 2019"
-              subheader="118K subscribers"
-            >
-              Radio show previously soundcloud then Apple Music in... -- A note
-              on playcount: The YouTube algorithm is amazing and there might be
-              some plays in there that have counted towards my history that
-              might have auto-played when I was distracted, out of the room, or
-              even asleep! The bottom line is that the videos that have the
-              highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Boiler Room"
-              chipAvatarColor="black"
-              tooltipTitle={null}
-              subheader="3.2M subscribers"
-            >
-              Epic -- A note on playcount: The YouTube algorithm is amazing and
-              there might be some plays in there that have counted towards my
-              history that might have auto-played when I was distracted, out of
-              the room, or even asleep! The bottom line is that the videos that
-              have the highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Stones Throw"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: June 27, 2018"
-              subheader="504K subscribers"
-            >
-              Record label -- A note on playcount: The YouTube algorithm is
-              amazing and there might be some plays in there that have counted
-              towards my history that might have auto-played when I was
-              distracted, out of the room, or even asleep! The bottom line is
-              that the videos that have the highest playcount are the ones I
-              love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="Fkj"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: June 27, 2018"
-              subheader="2.23M subscribers"
-            >
-              Loop dude -- A note on playcount: The YouTube algorithm is amazing
-              and there might be some plays in there that have counted towards
-              my history that might have auto-played when I was distracted, out
-              of the room, or even asleep! The bottom line is that the videos
-              that have the highest playcount are the ones I love the most.
-            </ChannelCard>
-          </Grid>
-          <Grid item sm={6} md={4} xl={3}>
-            <ChannelCard
-              name="COLORS"
-              chipAvatarColor="black"
-              tooltipTitle="First Subscribed: November 29, 2018"
-              subheader="6.47M subscribers"
-            >
-              Cool backdrops -- A note on playcount: The YouTube algorithm is
-              amazing and there might be some plays in there that have counted
-              towards my history that might have auto-played when I was
-              distracted, out of the room, or even asleep! The bottom line is
-              that the videos that have the highest playcount are the ones I
-              love the most.
-            </ChannelCard>
-          </Grid>
-        </Grid>
-      </Container>
+      <YouTubeChannelGrid />
       <Container maxWidth="md" sx={{ p: 0 }}>
         <Typography
           component="h2"
@@ -280,18 +129,25 @@ function IntroText({ theme }) {
           color={theme.palette.accentColor}
           textAlign="center"
           sx={{ mt: 3 }}
+          id="app-h2"
         >
           The Data App
         </Typography>
-        <Typography
-          sx={{
-            color: "lightgrey",
-          }}
-        >
+        <Typography sx={{ color: "lightgrey", mb: 1 }}>
           The data is for <strong>December 2018 through October 2022</strong>{" "}
           and was exported using Google Takeout. After transforming and
           filtering the data in R, I built this front-end using React.js and MUI
-          components to take a look at some of my most viewed videos!
+          components to take a look at some of my most viewed videos and the
+          viewcount trends.
+        </Typography>
+        <Typography sx={{ color: "lightgrey", mb: 1 }}>
+          It's interesting to see the higher viewcount in 2019/2020 vs 2022. I
+          spent a lot of time making music in Ableton Live with my synths,
+          sampling, and live looping gear; inspired by a lot of these videos!
+          I've certainly still been involved in music in 2022; it's just more
+          focused on band rehearsal/recording rather than my own "bedroom
+          producer" projects. Different inspirations for different phases of
+          life, I suppose!
         </Typography>
         <Typography sx={{ color: "lightgrey", mb: 3 }}>
           To view a video, just click the row in the table.{" "}
