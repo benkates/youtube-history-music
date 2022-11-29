@@ -77,11 +77,11 @@ function YouTubeChannelGrid() {
               url="https://www.youtube.com/@Factmag"
             >
               Fact has been at the forefront of music and culture since its
-              launch as a print magazine in 2003 and developed into a digital
-              platform in 2009. Fact’s video output boasts more than 50 million
-              views and includes its long-running series Against The Clock,
-              where a producer or DJ is challenged to create a beat in under 10
-              minutes,
+              launch as a print magazine in 2003 and has developed into a
+              digital platform in 2009. Fact’s video output boasts more than 50
+              million views and includes its long-running series Against The
+              Clock, where a producer or DJ is challenged to create a beat in
+              under 10 minutes.
             </ChannelCard>
           </SwiperSlide>
           <SwiperSlide>
@@ -92,10 +92,10 @@ function YouTubeChannelGrid() {
               subheader="7.35M subscribers"
               url="https://www.youtube.com/@nprmusic"
             >
-              The NPR Music channel is largely dedictated to the Tiny Desk
+              The NPR Music channel is largely dedicated to the Tiny Desk
               Concerts series. It's a video series of live concerts at the desk
               of All Songs Considered host Bob Boilen in Washington, D.C. The
-              first video priemered in 2008 and there are now over 800 with a
+              first video premiered in 2008 and there are now over 800 with a
               collective 2 billion views.
             </ChannelCard>
           </SwiperSlide>
@@ -142,8 +142,8 @@ function YouTubeChannelGrid() {
               a platform and community for artists, musicians, and fans from
               across the world. The brand defines itself as uniting a
               "borderless, genre-bending musical movement". Its radio show
-              started on KBeach Radio in 2011 and was piocked up by Apple
-              Music's Beats 1 Radio in 2015.
+              started on KBeach Radio in 2011 and was picked up by Apple Music's
+              Beats 1 Radio in 2015.
             </ChannelCard>
           </SwiperSlide>
           <SwiperSlide>
@@ -187,7 +187,7 @@ function YouTubeChannelGrid() {
               url="https://www.youtube.com/@FKJ"
             >
               {`An accomplished artist of the Parisian electronic scene, FKJ, also
-              known as French Kiwi Juice, is one of the flag bearers of the New
+              known as French Kiwi Juice based on wordplay from his French mother and Kiwi father, is one of the flag-bearers of the New
               French House musical genre. A native of Tours (France), but now
               based in Paris, FKJ is a leading multi-instrumentalist in live looping performance.`}
             </ChannelCard>
@@ -204,8 +204,8 @@ function YouTubeChannelGrid() {
               exceptional talent from around the globe. COLORS focuses on the
               most distinctive new artists and original sounds in an
               increasingly fragmented and saturated scene. All COLORS shows seek
-              to provide clear, minimalistic stage that shines a spotlight on
-              the artists, giving them the opportunity to present their music
+              to provide a clear, minimalistic stage that shines a spotlight on
+              artists, giving them the opportunity to present their music
               without distraction.
             </ChannelCard>
           </SwiperSlide>
