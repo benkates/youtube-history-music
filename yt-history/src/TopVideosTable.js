@@ -7,10 +7,9 @@ import {
 import ChipAvatar from "./utils/ChipAvatar";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
-//TODO: checkbox bool field for quote sorting/filtering
-
 //HOLD: bars/styling for playcount?
 
+//DONE: checkbox bool field for quote sorting/filtering
 //DONE: Different font size on mobile for col titles? it's cutoff (.col-header-center)
 //DONE: alternating row stripes
 //DONE: special button icon inline if i wrote something (npm install @mui/icons-material) https://mui.com/material-ui/icons/`
@@ -74,9 +73,7 @@ function TopVideosTable({
         );
       },
       renderHeader: () => {
-        return (
-          <FormatQuoteIcon sx={{ p: 0, m: 0, width: "1rem", height: "1rem" }} />
-        );
+        return <FormatQuoteIcon sx={{ width: "1rem", height: "1rem" }} />;
       },
       flex: 0.15,
       minWidth: 32,
@@ -107,14 +104,14 @@ function TopVideosTable({
     },
     {
       field: "count",
-      headerName: "Plays",
+      headerName: "Views",
       type: "number",
       headerClassName: "col-header-center",
       headerAlign: "center",
       flex: 0.35,
       minWidth: 50,
       hideable: false,
-      description: "Total playcount for selected data",
+      description: "Ben's total views for imported data",
       // cellClassName: "count-col-align-center",
       align: "center",
     },

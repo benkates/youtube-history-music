@@ -13,12 +13,12 @@ import { GridRows } from "@visx/grid";
 import { Annotation, Connector, Label } from "@visx/annotation";
 import theme from "./utils/theme";
 
-//TODO: x-axis label more padding
 //TODO: Reverse color scale for graph? Blue to white standout
 
 //HOLD: animated transition of bars on change of top level channel (although you cant really see much)
 //HOLD: fixed axis for dates (always jan '19 to oct '22, shows blanks if no data)
 
+//DONE: x-axis label more padding
 //DONE: Fade in annotation
 //DONE: annotation on vulf spike
 //DONE: sort months correctly
@@ -127,7 +127,7 @@ function WatchBarChart({
   const vulfAnnoation =
     selectedChannel === "Vulf" ? (
       <>
-        <svg className="fade-in">
+        <svg>
           <Annotation
             x={xScale(
               new Date(
@@ -313,7 +313,7 @@ function WatchBarChart({
             <strong>{tooltipData.month_label}</strong>
           </div>
           <div>
-            <small>Playcount: {tooltipData.count}</small>
+            <small>Ben's Views: {tooltipData.count}</small>
             <br />
             <small>{selectedChannel}</small>
           </div>
