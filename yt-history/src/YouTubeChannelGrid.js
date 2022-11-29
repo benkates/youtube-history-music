@@ -96,9 +96,11 @@ function YouTubeChannelGrid() {
               subheader="7.35M subscribers"
               url="https://www.youtube.com/@nprmusic"
             >
-              Tiny Desk Concerts is a video series of live concerts hosted by
-              NPR Music at the desk of All Songs Considered host Bob Boilen in
-              Washington, D.C.
+              The NPR Music channel is largely dedictated to the Tiny Desk
+              Concerts series. It's a video series of live concerts at the desk
+              of All Songs Considered host Bob Boilen in Washington, D.C. The
+              first video priemered in 2008 and there are now over 800 with a
+              collective 2 billion views.
             </ChannelCard>
           </SwiperSlide>
           <SwiperSlide>

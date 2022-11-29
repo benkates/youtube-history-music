@@ -107,7 +107,7 @@ function WatchBarChart({
   });
 
   const colorScale = scaleLinear({
-    range: ["lightgrey", "#556CD6"],
+    range: ["lightgrey", theme.palette.accentColor],
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
   });
 

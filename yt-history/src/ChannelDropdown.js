@@ -72,7 +72,11 @@ function ChannelDropdown({
             >
               <Avatar
                 alt={`${e.label}`}
-                src={`./avatar/${e.channel_name}.jpg`}
+                src={
+                  e.channel_name === "All Channels"
+                    ? null
+                    : `./avatar/${e.channel_name}.jpg`
+                }
                 sx={{ ...AvatarStyles, bgcolor: "red" }}
               >
                 {e.channel_name === "All Channels" && (
