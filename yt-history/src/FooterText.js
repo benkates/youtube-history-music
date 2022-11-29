@@ -4,11 +4,14 @@ function FooterText() {
   return (
     <Container maxWidth="md">
       <hr style={{ borderColor: "grey", marginTop: 20 }}></hr>
-      <Typography
-        component="p"
-        color="white"
-        sx={{ textAlign: "left", mt: 3, mb: 3, color: "lightgrey" }}
-      >
+      <Typography sx={{ mt: 3, mb: 3, color: "lightgrey" }}>
+        A note on viewcount: The YouTube algorithm is amazing and there are some
+        views that have counted towards my history that might have auto-played
+        when I was distracted, out of the room, or even asleep! The bottom line
+        is that the videos that have the highest views are the ones I love the
+        most.
+      </Typography>
+      <Typography component="p" sx={{ mt: 3, mb: 3, color: "lightgrey" }}>
         I had a lot of fun making this! This was my first larger React.js
         project after years of developing in R/Shiny and dashboarding tools
         Google Data Studio and Power BI! If you're curious to learn more about
