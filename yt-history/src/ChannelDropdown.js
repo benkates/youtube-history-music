@@ -40,7 +40,7 @@ function ChannelDropdown({
     arrange(desc("count")),
     //create label field
     mutate({
-      label: (d) => `${d.channel_name} (playcount: ${format(",")(d.count)})`,
+      label: (d) => `${d.channel_name} (Ben's Views: ${format(",")(d.count)})`,
     })
   );
   return (
