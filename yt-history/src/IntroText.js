@@ -2,20 +2,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
-import Grid from "@mui/material/Grid";
-
-import ChannelCard from "./utils/ChannelCard";
-
-import useIsInViewport from "./utils/useIsInViewPort";
-import { useRef } from "react";
-
-import { Zoom } from "@mui/material";
-
 import YouTubeChannelGrid from "./YouTubeChannelGrid";
-
-//TODO: transition ref
-//DONE: intro the month filter
-//DONE: transition body text
 
 function IntroText({ theme }) {
   return (
