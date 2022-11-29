@@ -6,9 +6,7 @@ import Grid from "@mui/material/Grid";
 
 import ChannelCard from "./utils/ChannelCard";
 
-//TODO: channels text
-//TODO: intro the month filter
-
+//DONE: intro the month filter
 //DONE: transition body text
 
 function IntroText({ theme }) {
@@ -54,12 +52,13 @@ function IntroText({ theme }) {
           }
         </Typography>
       </Container>
-      <Container maxWidth="md" sx={{ p: 0 }} className="fade-in">
+      <Container maxWidth="md" sx={{ p: 0 }}>
         <Typography
           component="h2"
           variant="h4"
           fontWeight="bold"
           color={theme.palette.accentColor}
+          textAlign="center"
         >
           Introduction
         </Typography>
@@ -67,8 +66,6 @@ function IntroText({ theme }) {
           component="div"
           gutterBottom
           sx={{
-            textAlign: "left",
-            // mt: 3,
             mb: 3,
             color: "lightgrey",
           }}
@@ -100,8 +97,9 @@ function IntroText({ theme }) {
           <br></br>
           There are so many YouTube channels and media platforms out there
           producing amazing music content, particularly the ones that have
-          regular series! I dove into my YouTube history and filtered to some of
-          the channels I watch most.
+          regular series! I wanted to explore my YouTube history and filter to
+          some of the channels I watch most. What better than a data app to help
+          facilitate that?
         </Typography>
         <Typography
           component="h2"
@@ -109,12 +107,13 @@ function IntroText({ theme }) {
           fontWeight="bold"
           gutterBottom
           color={theme.palette.accentColor}
+          textAlign="center"
         >
           The YouTube Channels
         </Typography>
       </Container>
 
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ mb: 2 }}>
         {/* YouTube Channel Grid */}
         <Grid
           container
@@ -272,53 +271,41 @@ function IntroText({ theme }) {
             </ChannelCard>
           </Grid>
         </Grid>
-
-        {/* This App and Its Data */}
-
+      </Container>
+      <Container maxWidth="md" sx={{ p: 0 }}>
         <Typography
           component="h2"
           variant="h4"
           fontWeight="bold"
           color={theme.palette.accentColor}
+          textAlign="center"
+          sx={{ mt: 3 }}
         >
-          This App and its Data
+          The Data App
         </Typography>
         <Typography
-          component="div"
-          gutterBottom
-          color="white"
           sx={{
-            textAlign: "left",
-            // mt: 3,
-            mb: 3,
             color: "lightgrey",
           }}
         >
-          I've created this app to explore my music-related YouTube history! The
-          data was exported using Google Takeout and is for December 2018
-          through October 2022. After transforming and filtering the data in R,
-          I built this front-end using React.js to take a look at some of my
-          most viewed videos!
-          <br></br>
-          <br></br>
-          To view a video, just select the row in the table. If there's a quote
-          symbol like this{" "}
-          <FormatQuoteIcon sx={{ width: 28, height: 28 }}></FormatQuoteIcon>
-          then I've added extra context below the video on how a particular
-          video might have impacted me as a music fan or creator!
-          <br></br>
-          <br></br>A note on playcount: The YouTube algorithm is amazing and
-          there are some plays that have counted towards my history that might
-          have auto-played when I was distracted, out of the room, or even
-          asleep! The bottom line is that the videos that have the highest
-          playcount are the ones I love the most.
-          <br></br>
-          <br></br>
-          UI Note: Click on a month bar to filter the table to that month's
-          activity!
+          The data is for <strong>December 2018 through October 2022</strong>{" "}
+          and was exported using Google Takeout. After transforming and
+          filtering the data in R, I built this front-end using React.js to take
+          a look at some of my most viewed videos!
+        </Typography>
+        <Typography sx={{ color: "lightgrey", mb: 3 }}>
+          To view a video, just click the row in the table.{" "}
+          <strong>
+            If there's a quote symbol like this{" "}
+            <FormatQuoteIcon sx={{ width: 28, height: 28 }}></FormatQuoteIcon>
+            then there's extra context below the video
+          </strong>{" "}
+          on how a particular video might have impacted me as a music fan or
+          creator!<br></br>Also,{" "}
+          <strong>click on a bar to filter the table to that month!</strong>{" "}
+          Happy listening!
         </Typography>
       </Container>
-      {/* </Grow> */}
     </>
   );
 }
