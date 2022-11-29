@@ -19,9 +19,9 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 //UI
 //TODO: uncomment GA
-//TODO: Scrollytelling at the top and logos come in in background
 //TODO: opengraph stuff
 //TODO: fix favicon
+//TODO: add icons
 
 //WRITING
 //TODO: README
@@ -82,11 +82,7 @@ function App() {
             setSelectedVideo={setSelectedVideo}
             setSelectedMonth={setSelectedMonth}
           />
-          <ParentSize
-            className="graph-container"
-            debounceTime={10}
-            style={{ marginTop: "12px", marginBottom: "24px" }}
-          >
+          <ParentSize className="graph-container" debounceTime={10}>
             {({ width: visWidth, height: visHeight }) => (
               <WatchBarChart
                 data={data}
@@ -94,7 +90,7 @@ function App() {
                 selectedMonth={selectedMonth}
                 setSelectedMonth={setSelectedMonth}
                 width={visWidth}
-                height="164"
+                height={200}
               ></WatchBarChart>
             )}
           </ParentSize>

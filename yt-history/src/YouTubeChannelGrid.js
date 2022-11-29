@@ -60,10 +60,9 @@ function YouTubeChannelGrid() {
               subheader="548K subscribers"
               url="https://www.youtube.com/@Vulf"
             >
-              {`Vulf is a record label started by the funk band Vulfpeck!
-              Originally formed in 2011 at University of Michican's music
-              school, the "collective" has produced viral videos with great
-              style. Fun fact: in 2014 the band put out a completely silent
+              {`Vulf is a record label started by the funk band Vulfpeck.
+              Originally formed in 2011 at University of Michican, the "collective" has produced viral videos with great
+              style. Fun fact: in 2014 the band released a completely silent
               album entitled "Sleepify" and encouraged fans to play it on repeat
               when they slept to crowdfund a free tour. Spotify wasn't so happy...`}
             </ChannelCard>
@@ -77,15 +76,11 @@ function YouTubeChannelGrid() {
               url="https://www.youtube.com/@Factmag"
             >
               Fact has been at the forefront of music and culture since its
-              launch as a print magazine in 2003. It was developed into a
-              digital platform in 2009 and has remained a vital voice in a
-              crowded conversation by prioritising unique artists in its
-              original video content and visual storytelling. Our venerated Fact
-              mix series has highlighted the world’s most vital DJs and
-              producers since 2008. Fact’s video output boasts more than 50
-              million views and includes our long-running series Against The
-              Clock, where a producer or DJ is challenged to create a beat in
-              under 10 minutes,
+              launch as a print magazine in 2003 and developed into a digital
+              platform in 2009. Fact’s video output boasts more than 50 million
+              views and includes its long-running series Against The Clock,
+              where a producer or DJ is challenged to create a beat in under 10
+              minutes,
             </ChannelCard>
           </SwiperSlide>
           <SwiperSlide>

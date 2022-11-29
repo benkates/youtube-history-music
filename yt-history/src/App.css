@@ -179,11 +179,11 @@ blockquote:after {
 }
 
 .swiper-pagination-bullet {
-  width: 14px !important;
-  height: 14px !important;
-  transform: translate(0px, 10px);
+  width: 12px !important;
+  height: 12px !important;
+  transform: translate(0px, 15px);
   text-align: center;
-  line-height: 14px;
+  line-height: 12px;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid white;
 }

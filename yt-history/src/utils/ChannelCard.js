@@ -1,24 +1,31 @@
 import {
   Card,
-  CardActionArea,
   CardHeader,
   Typography,
   CardMedia,
   Avatar,
   CardContent,
+  IconButton,
 } from "@mui/material";
 
-//TODO: channel text for tiny desk and COLORS
-//TODO: radio buttons style for swipe
+import { Link } from "@mui/icons-material";
+
+//DONE: add url
+//DONE: channel text for tiny desk and COLORS
+//DONE: radio buttons style for swipe
 
 function ChannelCard({ name, children, subheader, url, tooltipTitle }) {
   return (
     <Card>
-      {/* <CardActionArea href={url} target="_blank"> */}
       <CardHeader
         avatar={<Avatar alt={name} src={`avatar/${name}.jpg`} />}
         title={name}
         subheader={subheader}
+        action={
+          <IconButton href={url} target="_blank">
+            <Link />
+          </IconButton>
+        }
       />
       <CardMedia
         component="img"
@@ -30,7 +37,6 @@ function ChannelCard({ name, children, subheader, url, tooltipTitle }) {
       <CardContent>
         <Typography>{children}</Typography>
       </CardContent>
-      {/* </CardActionArea> */}
     </Card>
   );
 }
