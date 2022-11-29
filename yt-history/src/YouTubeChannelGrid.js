@@ -1,31 +1,58 @@
-import { Box, Container, ImageList, ImageListItem } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import useWindowSize from "./utils/useWindowSize";
 import ChannelCard from "./utils/ChannelCard";
 
-//TODO: scroll
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+import { EffectCoverflow, Pagination } from "swiper";
+
+//DONE: scroll
 
 function YouTubeChannelGrid() {
-  //get windowSize hook
   const windowSize = useWindowSize();
 
   //declare number of cols based on windowSize
-  let imageListCols;
-  if (windowSize.width < 900) {
-    imageListCols = 1;
-  } else if (windowSize.width >= 900 && windowSize.width < 1200) {
-    imageListCols = 2;
-  } else if (windowSize.width >= 1200 && windowSize.width < 1536) {
-    imageListCols = 3;
+  let slidesNum;
+  if (windowSize.width < 760) {
+    slidesNum = 1;
+  } else if (windowSize.width >= 760 && windowSize.width < 1200) {
+    slidesNum = 2;
+  } else if (windowSize.width >= 1200) {
+    slidesNum = 3;
   } else {
-    imageListCols = 4;
+    slidesNum = 3;
   }
+
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<span class=${className}></span>`;
+    },
+  };
 
   //declare ref for transition
   return (
     <Container maxWidth="xl" sx={{ mb: 2 }}>
-      <Box sx={{ mb: 5 }}>
-        <ImageList variant="masonry" cols={imageListCols} gap={8}>
-          <ImageListItem>
+      <Box sx={{ mb: 5 }} position="relative">
+        <Swiper
+          effect={"coverflow"}
+          navigation={true}
+          centeredSlides={true}
+          modules={[EffectCoverflow, Pagination]}
+          coverflowEffect={{
+            depth: 500,
+            modifier: 0.75,
+            slideShadows: true,
+          }}
+          slidesPerView={slidesNum}
+          grabCursor={true}
+          spaceBetween={20}
+          pagination={pagination}
+          className="mySwiper"
+        >
+          <SwiperSlide>
             <ChannelCard
               name="Vulf"
               chipAvatarColor="black"
@@ -40,8 +67,8 @@ function YouTubeChannelGrid() {
               album entitled "Sleepify" and encouraged fans to play it on repeat
               when they slept to crowdfund a free tour. Spotify wasn't so happy...`}
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="FACTmagazine"
               chipAvatarColor="black"
@@ -60,8 +87,8 @@ function YouTubeChannelGrid() {
               Clock, where a producer or DJ is challenged to create a beat in
               under 10 minutes,
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="NPR Music"
               chipAvatarColor="black"
@@ -73,9 +100,8 @@ function YouTubeChannelGrid() {
               NPR Music at the desk of All Songs Considered host Bob Boilen in
               Washington, D.C.
             </ChannelCard>
-          </ImageListItem>
-
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="Mass Appeal"
               chipAvatarColor="black"
@@ -90,8 +116,8 @@ function YouTubeChannelGrid() {
               are blindfolded and select three random records to then sample and
               make a beat.
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="KEXP"
               chipAvatarColor="black"
@@ -105,9 +131,8 @@ function YouTubeChannelGrid() {
               station is owned by the non-profit Friends of KEXP. They
               frequently post in-studio performances online.
             </ChannelCard>
-          </ImageListItem>
-
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="Soulection"
               chipAvatarColor="black"
@@ -122,8 +147,8 @@ function YouTubeChannelGrid() {
               started on KBeach Radio in 2011 and was piocked up by Apple
               Music's Beats 1 Radio in 2015.
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="Boiler Room"
               chipAvatarColor="black"
@@ -139,8 +164,8 @@ function YouTubeChannelGrid() {
               house, techno, dub but eventually expanded to include grime, hip
               hop, classical, and jazz.
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="Stones Throw"
               chipAvatarColor="black"
@@ -154,8 +179,8 @@ function YouTubeChannelGrid() {
               to experimental psychedelic rock. Hip hop legends like J Dilla,
               Madlib, MF Doom, and many more have records on the label.
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="Fkj"
               chipAvatarColor="black"
@@ -168,8 +193,8 @@ function YouTubeChannelGrid() {
               French House musical genre. A native of Tours (France), but now
               based in Paris, FKJ is a leading multi-instrumentalist in live looping performance.`}
             </ChannelCard>
-          </ImageListItem>
-          <ImageListItem>
+          </SwiperSlide>
+          <SwiperSlide>
             <ChannelCard
               name="COLORS"
               chipAvatarColor="black"
@@ -185,8 +210,8 @@ function YouTubeChannelGrid() {
               the artists, giving them the opportunity to present their music
               without distraction.
             </ChannelCard>
-          </ImageListItem>
-        </ImageList>
+          </SwiperSlide>
+        </Swiper>
       </Box>
     </Container>
   );

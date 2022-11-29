@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { json, timeMonth, timeFormat } from "d3";
-import truncate from "lodash/truncate";
 
 import IntroText from "./IntroText";
 import VideoEmbed from "./VideoEmbed";
@@ -62,8 +61,6 @@ function App() {
           e.timestamp = new Date(e.timestamp.replace(" ", "T"));
           e.month = timeMonth.floor(e.timestamp);
           e.month_label = timeFormat("%b %Y")(e.month);
-          e.channel_name_full = e.channel_name;
-          e.channel_name = truncate(e.channel_name, { length: 25 });
         });
         return d;
       })
