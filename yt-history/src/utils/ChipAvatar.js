@@ -9,7 +9,7 @@ const ChipAvatar = forwardRef((props, ref) => {
       avatar={<Avatar alt={props.name} src={`avatar/${props.name}.jpg`} />}
       label={props.name}
       variant="outlined"
-      sx={{ color: color, borderColor: null }}
+      sx={{ color: color, borderColor: null, cursor: "pointer" }}
       ref={ref}
       {...props}
     />

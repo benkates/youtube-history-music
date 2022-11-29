@@ -40,6 +40,7 @@ function YouTubeChannelGrid() {
           effect={"coverflow"}
           navigation={true}
           centeredSlides={true}
+          loop={true}
           modules={[EffectCoverflow, Pagination]}
           coverflowEffect={{
             depth: 500,

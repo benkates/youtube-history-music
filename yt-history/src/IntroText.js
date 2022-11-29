@@ -19,6 +19,8 @@ function IntroText({ theme }) {
             mt: 3,
             pb: 1,
             fontFamily: "Abril Fatface",
+
+            //playing with gradients
             color: "transparent",
             backgroundClip: "text",
             backgroundImage: `linear-gradient(50deg, #55add6, rgb(255, 91, 138) 20%, rgb(255, 91, 138) 23%, #556CD6 55%, rgb(251, 166, 75) 77%, lightgrey)`,

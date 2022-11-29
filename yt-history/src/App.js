@@ -21,10 +21,11 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: uncomment GA
 //TODO: opengraph stuff
 //TODO: fix favicon
-//TODO: add icons
+//TODO: add icons to root folder
 
 //WRITING
 //TODO: README
+//TODO: wrap up commenting
 
 //HOLD: Blockquote under video on desktop but on top on mobile
 
