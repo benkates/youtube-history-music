@@ -173,3 +173,22 @@ blockquote:after {
   -moz-animation-duration: 1.5s;
   animation-duration: 1.5s;
 }
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  width: 14px !important;
+  height: 14px !important;
+  transform: translate(0px, 10px);
+  text-align: center;
+  line-height: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid white;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff !important;
+  background: #55add6 !important;
+}
