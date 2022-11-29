@@ -13,7 +13,7 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
-    bgColor: "#282c34",
+    bgColor: "#182133",
     accentColor: "#55ADD6",
   },
 });
