@@ -12,8 +12,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-//TODO: implement https://mui.com/material-ui/react-card/#complex-interaction
-//TODO: accordian on the bottom?
+//TODO: figure out channel text
+//TODO: write text
 
 function ChannelCard({
   name,

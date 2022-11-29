@@ -290,8 +290,8 @@ function IntroText({ theme }) {
         >
           The data is for <strong>December 2018 through October 2022</strong>{" "}
           and was exported using Google Takeout. After transforming and
-          filtering the data in R, I built this front-end using React.js to take
-          a look at some of my most viewed videos!
+          filtering the data in R, I built this front-end using React.js and MUI
+          components to take a look at some of my most viewed videos!
         </Typography>
         <Typography sx={{ color: "lightgrey", mb: 3 }}>
           To view a video, just click the row in the table.{" "}

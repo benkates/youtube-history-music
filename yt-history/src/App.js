@@ -22,17 +22,15 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //TODO: uncomment GA
 //TODO: Scrollytelling at the top and logos come in in background
 //TODO: opengraph stuff
-//TODO: square favicon
-//TODO: change bg color
+//TODO: fix favicon
 
 //WRITING
-//TODO: Tom misch has been in so many of the channels, highlight that in intro text
-//TODO: footer/outro...
 //TODO: README
-//TODO: change language from plays to views
 
 //HOLD: Blockquote under video on desktop but on top on mobile
 
+//DONE: change language from plays to views
+//DONE: change bg color
 //DONE: Fade in intro text using css
 //DONE: Add link to my homepage in footer
 //DONE: responsively narrow the text cols
@@ -74,9 +72,9 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="xl" p="0 16px">
+    <Container maxWidth="xl" p="0 16px" className="fade-in">
       {/* parent div */}
-      <IntroText theme={theme}></IntroText>
+      <IntroText theme={theme} />
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
         {/* barchart + table */}
         <Grid item md={6} xs={12} id="watch-bar-chart-top-videos-table">
@@ -86,7 +84,7 @@ function App() {
             setSelectedChannel={setSelectedChannel}
             setSelectedVideo={setSelectedVideo}
             setSelectedMonth={setSelectedMonth}
-          ></ChannelDropdown>
+          />
           <ParentSize
             className="graph-container"
             debounceTime={10}
