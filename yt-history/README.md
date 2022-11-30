@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# What's in My YouTube History: Music
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app was created mostly to learn React.js and the MUI components. I used Create React App for initialization and several modules for development. Here are some notes!
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+I saw a Reddit post on r/informationisbeautiful where someone looked into their YouTube history data. As someone who is chronically online, I was immediately interested in this data so after poking around I explored in R! Soon after the idea to filter to music came about.
 
-### `npm start`
+## Modules
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- tidyjs: data manipulation, follows tidyverse format from R <3
+- mui/material: this Material UI library is awesome. There are so many components available and customization is super solid. I got deep into the docs for some of the styling in this app and learned a lot along the way!
+- mui/x-data-grid: very customizable table! works well with mui/material
+- visx: d3 viz components from Airbnb (still leaves d3 modularity on the table, Observable Plot did not)
+- d3: mainly for formatting functions, visx did most of the plotting work
+- swiper: cool swiping interaction for the channel list
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Future Considerations
 
-### `npm test`
+- automated testing of components using jest as I go
+- CSS Postprocessing, less inline styling, style at the start
+- more folders for components
+- aria labels for a11y
+- less "design as I develop" and more work in Figma upfront. I just sort of dove into developing (which was great for learning unwieldy at the end)
+- consider overall package size and how I can reduce
+- arquero instead of tidyjs
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Product Ideas
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- connect to an API around what the most popular YouTube videos are [like this site, kworb.net](https://kworb.net/youtube/)
+- ability to import your own Google Takeout data and generate a similar view
+- a visualization with floating bubbles (d3-force) to provide a UI to explore popular videos
