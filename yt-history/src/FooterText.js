@@ -18,12 +18,15 @@ function FooterText() {
         <Link
           href="https://github.com/benkates/apps/tree/main/yt-history"
           target="_blank"
-          style={{ color: "white" }}
+          style={{ color: "white", textDecorationColor: "white" }}
         >
           GitHub repo
         </Link>{" "}
         here! Check out my{" "}
-        <Link href="https://benkates.com" style={{ color: "white" }}>
+        <Link
+          href="https://benkates.com"
+          style={{ color: "white", textDecorationColor: "white" }}
+        >
           personal site
         </Link>{" "}
         too! Cheers and happy listening.

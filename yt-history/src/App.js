@@ -20,15 +20,15 @@ import ParentSize from "@visx/responsive/lib/components/ParentSize";
 //UI
 //TODO: uncomment GA
 //TODO: opengraph stuff
-//TODO: fix favicon
-//TODO: add icons to root folder
 
 //WRITING
-//TODO: README
 //TODO: wrap up commenting
 
 //HOLD: Blockquote under video on desktop but on top on mobile
 
+//DONE: README
+//DONE: add icons to root folder
+//DONE: fix favicon
 //DONE: change language from plays to views
 //DONE: change bg color
 //DONE: Fade in intro text using css

@@ -32,8 +32,10 @@ import theme from "./utils/theme";
 //DONE: tooltip correct
 //DONE: responsive (use visx repsonsive component)
 
+//declare margin
 const verticalMargin = 25;
 
+//tooltip styles for hover
 const tooltipStyles = {
   ...defaultStyles,
   minWidth: 60,
@@ -107,7 +109,7 @@ function WatchBarChart({
   });
 
   const colorScale = scaleLinear({
-    range: ["lightgrey", theme.palette.accentColor],
+    range: ["lightgrey", theme.palette.orangeColor],
     domain: [0, Math.max(...dataPrepped.map(getFreq))],
   });
 
@@ -140,7 +142,6 @@ function WatchBarChart({
             className="fade-in"
           >
             <Connector stroke="#fff" />
-            {/* <LineSubject stroke="#fff" min /> */}
             <Label
               title="High spike in Vulf views!"
               subtitle="This was probably a combination of going down a Vulfpeck rabbit hole with my good friend Virginia and subsequently falling asleep with autoplay on!"
@@ -175,6 +176,7 @@ function WatchBarChart({
           }
         >
           <g style={{ transform: `translate(0, -${verticalMargin / 2}px)` }}>
+            {/* horizontal grid styling */}
             <GridRows
               scale={yScale}
               width={xMax - 15}
@@ -183,6 +185,7 @@ function WatchBarChart({
               numTicks={6}
               transform={`translate(15,${verticalMargin / 2})`}
             />
+            {/* y axis styling */}
             <AxisLeft
               scale={yScale}
               key="axisLeft"
@@ -202,6 +205,7 @@ function WatchBarChart({
                 };
               }}
             />
+            {/* y axis styling */}
             <AxisBottom
               scale={xScale}
               key="axisBottom"
@@ -213,14 +217,14 @@ function WatchBarChart({
                 return {
                   y: height,
                   fill: "grey",
-                  transform: "translate(-7.5,0)",
+                  transform: "translate(-8.5,0)",
                   textAnchor: "center",
                   dominantBaseline: "middle",
-                  fontSize: 10,
+                  fontSize: 11,
                 };
               }}
             />
-
+            {/* bar styling */}
             <Group top={verticalMargin / 2}>
               {dataPrepped.map((d) => {
                 const month = getMonth(d);
@@ -231,9 +235,9 @@ function WatchBarChart({
 
                 let color = colorScale(getFreq(d));
                 //if it's the month, make it stand out
-                if (selectedMonth !== null && d.month_label === selectedMonth) {
-                  color = "#32A287";
-                }
+                // if (selectedMonth !== null && d.month_label === selectedMonth) {
+                //   color = theme.palette.orangeColor;
+                // }
                 //if it's not the month, make it darker
                 if (selectedMonth !== null && d.month_label !== selectedMonth) {
                   color = darken(color, 0.5);
@@ -247,6 +251,7 @@ function WatchBarChart({
                     height={barHeight}
                     fill={color}
                     rx={2}
+                    style={{ cursor: "pointer" }}
                     onMouseMove={(e) => {
                       if (tooltipTimeout) clearTimeout(tooltipTimeout);
                       //localPoint will get the exact svg coords
@@ -254,7 +259,7 @@ function WatchBarChart({
                       const left = barX + barWidth / 2;
                       showTooltip({
                         tooltipData: d, //data of the mapped array
-                        tooltipTop: eventSvgCoords?.y + 5,
+                        tooltipTop: eventSvgCoords?.y,
                         tooltipLeft: left + 5,
                       });
                     }}
@@ -289,7 +294,7 @@ function WatchBarChart({
                 <text
                   style={{ fill: "white" }}
                   x={width}
-                  y={12}
+                  y={verticalMargin + 10}
                   textAnchor="end"
                 >
                   {`Month: ${selectedMonth}`}
@@ -297,7 +302,7 @@ function WatchBarChart({
                 <text
                   style={{ fill: "white", cursor: "pointer" }}
                   x={width}
-                  y={30}
+                  y={verticalMargin + 25}
                   textAnchor="end"
                   textDecoration="underline"
                   fontSize="12px"

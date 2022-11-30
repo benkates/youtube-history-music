@@ -5,16 +5,17 @@ import ChannelCard from "./utils/ChannelCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import { EffectCoverflow, Pagination } from "swiper";
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 //DONE: scroll
 
 function YouTubeChannelGrid() {
+  // get window size as reactive var
   const windowSize = useWindowSize();
-
-  //declare number of cols based on windowSize
   let slidesNum;
+  //declare number of cols based on windowSize
   if (windowSize.width < 760) {
     slidesNum = 1;
   } else if (windowSize.width >= 760 && windowSize.width < 1200) {
@@ -25,6 +26,7 @@ function YouTubeChannelGrid() {
     slidesNum = 3;
   }
 
+  // init pagination style for swipe
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -36,22 +38,29 @@ function YouTubeChannelGrid() {
   return (
     <Container maxWidth="xl" sx={{ mb: 2 }}>
       <Box sx={{ mb: 5 }} position="relative">
+        {/* declare swiper */}
         <Swiper
-          effect={"coverflow"}
-          navigation={true}
-          centeredSlides={true}
-          loop={true}
-          modules={[EffectCoverflow, Pagination]}
+          effect={"coverflow"} //add 3d effect
+          navigation={true} //add bottom nav
+          centeredSlides={true} //center slides
+          loop={true} //infinite loop
+          modules={[Navigation, EffectCoverflow, Pagination]} //3d effect and bottom nav
+          //swiper styles
+          style={{
+            "--swiper-navigation-color": "#ffffff",
+            "--swiper-navigation-size": "24px",
+          }}
           coverflowEffect={{
+            //coverflow effect props
             depth: 500,
             modifier: 0.75,
             slideShadows: true,
           }}
-          slidesPerView={slidesNum}
-          grabCursor={true}
-          spaceBetween={20}
-          pagination={pagination}
-          className="mySwiper"
+          slidesPerView={slidesNum} //use reactive var for number of slides in view
+          grabCursor={true} //turn cursor into grab icon
+          spaceBetween={5} //add spacing
+          pagination={pagination} //pagination props
+          loopedSlides={10} //needed for loop
         >
           <SwiperSlide>
             <ChannelCard

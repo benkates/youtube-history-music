@@ -17,16 +17,19 @@ import { Link } from "@mui/icons-material";
 function ChannelCard({ name, children, subheader, url, tooltipTitle }) {
   return (
     <Card>
+      {/* header */}
       <CardHeader
         avatar={<Avatar alt={name} src={`avatar/${name}.jpg`} />}
         title={name}
         subheader={subheader}
+        // action button
         action={
           <IconButton href={url} target="_blank">
             <Link />
           </IconButton>
         }
       />
+      {/* image */}
       <CardMedia
         component="img"
         height="225"
@@ -34,6 +37,7 @@ function ChannelCard({ name, children, subheader, url, tooltipTitle }) {
         image={`channel-images/${name}.jpg`}
         alt={name}
       />
+      {/* content */}
       <CardContent>
         <Typography>{children}</Typography>
       </CardContent>

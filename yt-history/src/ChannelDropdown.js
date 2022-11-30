@@ -29,7 +29,15 @@ function ChannelDropdown({
   setSelectedVideo,
   setSelectedMonth,
 }) {
-  const AvatarStyles = { width: 24, height: 24, mr: 1, position: "absolute" };
+  // declare styling for avatar picture
+  const AvatarStyles = {
+    width: 24,
+    height: 24,
+    mr: 1,
+    position: "absolute",
+    bgcolor: "red",
+  };
+
   const tidyData = tidy(
     data,
     //group by channel name and count
@@ -64,12 +72,14 @@ function ChannelDropdown({
       >
         {tidyData.map((e) => {
           return (
+            // render menu item with styling
             <MenuItem
               value={e.channel_name}
               key={e.channel_name}
               divider={true}
               dense={true}
             >
+              {/* avatar should be featured if relevant, get youtube logo if not */}
               <Avatar
                 alt={`${e.label}`}
                 src={
@@ -77,12 +87,13 @@ function ChannelDropdown({
                     ? null
                     : `./avatar/${e.channel_name}.jpg`
                 }
-                sx={{ ...AvatarStyles, bgcolor: "red" }}
+                sx={AvatarStyles}
               >
                 {e.channel_name === "All Channels" && (
                   <YouTubeIcon sx={{ width: 20, height: 20 }}></YouTubeIcon>
                 )}
               </Avatar>
+              {/* add in actual value */}
               <div style={{ marginLeft: 30 }}>{e.label}</div>
             </MenuItem>
           );

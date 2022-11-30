@@ -9,7 +9,6 @@ import YouTubeChannelGrid from "./YouTubeChannelGrid";
 function IntroText({ theme }) {
   return (
     <>
-      {/* <Grow toggle={true} mountOnEnter unmountOnExit> */}
       <Container maxWidth="lg" disableGutters>
         <Typography
           variant="h2"
@@ -19,12 +18,9 @@ function IntroText({ theme }) {
             mt: 3,
             pb: 1,
             fontFamily: "Abril Fatface",
-
-            //playing with gradients
-            color: "transparent",
-            backgroundClip: "text",
-            backgroundImage: `linear-gradient(50deg, #55add6, rgb(255, 91, 138) 20%, rgb(255, 91, 138) 23%, #556CD6 55%, rgb(251, 166, 75) 77%, lightgrey)`,
           }}
+          //playing with gradients (inspired by gamma.app)
+          className="gradient-bg-text"
         >
           What's in My YouTube History: Music
         </Typography>
@@ -37,7 +33,14 @@ function IntroText({ theme }) {
         >
           by{" "}
           <Link
-            style={{ textDecoration: "underline", color: "inherit" }}
+            sx={{
+              "&:hover": {
+                textDecoration: "underline !important",
+              },
+            }}
+            onMouseOver={(e) => {
+              e.target.classList.add("gradient-bg-text");
+            }}
             href="https://benkates.com"
           >
             Ben Kates
@@ -69,7 +72,7 @@ function IntroText({ theme }) {
           component="h2"
           variant="h4"
           fontWeight="bold"
-          color={theme.palette.accentColor}
+          color={theme.palette.pinkColor}
           textAlign="center"
         >
           Introduction
@@ -90,7 +93,13 @@ function IntroText({ theme }) {
           <Link
             href="https://open.spotify.com/artist/0aOoGOhY7yubvn0nNu4EJo"
             target="_blank"
-            style={{ color: "lightgrey" }}
+            sx={{
+              color: "lightgrey",
+              textDecorationColor: theme.palette.pinkColor,
+              "&:hover": {
+                color: theme.palette.pinkColor,
+              },
+            }}
           >
             hobbyist musician
           </Link>
@@ -98,7 +107,13 @@ function IntroText({ theme }) {
           <Link
             href="https://www.youtube.com/benkates"
             target="_blank"
-            style={{ color: "lightgrey" }}
+            sx={{
+              color: "inherit",
+              textDecorationColor: theme.palette.pinkColor,
+              "&:hover": {
+                color: theme.palette.pinkColor,
+              },
+            }}
           >
             bedroom producer
           </Link>
@@ -128,7 +143,7 @@ function IntroText({ theme }) {
           component="h2"
           variant="h4"
           fontWeight="bold"
-          color={theme.palette.accentColor}
+          color={theme.palette.orangeColor}
           textAlign="center"
           sx={{ mt: 3 }}
           id="app-h2"
@@ -143,13 +158,26 @@ function IntroText({ theme }) {
           viewcount trends.
         </Typography>
         <Typography sx={{ color: "lightgrey" }}>
-          It's interesting to see the higher viewcount in 2019/2020 vs 2022. I
-          spent a lot of time making music in Ableton Live with my synths,
-          sampling, and live looping gear; inspired by a lot of these videos!
-          I've certainly still been involved in music in 2022; it's just more
-          focused on band rehearsal/recording rather than my own "bedroom
-          producer" projects. Different inspirations for different phases of
-          life, I suppose!
+          It's interesting to see the higher viewcount in 2019/2020 vs 2022.{" "}
+          <Link
+            href="https://www.youtube.com/shorts/Io8DjziUl8M"
+            target="_blank"
+            className="orange-color"
+            sx={{
+              color: "inherit",
+              textDecorationColor: theme.palette.orangeColor,
+              "&:hover": {
+                color: theme.palette.orangeColor,
+              },
+            }}
+          >
+            I spent a lot of time making music in Ableton Live with my synths,
+            sampling, and live looping gear
+          </Link>
+          ; inspired by a lot of these videos! I've certainly still been
+          involved in music in 2022, it's just more focused on band
+          rehearsal/recording rather than my own "bedroom producer" projects.
+          Different inspirations for different phases of life, I suppose!
         </Typography>
         <Typography sx={{ color: "lightgrey", mb: 3 }}>
           To view a video, just click the row in the table.{" "}

@@ -6,6 +6,7 @@ import {
 } from "@mui/x-data-grid";
 import ChipAvatar from "./utils/ChipAvatar";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import theme from "./utils/theme";
 
 //HOLD: bars/styling for playcount?
 
@@ -29,6 +30,7 @@ function TopVideosTable({
   selectedMonth,
   WRITING,
 }) {
+  // create custom toolbar with the quote icon guide and search bar
   function CustomToolbar() {
     return (
       <GridToolbarContainer sx={{ justifyContent: "space-between" }}>
@@ -43,6 +45,7 @@ function TopVideosTable({
     );
   }
 
+  //define columns and styling
   const columns = [
     {
       field: "channel_name",
@@ -52,19 +55,27 @@ function TopVideosTable({
       hideable: false,
       headerClassName: "col-header-center",
       description: "YouTube Channel Name",
+      // use custom component to render value
       renderCell: (d) => {
         return <ChipAvatar name={d.value}></ChipAvatar>;
       },
     },
     {
-      field: "text",
-      headerName: "",
+      field: "quote",
+      renderHeader: () => {
+        return <FormatQuoteIcon sx={{ width: "1rem", height: "1rem" }} />;
+      },
+      flex: 0.15,
+      minWidth: 32,
+      hideable: false,
       type: "boolean",
       headerClassName: "quote-col",
       headerAlign: "center",
+      //lookup if video url exists in the writing (boolean)
       valueGetter: (d) => {
         return WRITING.some((e) => e.video_url === d.row.video_url);
       },
+      //based on true/false, render the icon
       renderCell: (d) => {
         return d.value ? (
           <FormatQuoteIcon sx={{ width: "1rem", height: "1rem" }} />
@@ -72,12 +83,6 @@ function TopVideosTable({
           ""
         );
       },
-      renderHeader: () => {
-        return <FormatQuoteIcon sx={{ width: "1rem", height: "1rem" }} />;
-      },
-      flex: 0.15,
-      minWidth: 32,
-      hideable: false,
       description: "Whether or not text commentary exists for video",
       align: "center",
     },
@@ -89,18 +94,6 @@ function TopVideosTable({
       minWidth: 100,
       hideable: false,
       description: "YouTube Video Title",
-      // renderCell: (d) => {
-      //   return (
-      //     <>
-      //       {WRITING.some((e) => e.video_url === d.rowNode.id) && (
-      //         <FormatQuoteIcon
-      //           sx={{ mr: 0.5, width: 16, height: 16 }}
-      //         ></FormatQuoteIcon>
-      //       )}
-      //       {d.value}
-      //     </>
-      //   );
-      // },
     },
     {
       field: "count",
@@ -112,7 +105,6 @@ function TopVideosTable({
       minWidth: 50,
       hideable: false,
       description: "Ben's total views for imported data",
-      // cellClassName: "count-col-align-center",
       align: "center",
     },
   ];
@@ -120,11 +112,13 @@ function TopVideosTable({
   //tidyjs for data manipulation (akin to tidyverse)
   const tidyData = tidy(
     data,
+    // filter data to selected channel if active
     filter((d) =>
       selectedChannel !== "All Channels"
         ? d.channel_name === selectedChannel
         : true
     ),
+    //filter data to month if active
     filter((d) =>
       selectedMonth === null ? true : d.month_label === selectedMonth
     ),
@@ -139,6 +133,7 @@ function TopVideosTable({
 
   return (
     <>
+      {/* height is exactly 5 rows tall */}
       <div style={{ height: 358, width: "100%" }}>
         <div
           style={{
@@ -148,36 +143,46 @@ function TopVideosTable({
             cursor: "pointer",
           }}
         >
+          {/* render data grid with styling */}
           <DataGrid
             sx={{
               color: "white",
               "& .MuiDataGrid-cell:hover": {
-                color: "primary.main",
+                color: theme.palette.orangeColor,
               },
+              //
               "& .MuiButtonBase-root": {
                 color: "white !important",
+              },
+              //striped row
+              "& .MuiDataGrid-row:nth-child(even)": {
+                backgroundColor: theme.palette.orangeColor + "35",
               },
               fontFamily: "Roboto",
             }}
             rows={tidyData}
             columns={columns}
-            getRowId={(e) => e.video_url}
+            getRowId={(e) => e.video_url} //use video_url for id
+            //disable a lot of unnecessary features
             hideFooter
             disableColumnMenu
             disableColumnFilter
             disableColumnSelector
             disableDensitySelector
+            //use modulo to get even/odd styling for striped look
             getRowClassName={(params) =>
               params.indexRelativeToCurrentPage % 2 === 0
                 ? "even-row"
                 : "odd-row"
             }
+            //when clicking a row, set the selected video and scroll to the iframe
             onRowClick={(e) => {
               setSelectedVideo(e.id);
               document
                 .getElementById("video-embed-blockquote")
                 .scrollIntoView({ behavior: "smooth" });
             }}
+            //add in the custom toolbar with quote icon and search bar
             components={{ Toolbar: CustomToolbar }}
             componentsProps={{
               toolbar: {
