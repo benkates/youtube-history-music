@@ -209,13 +209,10 @@ function YouTubeChannelGrid() {
               subheader="6.47M subscribers"
               url="https://www.youtube.com/@COLORSxSTUDIOS"
             >
-              COLORSXSTUDIOS is a unique aesthetic music platform showcasing
-              exceptional talent from around the globe. COLORS focuses on the
-              most distinctive new artists and original sounds in an
-              increasingly fragmented and saturated scene. All COLORS shows seek
-              to provide a clear, minimalistic stage that shines a spotlight on
-              artists, giving them the opportunity to present their music
-              without distraction.
+              COLORSXSTUDIOS is a music platform showcasing talent from around
+              the globe. COLORS focuses on the new artists and original sounds
+              from a variety of genres. The unique sets of COLORS shows makes
+              each performance stand out.
             </ChannelCard>
           </SwiperSlide>
         </Swiper>
