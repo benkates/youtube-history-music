@@ -18,14 +18,14 @@ import { useTheme } from "@mui/material/styles";
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 //UI
-//TODO: uncomment GA
-//TODO: opengraph stuff
 
 //WRITING
-//TODO: wrap up commenting
 
 //HOLD: Blockquote under video on desktop but on top on mobile
 
+//DONE: opengraph stuff
+//DONE: wrap up commenting
+//DONE: uncomment GA
 //DONE: README
 //DONE: add icons to root folder
 //DONE: fix favicon
