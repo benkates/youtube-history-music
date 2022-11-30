@@ -102,7 +102,7 @@ function TopVideosTable({
       headerClassName: "col-header-center",
       headerAlign: "center",
       flex: 0.35,
-      minWidth: 50,
+      minWidth: 60,
       hideable: false,
       description: "Ben's total views for imported data",
       align: "center",
