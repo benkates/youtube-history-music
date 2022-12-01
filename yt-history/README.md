@@ -8,12 +8,12 @@ I saw a Reddit post on r/informationisbeautiful where someone looked into their 
 
 ## Modules
 
-- tidyjs: data manipulation, follows tidyverse format from R <3
-- mui/material: this Material UI library is awesome. There are so many components available and customization is super solid. I got deep into the docs for some of the styling in this app and learned a lot along the way!
-- mui/x-data-grid: very customizable table! works well with mui/material
-- visx: d3 viz components from Airbnb (still leaves d3 modularity on the table, Observable Plot did not)
-- d3: mainly for formatting functions, visx did most of the plotting work
-- swiper: cool swiping interaction for the channel list
+- [tidyjs](https://pbeshai.github.io/tidy/): data manipulation, follows tidyverse format from R <3
+- [mui/material](https://mui.com/material-ui/getting-started/overview/): this Material UI library is awesome. There are so many components available and customization is super solid. I got deep into the docs for some of the styling in this app and learned a lot along the way!
+- [mui/x-data-grid](https://mui.com/x/introduction/): very customizable table! works well with mui/material
+- [visx](https://airbnb.io/visx/): d3 viz components from Airbnb (still leaves d3 modularity on the table, Observable Plot did not)
+- [d3](https://d3js.org/): mainly for formatting functions, visx did most of the plotting work
+- [swiper](https://swiperjs.com/): cool swiping interaction for the channel list
 
 ## Future Considerations
 
