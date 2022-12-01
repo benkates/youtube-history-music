@@ -155,7 +155,7 @@ function TopVideosTable({
                 color: "white !important",
               },
               //striped row
-              "& .MuiDataGrid-row:nth-child(even)": {
+              "& .MuiDataGrid-row:nth-of-type(even)": {
                 backgroundColor: theme.palette.orangeColor + "35",
               },
               fontFamily: "Roboto",
