@@ -6,7 +6,7 @@ This app was created mostly to learn React.js and the MUI components. I used Cre
 
 I saw a Reddit post on r/informationisbeautiful where someone looked into their YouTube history data. As someone who is chronically online, I was immediately interested in this data so after poking around I explored in R! Soon after the idea to filter to music came about.
 
-## Modules
+## Modules Used (Highlights)
 
 - [tidyjs](https://pbeshai.github.io/tidy/): data manipulation, follows tidyverse format from R <3
 - [mui/material](https://mui.com/material-ui/getting-started/overview/): this Material UI library is awesome. There are so many components available and customization is super solid. I got deep into the docs for some of the styling in this app and learned a lot along the way!
@@ -20,6 +20,7 @@ I saw a Reddit post on r/informationisbeautiful where someone looked into their 
 - automated testing of components using jest as I go
 - CSS Postprocessing, less inline styling, style at the start
 - more folders for components
+- task management (Trello?)
 - aria labels for a11y
 - less "design as I develop" and more work in Figma upfront. I just sort of dove into developing (which was great for learning unwieldy at the end)
 - consider overall package size and how I can reduce
