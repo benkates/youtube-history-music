@@ -50,7 +50,7 @@ function App() {
 
   //get data and set it
   useEffect(() => {
-    console.log("fetching data");
+    // console.log("fetching data");
 
     //get data
     json("top_watch_history_music.json")
