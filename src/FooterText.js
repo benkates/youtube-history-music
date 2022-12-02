@@ -16,7 +16,7 @@ function FooterText() {
         Google Data Studio and Power BI! If you're curious to learn more about
         the code, you can visit the{" "}
         <Link
-          href="https://github.com/benkates/apps/tree/main/yt-history"
+          href="https://github.com/benkates/youtube-history-music"
           target="_blank"
           style={{ color: "white", textDecorationColor: "white" }}
         >
