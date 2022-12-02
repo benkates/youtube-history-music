@@ -1,5 +1,7 @@
 # What's in My YouTube History: Music
 
+[![](public/og-image.png)](https://benkates.com/apps/yt-history)
+
 This app was created mostly to learn React.js and the MUI components. I used Create React App for initialization and several modules for development. Here are some notes!
 
 ## Inspiration
