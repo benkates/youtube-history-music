@@ -44,7 +44,7 @@ function Blockquote({ data, selectedVideo, selectedChannel, WRITING }) {
   }
 
   return (
-    <Slide direction="right" in={toggle} mountOnEnter unmountOnExit>
+    <Slide direction="left" in={toggle} mountOnEnter unmountOnExit>
       <Paper
         sx={{
           backgroundImage: `linear-gradient(210deg, ${theme.palette.orangeColor},${theme.palette.bgColor},${theme.palette.bgColor});`,
