@@ -4,7 +4,7 @@ This app was created mostly to learn React.js and the MUI components. I used Cre
 
 ## Inspiration
 
-I saw a Reddit post on r/informationisbeautiful where someone looked into their YouTube history data. As someone who is chronically online, I was immediately interested in this data so after poking around I explored in R! Soon after the idea to filter to music came about.
+I saw a Reddit post on [r/dataisbeautiful](reddit.com/r/dataisbeautiful) where someone looked into their YouTube history data. As someone who is chronically online, I was immediately interested in this data so after poking around I explored in R! Soon after the idea to filter to music came about.
 
 ## Modules Used (Highlights)
 
